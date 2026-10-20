@@ -34,6 +34,7 @@ class VersionContractTests(unittest.TestCase):
             {"sha256": "missing"}, {"source_id": "unrelated"},
             {"upstream_path": "../secret"}, {"path": "/tmp/secret"},
             {"path": "data/../secret"}, {"path": "data\\secret"},
+            {"path": "data/secret\x00.md"},
             {"commit": "main"}, {"title": ""},
         ):
             with self.subTest(fields=fields), self.assertRaises(ValidationError):
@@ -46,7 +47,7 @@ class VersionContractTests(unittest.TestCase):
         changed = Chunk.create(example_source(text="changed"), "Test", 1, 2, "changed")
         self.assertEqual(one.chunk_id, again.chunk_id)
         self.assertNotEqual(one.chunk_id, changed.chunk_id)
-        self.assertEqual(one.citation_url, source.url + "#L1-L2")
+        self.assertEqual(one.citation_url, source.url + "?plain=1#L1-L2")
 
     def test_invalid_chunk_ranges_are_rejected(self):
         for start, end, text in ((0, 1, "text"), (2, 1, "text"), (1, 1, " ")):

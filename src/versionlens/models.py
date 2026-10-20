@@ -26,7 +26,7 @@ def validate_version(value: str) -> str:
 
 
 def validate_relative_path(value: str) -> str:
-    if not isinstance(value, str) or not value or "\\" in value:
+    if not isinstance(value, str) or not value or "\\" in value or "\x00" in value:
         raise ValidationError("Source paths must be relative POSIX paths.")
     path = PurePosixPath(value)
     if path.is_absolute() or any(part in ("", ".", "..") for part in value.split("/")):
@@ -76,7 +76,8 @@ class Chunk:
 
     @property
     def citation_url(self) -> str:
-        return f"{self.source.url}#L{self.start_line}-L{self.end_line}"
+        # GitHub needs source mode for line anchors in Markdown files.
+        return f"{self.source.url}?plain=1#L{self.start_line}-L{self.end_line}"
 
     @classmethod
     def create(cls, source: Source, section: str, start: int, end: int, text: str) -> "Chunk":
