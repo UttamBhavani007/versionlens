@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "versionlens"
+version = "0.1.0"
+description = "Local, version-aware technical support retrieval for HTTPX"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = []
+
+[project.scripts]
+versionlens = "versionlens.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
