@@ -4,7 +4,7 @@ A local, version-aware technical support service for **HTTPX**. The goal is to
 answer upgrade and troubleshooting questions from the documentation that matches
 the requested version, with inspectable evidence and explicit abstention.
 
-**Status: day 1, retrieval foundation.** Generated answers, semantic retrieval,
+**Status: day 1 complete, retrieval foundation.** Generated answers, semantic retrieval,
 the API, UI, evaluation report, and screenshots are future milestones. This is
 not yet a finished RAG application. See [the delivery plan](docs/DELIVERY_PLAN.md).
 
@@ -36,12 +36,34 @@ Requires Python 3.11 or newer with SQLite FTS5. The day-1 runtime and tests have
 no third-party dependencies. From this repository:
 
 ```sh
+python3 scripts/fetch_sources.py --check
+PYTHONPATH=src python3 -m versionlens ingest
+PYTHONPATH=src python3 -m versionlens search 'proxies argument removed' --version 0.27.2 --limit 3
+PYTHONPATH=src python3 -m versionlens search 'proxies argument removed' --version 0.28.1 --limit 3
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
-Repository setup and commands are extended with each implemented milestone.
-An editable installation is optional; running with `PYTHONPATH=src` avoids
-installing build tools. No service account is required.
+The checked-in corpus works offline: 32 source files, 16 per snapshot, indexed
+into 644 line-preserving chunks with the default settings. The index is a local,
+ignored build artifact; rebuild it from the manifest after cloning. An editable
+installation is optional; running with `PYTHONPATH=src` avoids installing build
+tools. No service account is required.
+
+`search` returns JSON with ranked excerpts, exact version, immutable source
+links, line ranges, and SHA-256 provenance. It sets `answer` to `null` because
+generation is not implemented. Missing matches return `no_matching_evidence`.
+Unsupported versions and malformed requests fail explicitly.
+
+**Known baseline limitation:** BM25 can rank an old release-history entry above
+a more recent applicable change, even within the correct snapshot. Selecting
+the correct snapshot is necessary but does not prove the retrieved passage
+answers the question. Release headings are preserved for the later answering
+and evaluation layers. Ranking scores are not confidence probabilities.
+
+The 26 automated checks cover checksum tampering, unsafe paths and symlinks,
+exact source line references, failed-update rollback, repeat ingestion,
+wrong-version isolation, query punctuation, and CLI behavior. These are software
+checks, not a held-out answer-quality benchmark.
 
 ## Evaluation commitments
 
