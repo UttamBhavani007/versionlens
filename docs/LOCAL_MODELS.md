@@ -63,6 +63,14 @@ project server; it does not start the desktop app. `status` lists downloaded
 models on the project server. Stop the foreground server with **Ctrl-C**.
 The launcher does not install login items or alter a system service.
 
+This no-desktop-launch behavior depends on the pinned macOS CLI: its
+[`startApp` implementation](https://github.com/ollama/ollama/blob/v0.40.7/cmd/start_darwin.go)
+requires the executable to be a symlink into an `Ollama.app` bundle. Our installer
+materializes a regular CLI file and runtime verification rejects symlinks,
+including a symlinked executable. If the project server is absent, commands
+therefore fail instead of starting the desktop application. Recheck this
+upstream behavior before changing the pinned runtime release.
+
 Local artifacts are ignored by Git:
 
 | Artifact | Location |

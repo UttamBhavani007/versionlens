@@ -7,18 +7,27 @@ quality score or a human-reviewed holdout.
 ## What the pipeline checks
 
 1. Validate an explicit HTTPX version and retrieve only that snapshot.
-2. Select at most four complete excerpts within a bounded context. Count the
+2. Select at most four excerpts with bounded, labelled quotation menus. Quotes
+   are chunk paragraphs or list items, copied verbatim from the source. Visible
+   fenced code and oversized prose paragraphs are skipped. The source chunker
+   can begin inside an original paragraph or code block; quote selection does
+   not restore that surrounding context or prove original paragraph completeness.
+   Count the
    question, system instructions and JSON grammar as part of a conservative
    UTF-8 input-byte budget, reserving output and template headroom. This is a
-   conservative heuristic, not a tokenizer measurement. Oversized excerpts
+   conservative heuristic, not a tokenizer measurement. Oversized quote menus
    are skipped rather than silently truncated.
 3. If no excerpt fits or no match exists, abstain without calling the model.
 4. Send a JSON evidence envelope to local Ollama with cloud disabled. Include
    release headings; a snapshot's cumulative changelog contains historical
    statements that may no longer apply to the requested version.
-5. Require a bounded JSON response: either short cited claims or an explicit
-   evidence-related abstention. Reject duplicate keys, extra fields, unknown
-   evidence IDs, absent citations, and quotes not literally in the cited text.
+5. Require a bounded JSON response: one decision and at most two short cited
+   claims, or an explicit evidence-related abstention with no claims. The model
+   selects an `(evidence_id, quote_id)` pair from the supplied menu. It cannot
+   supply quote text or URLs; the server resolves the exact original quotation.
+   Reject duplicate keys, extra fields, unknown evidence/quote IDs and absent
+   citations. Quote IDs are local to each excerpt and cannot cross-reference
+   another excerpt's quotation.
    Claim text must be plain text: model-supplied links, citation markers, HTML,
    control characters and invalid Unicode are rejected.
    Square brackets are reserved for server-added citations, so technical
@@ -53,6 +62,7 @@ development evidence, not a held-out benchmark.
 | --- | --- |
 | `answered` | A draft passed structure, citation identity and literal quote checks |
 | `abstained / no_matching_evidence` | Retrieval found no matching excerpt; no model call |
+| `abstained / no_usable_quote_spans` | Matching excerpts contain no bounded quotation; no model call |
 | `abstained / context_budget_exceeded` | Available excerpts did not fit the conservative input budget; no model call |
 | `abstained / insufficient_evidence` | Model declined on the supplied excerpts |
 | `abstained / conflicting_evidence` | Model identified unresolved conflicting evidence |

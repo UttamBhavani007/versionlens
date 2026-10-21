@@ -2,6 +2,7 @@
 
 import hashlib
 import importlib.util
+import json
 import os
 from pathlib import Path
 import tempfile
@@ -18,6 +19,23 @@ _spec.loader.exec_module(runtime)
 
 
 class LocalRuntimePolicyTests(unittest.TestCase):
+    def test_symlinked_cli_cannot_pass_runtime_verification(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            installed = root / ".tools" / "ollama"
+            installed.mkdir(parents=True)
+            other_cli = root / "another-ollama"
+            other_cli.write_bytes(b"test executable bytes")
+            (installed / "ollama").symlink_to(other_cli)
+            (installed / ".release.json").write_text(json.dumps({
+                "release": runtime.RELEASE,
+                "archive_sha256": runtime.ARCHIVE_SHA256,
+                "files": {"ollama": hashlib.sha256(other_cli.read_bytes()).hexdigest()},
+            }))
+            with patch.multiple(runtime, ROOT=root, RUNTIME=installed):
+                with self.assertRaisesRegex(runtime.RuntimeSetupError, "symlinks"):
+                    runtime.require_runtime()
+
     def test_environment_forces_local_cloud_off_and_drops_tokens_and_proxies(self):
         inherited = {
             "OPENAI_API_KEY": "test-only-token",

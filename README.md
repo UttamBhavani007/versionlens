@@ -4,15 +4,16 @@ A local, version-aware technical support service for **HTTPX**. The goal is to
 answer upgrade and troubleshooting questions from the documentation that matches
 the requested version, with inspectable evidence and explicit abstention.
 
-**Status: day 1 complete, retrieval foundation.** Generated answers, semantic retrieval,
-the API, UI, evaluation report, and screenshots are future milestones. This is
-not yet a finished RAG application. See [the delivery plan](docs/DELIVERY_PLAN.md).
+**Status: day 2 complete, local cited drafts.** Pinned ingestion, version-filtered keyword
+retrieval, a cloud-disabled local model, cited draft answers and abstention are
+implemented. Semantic retrieval, the API, UI, held-out evaluation and screenshots
+remain future milestones. See [the delivery plan](docs/DELIVERY_PLAN.md).
 
 ## Zero paid services
 
 - No OpenAI API, paid inference, hosted vector database, cloud account, or trial.
 - Python and SQLite run on your existing computer.
-- Later inference uses a downloaded open model through local Ollama with cloud
+- Inference uses a downloaded open model through local Ollama with cloud
   features disabled. No account or API key is required for local inference.
 - Source code and documentation are intended for a public GitHub Free repository.
   Local checks remain the default. Any optional CI must refuse private repositories
@@ -51,7 +52,7 @@ tools. No service account is required.
 
 `search` returns JSON with ranked excerpts, exact version, immutable source
 links, line ranges, and SHA-256 provenance. It sets `answer` to `null` because
-generation is not implemented. Missing matches return `no_matching_evidence`.
+`search` is retrieval-only. Missing matches return `no_matching_evidence`.
 Unsupported versions and malformed requests fail explicitly.
 
 **Known baseline limitation:** BM25 can rank an old release-history entry above
@@ -60,10 +61,59 @@ the correct snapshot is necessary but does not prove the retrieved passage
 answers the question. Release headings are preserved for the later answering
 and evaluation layers. Ranking scores are not confidence probabilities.
 
-The 26 automated checks cover checksum tampering, unsafe paths and symlinks,
-exact source line references, failed-update rollback, repeat ingestion,
-wrong-version isolation, query punctuation, and CLI behavior. These are software
+Automated checks cover source integrity and line references, transactional
+ingestion, wrong-version isolation, local endpoint/model restrictions, proxy
+and redirect rejection, malformed or truncated model responses, citation
+validation, conservative abstention and CLI behavior. These are software
 checks, not a held-out answer-quality benchmark.
+
+## Free local draft answers
+
+The native runtime installer currently supports **Apple Silicon macOS**.
+Generation uses `qwen3:1.7b` locally on a separate loopback port, with cloud
+features disabled. See [runtime/model provenance and setup](docs/LOCAL_MODELS.md).
+The application and tests still use Python's standard library only.
+
+In one terminal, install the pinned runtime and start its foreground server:
+
+```sh
+python3 scripts/local_runtime.py install
+python3 scripts/local_runtime.py serve
+```
+
+Leave that terminal running. In a second terminal:
+
+```sh
+python3 scripts/local_runtime.py pull
+PYTHONPATH=src python3 -m versionlens doctor
+PYTHONPATH=src python3 -m versionlens ask 'What is the default timeout in HTTPX?' --version 0.28.1
+PYTHONPATH=src python3 -m versionlens ask 'Why did the proxies argument stop working after upgrading?' --version 0.28.1
+PYTHONPATH=src python3 -m versionlens ask 'quantumgiraffeunsupported' --version 0.28.1
+python3 scripts/smoke_local.py
+```
+
+The first model pull downloads approximately 1.4 GB of free model weights;
+weights and runtime artifacts are ignored by Git. Stop the server with Ctrl-C.
+No desktop app, sign-in, key, system background service or paid API is required.
+
+`ask` emits structured JSON and a cited draft. The model selects source and
+quotation IDs; the server resolves the exact original text and constructs
+source links from trusted metadata.
+Empty retrieval does not call the model. Invalid drafts are suppressed; runtime
+failure is an operational error, separately from evidence abstention.
+
+**A real quote does not prove that a paraphrase is correct.** Answers expose
+`semantic_support_verified: false`; citation relevance, entailment and release
+applicability still need evaluation. See [the answer policy](docs/ANSWER_POLICY.md).
+
+**Verified on 21 October:** 74 automated checks pass. The actual four-case
+[local development run](reports/day2-local-smoke.json) produced two cited drafts,
+suppressed one invalid generation on the upgrade question, and skipped the model
+for one missing-evidence query. The
+[initial failed run](reports/day2-initial-smoke.json) is retained. These prompts
+were used during development and are not held-out evaluation questions; the
+recorded roughly 1.1–1.8 second end-to-end latencies for model-calling probes are warmed, small-sample
+observations, not a deployment speed guarantee or controlled comparison.
 
 ## Evaluation commitments
 

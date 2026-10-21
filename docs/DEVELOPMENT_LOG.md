@@ -45,3 +45,70 @@ No model weights are downloaded or generation performance claimed on day 1.
 
 No generation, vector retrieval, hosted deployment, or evaluation scores are
 claimed at this stage.
+
+## 2026-10-21 — day 2
+
+### Implemented and verified
+
+- Pinned free Ollama v0.40.7 installed as a regular project-local executable,
+  with exact release-asset SHA-256 and per-file integrity checks. It does not
+  install a desktop app or login service. Ollama created its normal local
+  identity files under the user's home directory; no sign-in was performed.
+- Project server ran at `127.0.0.1:11435`. Startup explicitly reported
+  `Ollama cloud disabled: true`; child environment excludes provider tokens,
+  inherited proxies and remote Ollama overrides.
+- Approved `qwen3:1.7b` downloaded locally. The exact observed model digest is
+  `8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7`.
+  Model tag names are mutable; evaluation must record the digest.
+- Bounded local adapter rejects remote endpoints, redirects, environment
+  proxies, wrong models, malformed/oversized responses and truncated output.
+- Local draft answer pipeline validates decision, claims and scoped evidence/
+  quotation IDs, resolving quotes and source metadata server-side. Empty
+  retrieval avoids model execution. Runtime errors are distinct from evidence
+  abstention. Answers do not claim semantic support is verified.
+- CLI now supports `doctor` and `ask`; existing retrieval commands remain
+  offline. `scripts/smoke_local.py` records actual local development probes.
+- Final automated suite: **74 tests pass**, including loopback HTTP failure
+  cases, input/output bounds, Unicode/markup rejection, source integrity,
+  policy enforcement and CLI integration. No paid API was used.
+- The project-owned foreground server was stopped after verification; the
+  project port no longer has a listener. Runtime and weights remain cached.
+  Start `python3 scripts/local_runtime.py serve` before the next generation run.
+
+### Actual live runs and the change they motivated
+
+The first [four-case development run](../reports/day2-initial-smoke.json)
+suppressed all three generated drafts as `invalid_generation`. The absent-token
+query correctly made no model call. A diagnostic found contradictory
+`status`/`reason` fields and inaccurate copying of some source quotes.
+
+The internal output contract was then simplified to one decision and at most
+two claims. The model selects known `(evidence_id, quote_id)` pairs instead of
+rewriting quote text. The server returns exact source spans. This reduces the
+copying burden without accepting fabricated quotations or claiming semantic
+verification. Quote menus omit visible fenced code and oversized prose;
+original chunk boundaries may still omit surrounding source context.
+
+The [final run](../reports/day2-local-smoke.json), using `quote_menu_v2`, recorded:
+
+| Development probe | Actual result | End-to-end latency |
+| --- | --- | --- |
+| HTTPX 0.28.1 default timeout | Cited draft: five seconds of network inactivity | 1755.093 ms |
+| HTTPX 0.28.1 proxies upgrade | Invalid generation suppressed; no answer shown | 1315.057 ms |
+| HTTPX 0.27.2 proxies deprecation | Cited draft: argument is deprecated | 1088.853 ms |
+| Missing token | Abstained, no model call | 0.597 ms |
+
+All generated-result outputs still set `semantic_support_verified: false`.
+Both reports set `human_reviewed: false` and are explicitly not held-out
+benchmarks. Development changes, model warming and repeated prompts prevent
+interpreting these timings or outcomes as a controlled quality improvement.
+The upgrade-case failure remains visible rather than being replaced by a
+handwritten success. No API/UI, semantic retrieval, public hosted endpoint or
+manually reviewed benchmark is claimed.
+
+### Next milestone
+
+Day 3: add local embeddings and vector/hybrid retrieval, compare them against
+the keyword baseline on development questions, and investigate the remaining
+upgrade failure. Keep these probes out of the later frozen holdout. Do not
+adopt reranking without measured benefit.

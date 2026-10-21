@@ -4,7 +4,7 @@ from unittest.mock import patch
 import unittest
 
 from test_models import example_source
-from versionlens.answering import MAX_CONTEXT_CHARS, answer, select_evidence, validate_draft
+from versionlens.answering import MAX_CONTEXT_CHARS, answer, quote_spans, select_evidence, validate_draft
 from versionlens.config import LocalModelConfig
 from versionlens.local_model import LocalModelError, ModelResponse
 from versionlens.models import Chunk, SearchRequest, ValidationError
@@ -18,9 +18,9 @@ def hit(version="0.28.1", text=QUOTE):
     return SearchHit(Chunk.create(example_source(version, text), "Changelog > 0.28.0", 1, 1, text), 1.0)
 
 
-def draft(text="The deprecated proxies argument was removed.", quote=QUOTE, evidence_id="E1"):
-    return {"status": "answered", "reason": "", "claims": [{"text": text,
-            "citations": [{"evidence_id": evidence_id, "quote": quote}]}]}
+def draft(text="The deprecated proxies argument was removed.", quote_id="Q1", evidence_id="E1"):
+    return {"decision": "answer", "claims": [{"text": text,
+            "citations": [{"evidence_id": evidence_id, "quote_id": quote_id}]}]}
 
 
 class FakeGenerator:
@@ -49,15 +49,17 @@ class DraftValidationTests(unittest.TestCase):
     def test_unknown_citation_fabricated_quote_and_extra_url_fail_closed(self):
         invented_url = draft()
         invented_url["claims"][0]["citations"][0]["url"] = "https://untrusted.example"
-        cases = [draft(evidence_id="E99"), draft(quote="This text is not in the document."),
-                 draft(quote=" "), invented_url, {"status": "answered", "reason": "", "claims": []}]
+        invented_quote = draft()
+        invented_quote["claims"][0]["citations"][0]["quote"] = "This text is not in the document."
+        cases = [draft(evidence_id="E99"), draft(quote_id="Q99"), invented_quote,
+                 draft(quote_id=" "), invented_url, {"decision": "answer", "claims": []}]
         for value in cases:
             with self.subTest(value=value), self.assertRaises(ValidationError):
                 validate_draft(json.dumps(value), self.evidence)
 
     def test_duplicate_keys_nonstandard_numbers_and_empty_claims_are_rejected(self):
-        values = ['{"status":"answered","status":"abstained","claims":[],"reason":"unrelated_evidence"}',
-                  '{"status":"abstained","claims":[],"reason":NaN}', json.dumps(draft(text=" ")),
+        values = ['{"decision":"answer","decision":"unrelated_evidence","claims":[]}',
+                  '{"decision":NaN,"claims":[]}', json.dumps(draft(text=" ")),
                   "[1,2,3]", "{" * 1000]
         for value in values:
             with self.subTest(value=value[:40]), self.assertRaises(ValidationError):
@@ -70,23 +72,39 @@ class DraftValidationTests(unittest.TestCase):
             with self.subTest(text=repr(text)), self.assertRaises(ValidationError):
                 validate_draft(json.dumps(draft(text=text)), self.evidence)
 
-    def test_whitespace_cannot_bypass_supporting_quote_length_bound(self):
-        quote = " " * 600 + QUOTE
-        evidence = select_evidence((hit(text=quote),), "0.28.1")
-        with self.assertRaises(ValidationError):
-            validate_draft(json.dumps(draft(quote=quote)), evidence)
+    def test_menu_spans_are_exact_bounded_and_long_prose_is_omitted(self):
+        text = "  " + QUOTE + "  \n\n" + "x" * 601
+        self.assertEqual(quote_spans(text), (QUOTE,))
+        self.assertTrue(all(span in text and len(span) <= 600 for span in quote_spans(text)))
+
+    def test_long_lists_split_at_whole_item_boundaries(self):
+        first = "* " + "a" * 350 + "\n  continuation preserving the item."
+        second = "* " + "b" * 350
+        text = first + "\n" + second
+        self.assertEqual(quote_spans(text), (first, second))
+
+    def test_visible_code_fences_are_omitted_even_with_blank_lines(self):
+        code = '```python\nclient = httpx.Client()\n\nresponse = client.get("example")\n```'
+        self.assertEqual(quote_spans(code), ())
+        prose = "An ordinary source paragraph survives."
+        self.assertEqual(quote_spans(prose + "\n\n" + code), (prose,))
 
     def test_quote_from_other_chunk_is_not_accepted_for_selected_id(self):
-        other = hit(text="Use the proxy argument for a single proxy.")
+        other = hit(text="Use the proxy argument for a single proxy.\n\nAnother valid quote exists only here.")
         evidence = select_evidence((hit(), other), "0.28.1")
         with self.assertRaises(ValidationError):
-            validate_draft(json.dumps(draft(quote=other.chunk.text)), evidence)
+            validate_draft(json.dumps(draft(quote_id="Q2", evidence_id="E1")), evidence)
 
     def test_abstention_cannot_smuggle_claims_or_freeform_advice(self):
-        for value in ({"status": "abstained", "claims": draft()["claims"], "reason": "insufficient_evidence"},
-                      {"status": "abstained", "claims": [], "reason": "Try inventing a new API"}):
+        for value in ({"decision": "insufficient_evidence", "claims": draft()["claims"]},
+                      {"decision": "Try inventing a new API", "claims": []}):
             with self.subTest(value=value), self.assertRaises(ValidationError):
                 validate_draft(json.dumps(value), self.evidence)
+
+    def test_valid_evidence_abstention_has_no_generated_advice(self):
+        value = {"decision": "conflicting_evidence", "claims": []}
+        self.assertEqual(validate_draft(json.dumps(value), self.evidence),
+                         {"status": "abstained", "claims": [], "reason": "conflicting_evidence"})
 
     def test_context_is_bounded_and_mixed_versions_are_rejected(self):
         large = hit(text="x" * (MAX_CONTEXT_CHARS + 1))
@@ -112,6 +130,16 @@ class AnswerPipelineTests(unittest.TestCase):
         self.assertEqual(result["reason"], "no_matching_evidence")
         self.assertEqual(result["status"], "abstained")
         self.assertFalse(result["model_called"])
+        self.assertEqual(model.calls, [])
+
+    def test_unquotable_sources_and_context_overflow_are_distinct(self):
+        model = FakeGenerator(draft())
+        result = self.run_with((hit(text="x" * 601),), model)
+        self.assertEqual(result["reason"], "no_usable_quote_spans")
+        self.assertEqual(model.calls, [])
+        model.config = LocalModelConfig(num_ctx=512, max_output_tokens=100)
+        result = self.run_with((hit(),), model)
+        self.assertEqual(result["reason"], "context_budget_exceeded")
         self.assertEqual(model.calls, [])
 
     def test_success_is_cited_but_never_claims_semantic_verification(self):
