@@ -27,6 +27,10 @@ class VersionContractTests(unittest.TestCase):
             with self.subTest(question=question[:8], limit=limit), self.assertRaises(ValidationError):
                 SearchRequest(question, "0.28.1", limit)
 
+    def test_invalid_unicode_question_is_rejected_before_building_a_prompt(self):
+        with self.assertRaises(ValidationError):
+            SearchRequest("question " + chr(0xd800), "0.28.1")
+
     def test_source_cannot_misrepresent_its_version_or_upstream(self):
         source = example_source()
         for fields in (

@@ -99,5 +99,9 @@ class SearchRequest:
             raise ValidationError("Question must not be empty.")
         if len(self.question) > 2000:
             raise ValidationError("Question is limited to 2000 characters.")
+        try:
+            self.question.encode("utf-8", errors="strict")
+        except UnicodeEncodeError as exc:
+            raise ValidationError("Question must contain valid Unicode text.") from exc
         if type(self.limit) is not int or not 1 <= self.limit <= 20:
             raise ValidationError("Result limit must be between 1 and 20.")
