@@ -36,6 +36,7 @@ RUNTIME = ROOT / ".tools" / "ollama"
 ARCHIVE = ROOT / ".tools" / f"ollama-{RELEASE}-darwin.tgz"
 MODELS = ROOT / ".ollama" / "models"
 ALLOWED_DOWNLOAD_HOSTS = {"github.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com"}
+EMBEDDING_MODEL = "nomic-embed-text:v1.5"
 
 
 class RuntimeSetupError(ValueError):
@@ -220,7 +221,13 @@ def runtime_environment() -> dict[str, str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("install", "serve", "pull", "status"))
+    parser.add_argument(
+        "--embedding", action="store_true",
+        help="Pull only the approved local embedding model instead of the generation model",
+    )
     args = parser.parse_args()
+    if args.embedding and args.command != "pull":
+        parser.error("--embedding is allowed only with pull")
     try:
         if args.command == "install":
             install()
@@ -229,12 +236,13 @@ def main() -> int:
         environment = runtime_environment()
         safe_project_path(MODELS).mkdir(parents=True, exist_ok=True)
         config = LocalModelConfig()
+        selected_model = EMBEDDING_MODEL if args.embedding else config.model
         command = {
             "serve": [str(executable), "serve"],
-            "pull": [str(executable), "pull", config.model],
+            "pull": [str(executable), "pull", selected_model],
             "status": [str(executable), "list"],
         }[args.command]
-        print(f"Local-only runtime: {config.base_url}; cloud disabled; model {config.model}", flush=True)
+        print(f"Local-only runtime: {config.base_url}; cloud disabled; model {selected_model}", flush=True)
         return subprocess.run(command, env=environment, cwd=ROOT, check=False).returncode
     except KeyboardInterrupt:
         return 130

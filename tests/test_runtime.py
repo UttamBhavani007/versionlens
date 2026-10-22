@@ -2,6 +2,7 @@
 
 import hashlib
 import importlib.util
+import io
 import json
 import os
 from pathlib import Path
@@ -19,6 +20,40 @@ _spec.loader.exec_module(runtime)
 
 
 class LocalRuntimePolicyTests(unittest.TestCase):
+    def test_pull_selects_only_explicit_approved_generation_or_embedding_model(self):
+        for arguments, expected_model in (
+            (["pull"], "qwen3:1.7b"),
+            (["pull", "--embedding"], "nomic-embed-text:v1.5"),
+        ):
+            with self.subTest(arguments=arguments), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                executable = root / ".tools" / "ollama" / "ollama"
+                with (
+                    patch.multiple(runtime, ROOT=root, MODELS=root / ".ollama" / "models"),
+                    patch.object(runtime.sys, "argv", ["local_runtime.py", *arguments]),
+                    patch.object(runtime, "require_runtime", return_value=executable),
+                    patch.object(runtime.subprocess, "run") as run,
+                    patch("sys.stdout", new_callable=io.StringIO),
+                ):
+                    run.return_value.returncode = 0
+                    self.assertEqual(runtime.main(), 0)
+                    self.assertEqual(run.call_args.args[0], [str(executable), "pull", expected_model])
+                    self.assertEqual(run.call_args.kwargs["env"]["OLLAMA_NO_CLOUD"], "1")
+                    self.assertEqual(run.call_args.kwargs["env"]["OLLAMA_HOST"], "http://127.0.0.1:11435")
+
+    def test_embedding_flag_rejects_other_runtime_commands_before_execution(self):
+        with (
+            patch.object(runtime.sys, "argv", ["local_runtime.py", "serve", "--embedding"]),
+            patch.object(runtime, "require_runtime") as verify,
+            patch.object(runtime.subprocess, "run") as run,
+            patch("sys.stderr", new_callable=io.StringIO),
+        ):
+            with self.assertRaises(SystemExit) as caught:
+                runtime.main()
+            self.assertEqual(caught.exception.code, 2)
+            verify.assert_not_called()
+            run.assert_not_called()
+
     def test_symlinked_cli_cannot_pass_runtime_verification(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

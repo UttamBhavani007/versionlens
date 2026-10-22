@@ -137,3 +137,62 @@ test does not prove that a model has been downloaded, that Metal is available,
 or that generated answers are grounded. Record actual runtime version, model
 digest, cloud-off startup evidence, latency, and observed failures in local
 smoke reports; do not substitute assumed benchmark results.
+
+## Local embedding model
+
+Vector retrieval uses **`nomic-embed-text:v1.5`** through the same cloud-disabled
+project server. With that foreground server running, download its public
+weights explicitly:
+
+```sh
+python3 scripts/local_runtime.py pull --embedding
+```
+
+The default `pull` command continues to select the generation model.
+`--embedding` is accepted only with `pull` and cannot select arbitrary model
+names. The existing runtime and model directories remain ignored by Git.
+
+The [Nomic publisher model card](https://huggingface.co/nomic-ai/nomic-embed-text-v1.5)
+lists an **Apache 2.0** license, **768-dimensional** full-size embeddings, an
+**8192-token** context, and the required `search_document:` and `search_query:`
+task prefixes. The [official Ollama v1.5 tag](https://ollama.com/library/nomic-embed-text:v1.5)
+provides the roughly **274 MB** local model. These are source descriptions, not
+measurements of this project's retrieval quality or hardware performance.
+
+The adapter uses the local [`/api/embed` endpoint](https://docs.ollama.com/api/embed)
+with `truncate: false`, `dimensions: 768`, and `options.num_ctx: 8192`. It keeps
+each input text unchanged while prepending its task prefix. Requests contain
+1–16 texts, with at most 12,000 UTF-8 bytes per raw text and 192,000 raw bytes
+per batch; prefixes add a small fixed overhead. The runtime returns an error
+when the full input exceeds its context rather than silently truncating it.
+Response bodies are capped at 2 MiB.
+
+`LocalEmbeddingConfig` accepts only literal loopback on port 11435, the exact
+v1.5 model name, 768 dimensions, an 8192-token context, and a finite bounded
+timeout. The HTTP adapter disables inherited proxies and rejects redirects.
+It validates vector count, dimensions, numeric finiteness, nonzero magnitude,
+usage metadata, and the returned model name, then normalizes each full vector
+to unit length with stable arithmetic. Service errors are sanitized.
+
+Before and after every embedding request, the adapter checks the exact model's
+[`/api/tags` inventory](https://docs.ollama.com/api/tags) and its complete lowercase
+64-character SHA-256 digest. An observed model change rejects the batch. Cache
+metadata must retain model name, digest, dimensions, and preprocessing revision
+`nomic-search-prefix-v1`; a mutable model tag alone is insufficient. These checks
+detect observed changes around the request, not every possible race in a
+separately modified local server. Missing models and mismatched caches require
+explicit repair; the application does not switch to another provider.
+
+A live query smoke check on **22 October 2026** returned one 768-dimensional
+vector and observed this complete model inventory digest:
+
+```text
+0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f
+```
+
+This identifies the locally tested download at that time; the `v1.5` tag may
+change upstream. One successful query is not a retrieval-quality benchmark.
+
+Offline adapter and launcher tests use fixtures and mocks. Live model download,
+embedding/index execution, and retrieval comparisons need separate recorded
+checks; passing these tests alone establishes no retrieval improvement.
