@@ -236,13 +236,21 @@ def validate_draft(raw: str, evidence: tuple[Evidence, ...]) -> dict:
     return {"status": "answered", "claims": checked, "reason": ""}
 
 
-def answer(index_path: Path, request: SearchRequest, client: Generator | None = None) -> dict:
+def answer(index_path: Path, request: SearchRequest, client: Generator | None = None, *,
+           retrieval_method: str = "keyword", vector_path: Path | None = None,
+           embedding_client=None) -> dict:
     started = perf_counter()
-    hits = search(index_path, request)
+    if retrieval_method == "keyword":
+        hits = search(index_path, request)
+    else:
+        from .search_service import retrieve
+        hits = retrieve(index_path, request, method=retrieval_method,
+                        vector_path=vector_path, client=embedding_client)
     config = getattr(client, "config", None) or LocalModelConfig()
     evidence = select_evidence(hits, request.version, question=request.question, config=config)
     result = {
         "status": "abstained", "mode": "local_cited_draft", "pipeline_version": "quote_menu_v2",
+        "retrieval_method": retrieval_method,
         "question": request.question, "version": request.version,
         "claims": [], "answer": None, "reason": "no_matching_evidence",
         "evidence_ids": [item.evidence_id for item in evidence],
