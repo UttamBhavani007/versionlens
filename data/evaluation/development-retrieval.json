@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "kind": "retrieval_development",
+  "split": "development",
+  "frozen_at": "2026-10-22",
+  "frozen_before_first_vector_comparison": true,
+  "human_reviewed": false,
+  "label_origin": "AI-authored; automatically checked against pinned corpus; not independent human review",
+  "exhaustive_relevance_labels": false,
+  "prior_development_overlap": [
+    "D01",
+    "D02",
+    "D04",
+    "Q01"
+  ],
+  "protocol": {
+    "top_k": 5,
+    "candidate_pool": 20,
+    "rrf_constant": 60
+  },
+  "cases": [
+    {
+      "case_id": "D01",
+      "question": "Why did the proxies argument stop working after upgrading HTTPX?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "CHANGELOG.md",
+          "section_contains": "0.28.0",
+          "text_contains": "The deprecated `proxies` argument has now been removed."
+        }
+      ],
+      "notes": "Require the applicable removal entry, not only the older deprecation."
+    },
+    {
+      "case_id": "D02",
+      "question": "Is the proxies argument deprecated but still usable in this HTTPX version?",
+      "version": "0.27.2",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "CHANGELOG.md",
+          "section_contains": "0.26.0",
+          "text_contains": "It will still continue to work, but it will be removed in the future."
+        }
+      ],
+      "notes": "Do not import later removal claims into this older snapshot."
+    },
+    {
+      "case_id": "D03",
+      "question": "What happened to the app shortcut when upgrading to HTTPX 0.28?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "CHANGELOG.md",
+          "section_contains": "0.28.0",
+          "text_contains": "The deprecated `app` argument has now been removed."
+        }
+      ],
+      "notes": "Retrieve the removal release rather than the earlier shortcut deprecation."
+    },
+    {
+      "case_id": "D04",
+      "question": "What is the default timeout for network inactivity?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/quickstart.md",
+          "section_contains": "Timeouts",
+          "text_contains": "The default timeout for network inactivity is five seconds."
+        },
+        {
+          "upstream_path": "docs/advanced/timeouts.md",
+          "section_contains": "Timeouts",
+          "text_contains": "raise a `TimeoutException` after 5 seconds of"
+        }
+      ],
+      "notes": "Keep the numerical default and network-inactivity qualification together."
+    },
+    {
+      "case_id": "D05",
+      "question": "How many total connections may a client keep in its pool by default?",
+      "version": "0.27.2",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/resource-limits.md",
+          "section_contains": "Resource Limits",
+          "text_contains": "(Default 100)"
+        }
+      ],
+      "notes": "Maximum total connections differs from the separate keep-alive count."
+    },
+    {
+      "case_id": "D06",
+      "question": "Why does HTTPX not follow a redirect automatically like requests does?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/compatibility.md",
+          "section_contains": "Redirects",
+          "text_contains": "HTTPX does **not follow redirects by default**."
+        }
+      ],
+      "notes": "A known anchor explicitly states the default behavior."
+    },
+    {
+      "case_id": "D07",
+      "question": "Does HTTPX check HTTPS certificates automatically?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/ssl.md",
+          "section_contains": "Enabling and disabling verification",
+          "text_contains": "By default httpx will verify HTTPS connections"
+        }
+      ],
+      "notes": "A retrieval probe, not a recommendation to disable verification."
+    },
+    {
+      "case_id": "D08",
+      "question": "How can I prevent HTTPX from using proxy environment variables?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/environment_variables.md",
+          "section_contains": "Environment Variables",
+          "text_contains": "`trust_env` has to be set `False`"
+        }
+      ],
+      "notes": "Retrieve the setting rather than assume environment variables are ignored."
+    },
+    {
+      "case_id": "D09",
+      "question": "Which timeout applies while waiting for another chunk of the response body?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/timeouts.md",
+          "section_contains": "Fine tuning the configuration",
+          "text_contains": "a `ReadTimeout` exception is raised."
+        }
+      ],
+      "notes": "The anchor belongs to the paragraph describing the read timeout."
+    },
+    {
+      "case_id": "D10",
+      "question": "How can I disable all timeouts on a Client instance?",
+      "version": "0.27.2",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/timeouts.md",
+          "section_contains": "Setting a default timeout on a client",
+          "text_contains": "httpx.Client(timeout=None)"
+        }
+      ],
+      "notes": "Client-level configuration is required; a per-request example has a different scope."
+    },
+    {
+      "case_id": "D11",
+      "question": "Does HTTPX support HTTP/2 in addition to HTTP/1.1?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "README.md",
+          "section_contains": "HTTPX overview",
+          "text_contains": "HTTP/1.1 and HTTP/2"
+        }
+      ],
+      "notes": "Protocol support does not establish successful negotiation for every request."
+    },
+    {
+      "case_id": "D12",
+      "question": "How can I turn HTTP/2 off only for one particular domain?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/transports.md",
+          "section_contains": "Mounting transports",
+          "text_contains": "Disabling HTTP/2 on a single given domain..."
+        }
+      ],
+      "notes": "Retrieve the per-domain mounting example, not only general protocol support."
+    },
+    {
+      "case_id": "D13",
+      "question": "Will HTTPX trigger ASGI application startup and shutdown events for me?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/transports.md",
+          "section_contains": "ASGI startup and shutdown",
+          "text_contains": "It is not in the scope of HTTPX to trigger ASGI lifespan events of your app."
+        }
+      ],
+      "notes": "A documented responsibility boundary."
+    },
+    {
+      "case_id": "D14",
+      "question": "Can a response event hook assume the response body has already been read?",
+      "version": "0.27.2",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/event-hooks.md",
+          "section_contains": "Event Hooks",
+          "text_contains": "Response event hooks are called before determining if the response body"
+        }
+      ],
+      "notes": "Keep the following continuation in the excerpt when interpreting this anchor."
+    },
+    {
+      "case_id": "D15",
+      "question": "For HTTPS destinations, should my HTTP proxy address usually start with http or https?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "docs/advanced/proxies.md",
+          "section_contains": "HTTP Proxies",
+          "text_contains": "the proxy URL for the `https://` key _should_ use the `http://` scheme"
+        }
+      ],
+      "notes": "Destination scheme and proxy-connection scheme differ in the documented gotcha."
+    },
+    {
+      "case_id": "D16",
+      "question": "What SSL fix involving verify=False and client certificates shipped in 0.28.1?",
+      "version": "0.28.1",
+      "category": "answerable",
+      "expected": [
+        {
+          "upstream_path": "CHANGELOG.md",
+          "section_contains": "0.28.1",
+          "text_contains": "Fix SSL case where `verify=False` together with client side certificates."
+        }
+      ],
+      "notes": "Require this specific fix rather than an unrelated historical SSL release note."
+    },
+    {
+      "case_id": "Q01",
+      "question": "quantumgiraffeunsupported",
+      "version": "0.28.1",
+      "category": "missing_evidence",
+      "expected": [],
+      "expected_behavior": "No document contains this token. BM25 may return no candidates; dense retrieval may still return nearest neighbors. Record evidence and version isolation separately; do not invent a similarity cutoff or treat neighbors as proof of an answer.",
+      "notes": "This absent-token probe was used during day-2 development and is not held out."
+    },
+    {
+      "case_id": "Q02",
+      "question": "How do I enable HTTPX's built-in Kubernetes cluster autoscaler?",
+      "version": "0.28.1",
+      "category": "missing_evidence",
+      "expected": [],
+      "expected_behavior": "The checked-in corpus contains no Kubernetes or autoscaler guidance. Record false-relevance risk qualitatively; candidates alone do not establish answerability.",
+      "notes": "A real product name and unsupported capability can still produce lexical overlap."
+    },
+    {
+      "case_id": "Q03",
+      "question": "Why was the proxies argument removed in HTTPX 0.28.0?",
+      "version": "0.27.2",
+      "category": "wrong_version_trap",
+      "expected": [],
+      "expected_behavior": "Every returned source must remain at snapshot 0.27.2. The later 0.28.0 removal entry cannot be cited from this older snapshot; old deprecation text does not establish the future event.",
+      "notes": "Version isolation is a software property separate from answer correctness and relevance."
+    },
+    {
+      "case_id": "Q04",
+      "question": "What SSL client-certificate fix was released in HTTPX 0.28.1?",
+      "version": "0.27.2",
+      "category": "wrong_version_trap",
+      "expected": [],
+      "expected_behavior": "Return only snapshot 0.27.2 evidence. The new 0.28.1 fix is unavailable in that snapshot even if historical SSL material ranks highly.",
+      "notes": "No empty-result expectation is imposed on keyword or vector retrieval."
+    }
+  ]
+}

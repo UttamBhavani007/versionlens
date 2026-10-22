@@ -112,3 +112,74 @@ Day 3: add local embeddings and vector/hybrid retrieval, compare them against
 the keyword baseline on development questions, and investigate the remaining
 upgrade failure. Keep these probes out of the later frozen holdout. Do not
 adopt reranking without measured benefit.
+
+## 2026-10-22 — day 3
+
+### Implemented and verified
+
+- Downloaded the free Apache-2.0 `nomic-embed-text:v1.5` model through the
+  project-owned, cloud-disabled loopback server. Observed full digest:
+  `0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f`.
+- A bounded embedding adapter checks identity before/after calls, applies the
+  documented document/query prefixes, rejects invalid or non-finite vectors,
+  and normalizes all 768 dimensions. No proxy, redirect or remote provider path.
+- Embedded all 644 chunks without input truncation in 41 bounded batches.
+  The [actual build metadata](../reports/day3-index-build.json) records 86,877
+  prompt tokens and 12,450,323,371 ns summed model-reported duration; this is
+  not end-to-end build elapsed time. All local API fees were zero.
+- The backend capped embedding context at 2048 despite the configured 8192
+  request and upstream setting. All full inputs succeeded; no 8192-token
+  capacity is claimed for this runtime/model pair.
+- The separate SQLite vector index binds exact text and all source metadata
+  to the model digest, dimensions and preprocessing revision. Failed builds
+  preserve an existing index. Missing, stale, incomplete or corrupt caches fail.
+- Cosine search filters the exact snapshot before scoring. Fixed hybrid RRF
+  combines twenty candidates per engine with constant 60, deterministic ties
+  and corpus-change detection across engines. No raw-score mixing or fallback.
+- CLI adds `embed`, `--vector-index` and explicit retrieval mode selection.
+  Keyword remains the default for search and local draft answers.
+- **132 automated checks pass**, including model identity, vector/cache
+  validation, version isolation, real source-change races, transaction rollback,
+  strict development-file validation and the no-match generation guard.
+- The foreground model server was stopped after verification. Runtime, weights
+  and both indexes remain local ignored artifacts. No cloud environment was
+  configured or scheduled by this work; the daily schedule remains local.
+
+### Recorded comparison and decisions
+
+The development file was frozen before the first vector comparison at SHA-256
+`91c06eb01d0a29a535e3b43ed0f091f3f65ef2d7c35aed79fb15e79cd3ae41c5`.
+It contains sixteen answerable questions and four separate qualitative probes;
+seventeen source anchors were checked against actual pinned chunks. These are
+AI-authored, nonexhaustive labels, **not human review or a held-out benchmark**.
+
+The [final comparison](../reports/day3-retrieval-comparison.json) records
+known-evidence hits at five of 13/16 for keyword, 12/16 for vector and 13/16 for
+hybrid; corresponding reciprocal ranks are 0.65625, 0.71875 and 0.653125.
+Keyword stays the default: hybrid does not improve coverage and adds latency.
+No reranker, tuned threshold or post-comparison parameter search was added.
+The first comparison is retained separately; validation of malformed development
+files was tightened before the final run, without changing questions or labels.
+
+The [initial answer smoke](../reports/day3-initial-answer-smoke.json) exposed
+unrelated drafted answers to the missing-token query under vector/hybrid modes.
+The [final smoke](../reports/day3-answer-smoke.json) tests a conservative lexical
+match prerequisite for experimental generation. That repeated query now abstains
+without embedding or generation. This veto can reject useful paraphrases and
+does not make matched passages semantically sufficient. Unsupported questions
+with shared terms remain an evaluation risk.
+
+The upgrade probe still produces `invalid_generation` in all three modes.
+A separate [diagnostic](../reports/day3-upgrade-diagnostic.json) found a response
+that selects `insufficient_evidence` while also supplying a claim; strict
+validation suppresses the contradiction. Its claim also names removal in
+0.28.1 instead of the supplied 0.28.0 heading. Better retrieval alone does not
+repair this small model's output-contract and release-reasoning errors.
+The old-version probe produced cited drafts in all modes, still labelled
+`semantic_support_verified: false`. No answer-accuracy score is inferred.
+
+### Next milestone
+
+Day 4 on 23 October: local API contracts and validation, web UI, source/version
+inspection, integration checks and accessibility. Holdout review, synthetic
+permission filtering and final screenshots remain later milestones.

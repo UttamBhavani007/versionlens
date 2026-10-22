@@ -168,7 +168,7 @@ when the full input exceeds its context rather than silently truncating it.
 Response bodies are capped at 2 MiB.
 
 `LocalEmbeddingConfig` accepts only literal loopback on port 11435, the exact
-v1.5 model name, 768 dimensions, an 8192-token context, and a finite bounded
+v1.5 model name, 768 dimensions, an 8192-token requested context, and a finite bounded
 timeout. The HTTP adapter disables inherited proxies and rejects redirects.
 It validates vector count, dimensions, numeric finiteness, nonzero magnitude,
 usage metadata, and the returned model name, then normalizes each full vector
@@ -192,6 +192,14 @@ vector and observed this complete model inventory digest:
 
 This identifies the locally tested download at that time; the `v1.5` tag may
 change upstream. One successful query is not a retrieval-quality benchmark.
+
+During the full 22 October run, the pinned native backend warned that the
+requested context exceeded the model's reported training context and launched
+with **2048 tokens**, despite the tag/model-card 8192-token setting. Every shipped
+chunk (at most 1795 UTF-8 bytes before its prefix) embedded successfully with
+`truncate: false`. Do not infer that this particular runtime/model pair accepts
+8192-token inputs; oversized inputs must fail explicitly. The configured request
+and the effective backend capacity are different observations.
 
 Offline adapter and launcher tests use fixtures and mocks. Live model download,
 embedding/index execution, and retrieval comparisons need separate recorded

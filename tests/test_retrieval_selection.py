@@ -82,3 +82,17 @@ class RetrievalSelectionTests(unittest.TestCase):
         generate.assert_not_called()
         self.assertEqual(result["retrieval_method"], "hybrid")
         self.assertEqual(result["reason"], "no_matching_evidence")
+
+    def test_unmatched_question_never_uses_dense_neighbors_as_proof_of_answerability(self):
+        for method in ("vector", "hybrid"):
+            with self.subTest(method=method), \
+                    patch("versionlens.search_service.retrieve", return_value=(self.hit,)) as dense, \
+                    patch("versionlens.local_model.LocalModelClient.generate") as generate:
+                result = answer(self.index, SearchRequest("quantumgiraffeunsupported", "0.28.1"),
+                                retrieval_method=method, vector_path=self.vectors)
+            dense.assert_not_called()
+            generate.assert_not_called()
+            self.assertEqual(result["status"], "abstained")
+            self.assertEqual(result["reason"], "no_lexical_support_for_experimental_retrieval")
+            self.assertFalse(result["retrieval_executed"])
+            self.assertIsNone(result["answer"])

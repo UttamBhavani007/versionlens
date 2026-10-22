@@ -4,6 +4,19 @@ Day 2 adds local generation to the keyword baseline. The model is a small local
 Qwen3 model, not a paid API. The service does not yet have a measured answer
 quality score or a human-reviewed holdout.
 
+Day 3 adds explicit vector/hybrid retrieval experiments. These modes require a
+keyword match in the requested snapshot before they can supply generation
+context. If no keyword match exists, the answer abstains with
+`no_lexical_support_for_experimental_retrieval` without embedding or generation.
+The response exposes `lexical_support_gate_applied` and `retrieval_executed`.
+Search-only vector/hybrid commands still return their neighbors for inspection.
+
+This conservative prerequisite was added after the retained day-3 initial smoke
+run answered an unrelated missing-token question from dense neighbors. It can
+abstain on useful paraphrases with no shared words. A keyword match is only a
+necessary condition here, never proof that the passage answers the question;
+unsupported questions with shared terms remain an evaluation risk.
+
 ## What the pipeline checks
 
 1. Validate an explicit HTTPX version and retrieve only that snapshot.

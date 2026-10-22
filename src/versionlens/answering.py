@@ -240,8 +240,19 @@ def answer(index_path: Path, request: SearchRequest, client: Generator | None = 
            retrieval_method: str = "keyword", vector_path: Path | None = None,
            embedding_client=None) -> dict:
     started = perf_counter()
+    if retrieval_method not in {"keyword", "vector", "hybrid"}:
+        raise ValidationError("Choose keyword, vector, or hybrid retrieval.")
+    if retrieval_method != "keyword" and vector_path is None:
+        raise ValidationError("Vector and hybrid retrieval require a vector index path.")
+    lexical_hits = search(index_path, request)
+    lexical_gate_blocked = retrieval_method != "keyword" and not lexical_hits
     if retrieval_method == "keyword":
-        hits = search(index_path, request)
+        hits = lexical_hits
+    elif lexical_gate_blocked:
+        # Dense retrieval always has neighbors. Until answerability is evaluated,
+        # require a lexical match as a conservative prerequisite for generation.
+        # This can abstain on useful semantic paraphrases and proves no entailment.
+        hits = ()
     else:
         from .search_service import retrieve
         hits = retrieve(index_path, request, method=retrieval_method,
@@ -251,6 +262,8 @@ def answer(index_path: Path, request: SearchRequest, client: Generator | None = 
     result = {
         "status": "abstained", "mode": "local_cited_draft", "pipeline_version": "quote_menu_v2",
         "retrieval_method": retrieval_method,
+        "retrieval_executed": not lexical_gate_blocked,
+        "lexical_support_gate_applied": retrieval_method != "keyword",
         "question": request.question, "version": request.version,
         "claims": [], "answer": None, "reason": "no_matching_evidence",
         "evidence_ids": [item.evidence_id for item in evidence],
@@ -260,7 +273,9 @@ def answer(index_path: Path, request: SearchRequest, client: Generator | None = 
         "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
     }
     if not evidence:
-        if hits:
+        if lexical_gate_blocked:
+            result["reason"] = "no_lexical_support_for_experimental_retrieval"
+        elif hits:
             result["reason"] = ("context_budget_exceeded" if any(quote_spans(hit.chunk.text) for hit in hits)
                                 else "no_usable_quote_spans")
     else:

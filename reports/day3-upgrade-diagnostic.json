@@ -1,0 +1,127 @@
+{
+  "kind": "upgrade_development_diagnostic",
+  "question": "Why did the proxies argument stop working after upgrading?",
+  "version": "0.28.1",
+  "response": {
+    "response": "{\n    \"decision\": \"insufficient_evidence\",\n    \"claims\": [\n        {\n            \"text\": \"The `proxies` argument was deprecated in version 0.26.0 and removed in version 0.28.1.\",\n            \"citations\": [\n                {\n                    \"evidence_id\": \"E3\",\n                    \"quote_id\": \"Q2\"\n                }\n            ]\n        }\n    ]\n}",
+    "model": "qwen3:1.7b",
+    "prompt_tokens": 1169,
+    "output_tokens": 90,
+    "total_duration_ns": 2324327708
+  },
+  "validation_error": "Abstention must have no claims and a known reason.",
+  "evidence": [
+    {
+      "evidence_id": "E1",
+      "snapshot_version": "0.28.1",
+      "section": "Changelog > 0.28.0 (28th November, 2024)",
+      "quotes": [
+        {
+          "quote_id": "Q1",
+          "text": "## 0.28.0 (28th November, 2024)"
+        },
+        {
+          "quote_id": "Q2",
+          "text": "The 0.28 release includes a limited set of deprecations."
+        },
+        {
+          "quote_id": "Q3",
+          "text": "**Deprecations**:"
+        },
+        {
+          "quote_id": "Q4",
+          "text": "We are working towards a simplified SSL configuration API."
+        },
+        {
+          "quote_id": "Q5",
+          "text": "*For users of the standard `verify=True` or `verify=False` cases, or `verify=<ssl_context>` case this should require no changes. The following cases have been deprecated...*"
+        },
+        {
+          "quote_id": "Q6",
+          "text": "* The `verify` argument as a string argument is now deprecated and will raise warnings.\n* The `cert` argument is now deprecated and will raise warnings."
+        },
+        {
+          "quote_id": "Q7",
+          "text": "Our revised [SSL documentation](docs/advanced/ssl.md) covers how to implement the same behaviour with a more constrained API."
+        },
+        {
+          "quote_id": "Q8",
+          "text": "**The following changes are also included**:"
+        },
+        {
+          "quote_id": "Q9",
+          "text": "* The deprecated `proxies` argument has now been removed.\n* The deprecated `app` argument has now been removed.\n* JSON request bodies use a compact representation. (#3363)\n* Review URL percent escape sets, based on WHATWG spec. (#3371, #3373)\n* Ensure `certifi` and `httpcore` are only imported if required. (#3377)\n* Treat `socks5h` as a valid proxy scheme. (#3178)\n* Cleanup `Request()` method signature in line with `client.request()` and `httpx.request()`. (#3378)\n* Bugfix: When passing `params={}`, always strictly update rather than merge with an existing querystring. (#3364)"
+        }
+      ]
+    },
+    {
+      "evidence_id": "E2",
+      "snapshot_version": "0.28.1",
+      "section": "Changelog > 0.26.0 (20th December, 2023) > Added",
+      "quotes": [
+        {
+          "quote_id": "Q1",
+          "text": "* The `proxy` argument was added. You should use the `proxy` argument instead of the deprecated `proxies`, or use `mounts=` for more complex configurations. (#2879)"
+        }
+      ]
+    },
+    {
+      "evidence_id": "E3",
+      "snapshot_version": "0.28.1",
+      "section": "Changelog > 0.26.0 (20th December, 2023) > Deprecated",
+      "quotes": [
+        {
+          "quote_id": "Q1",
+          "text": "### Deprecated"
+        },
+        {
+          "quote_id": "Q2",
+          "text": "* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)"
+        }
+      ]
+    },
+    {
+      "evidence_id": "E4",
+      "snapshot_version": "0.28.1",
+      "section": "Changelog > 0.25.1 (3rd November, 2023) > Fixed",
+      "quotes": [
+        {
+          "quote_id": "Q1",
+          "text": "* Raise `ValueError` on `Response.encoding` being set after `Response.text` has been accessed. (#2852)"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-22T17:43:51.224585+00:00",
+  "human_reviewed": false,
+  "not_a_held_out_benchmark": true,
+  "semantic_support_verified": false,
+  "sources": [
+    {
+      "evidence_id": "E1",
+      "chunk_id": "43fc998b74d6d31116c86241",
+      "section": "Changelog > 0.28.0 (28th November, 2024)",
+      "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L11-L36"
+    },
+    {
+      "evidence_id": "E2",
+      "chunk_id": "dc765ba62784b4293efbd579",
+      "section": "Changelog > 0.26.0 (20th December, 2023) > Added",
+      "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L67-L70"
+    },
+    {
+      "evidence_id": "E3",
+      "chunk_id": "4e158492dee6fb6e4241afbf",
+      "section": "Changelog > 0.26.0 (20th December, 2023) > Deprecated",
+      "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L71-L74"
+    },
+    {
+      "evidence_id": "E4",
+      "chunk_id": "5cda15691c434601140c99e8",
+      "section": "Changelog > 0.25.1 (3rd November, 2023) > Fixed",
+      "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L96-L99"
+    }
+  ],
+  "observation": "The response selects insufficient_evidence while supplying a claim; strict validation suppresses it. Its claimed removal release also differs from the supplied 0.28.0 change heading. This diagnostic was not used to tune the retrieval comparison."
+}

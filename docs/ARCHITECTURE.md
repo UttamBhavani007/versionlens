@@ -1,20 +1,44 @@
 # Architecture and boundaries
 
-## Implement first
+## Implemented through day 3
 
 ```mermaid
 flowchart LR
     A[HTTPX Git commit snapshots] --> B[Checksum and schema validation]
     B --> C[Markdown chunks with line references]
     C --> D[Local SQLite index]
-    E[Question and exact version] --> F[Version-filtered keyword retrieval]
+    E[Question and exact version] --> F[Keyword, cosine or RRF hybrid]
     D --> F
+    D --> H[Local Nomic embeddings]
+    H --> I[Digest-bound SQLite vector sidecar]
+    I --> F
     F --> G[Ranked evidence with source links]
+    G --> J[Bounded quote menus and local draft generation]
+    J --> K[Validated citations or explicit abstention]
 ```
 
-Only ingestion and retrieval belong to day 1. The planned extensions are local
-vector and hybrid retrieval, optional reranking after comparison, local
-generation, API/UI, document updates, and synthetic access-controlled documents.
+The application uses Python's standard library, SQLite and project-local Ollama.
+The API/UI, document updates and synthetic access-controlled documents remain
+planned. Reranking is deferred because the first development comparison does
+not justify additional complexity.
+
+The vector sidecar records the complete corpus fingerprint, embedding model
+digest, dimensions and preprocessing revision. Publication occurs only after
+every full-input embedding validates; a final source snapshot check rejects
+concurrent changes. Queries reject missing/stale/corrupt/incomplete caches and
+score only the requested snapshot. Cosine search scans this small corpus
+directly; no approximate index or hosted vector database is needed.
+
+Hybrid uses fixed RRF with constant 60 and twenty candidates per engine. It
+checks source consistency across both retrieval calls and uses chunk IDs to
+break ties. A broken vector index is an error, never an implicit keyword fallback.
+Raw BM25 and cosine scores are not combined as if they shared a scale.
+
+Keyword retrieval remains the default. Experimental vector/hybrid answer modes
+require a keyword match before retrieval/generation, because dense neighbors
+alone do not establish answerability. This conservative veto can miss relevant
+semantic paraphrases and does not validate entailment. Search-only comparisons
+do not apply this generation gate.
 
 ## Version policy
 

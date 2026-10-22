@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "local_vector_index_build",
+  "recorded_at_utc": "2026-10-22T17:42:28.712243+00:00",
+  "not_a_held_out_benchmark": true,
+  "human_reviewed": false,
+  "api_fee_usd": 0,
+  "notes": [
+    "Build metadata captured from the actual embed command on 22 October 2026.",
+    "total_duration_ns is the sum of model-reported batch durations, not end-to-end build elapsed time.",
+    "The full 644-chunk corpus was embedded without silent input truncation.",
+    "The request specified num_ctx 8192, but the native runtime logged an effective embedding context of 2048. All full chunk inputs succeeded with truncate=false; 8192-token capacity is not established."
+  ],
+  "index": {
+    "schema_version": "1",
+    "corpus_fingerprint": "81a58b9c965a0efdc45c95df7052842d8f7007e08bdf4e41871d8d98afa63fab",
+    "index_fingerprint": "2f1defc8f3b28508a1fbdc427cb0a132cc149005d6e8e40ada7f24212288f618",
+    "model": "nomic-embed-text:v1.5",
+    "model_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "dimensions": 768,
+    "preprocessing_revision": "nomic-search-prefix-v1",
+    "chunks": 644,
+    "versions": [
+      "0.27.2",
+      "0.28.1"
+    ],
+    "batches": 41,
+    "prompt_tokens": 86877,
+    "total_duration_ns": 12450323371
+  }
+}

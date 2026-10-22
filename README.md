@@ -4,10 +4,12 @@ A local, version-aware technical support service for **HTTPX**. The goal is to
 answer upgrade and troubleshooting questions from the documentation that matches
 the requested version, with inspectable evidence and explicit abstention.
 
-**Status: day 2 complete, local cited drafts.** Pinned ingestion, version-filtered keyword
-retrieval, a cloud-disabled local model, cited draft answers and abstention are
-implemented. Semantic retrieval, the API, UI, held-out evaluation and screenshots
-remain future milestones. See [the delivery plan](docs/DELIVERY_PLAN.md).
+**Status: day 3 complete, local retrieval comparison.** Pinned ingestion,
+version-filtered keyword/vector/hybrid retrieval, cloud-disabled local models,
+cited draft answers and abstention are implemented. Keyword retrieval remains
+the default after the first development comparison. The API, UI, held-out
+evaluation and screenshots remain future milestones.
+See [the delivery plan](docs/DELIVERY_PLAN.md).
 
 ## Zero paid services
 
@@ -52,7 +54,7 @@ tools. No service account is required.
 
 `search` returns JSON with ranked excerpts, exact version, immutable source
 links, line ranges, and SHA-256 provenance. It sets `answer` to `null` because
-`search` is retrieval-only. Missing matches return `no_matching_evidence`.
+`search` is retrieval-only. Missing keyword matches return `no_matching_evidence`.
 Unsupported versions and malformed requests fail explicitly.
 
 **Known baseline limitation:** BM25 can rank an old release-history entry above
@@ -114,6 +116,59 @@ for one missing-evidence query. The
 were used during development and are not held-out evaluation questions; the
 recorded roughly 1.1–1.8 second end-to-end latencies for model-calling probes are warmed, small-sample
 observations, not a deployment speed guarantee or controlled comparison.
+
+## Local vector and hybrid retrieval
+
+With the same foreground server running, pull the free Apache-2.0 embedding
+model and build its separate SQLite vector index:
+
+```sh
+python3 scripts/local_runtime.py pull --embedding
+PYTHONPATH=src python3 -m versionlens embed
+PYTHONPATH=src python3 -m versionlens search 'Why did the proxies argument stop working after upgrading HTTPX?' --version 0.28.1 --retriever vector
+PYTHONPATH=src python3 -m versionlens search 'Why did the proxies argument stop working after upgrading HTTPX?' --version 0.28.1 --retriever hybrid
+python3 scripts/compare_retrieval.py
+python3 scripts/smoke_retrievers.py
+```
+
+Nomic `nomic-embed-text:v1.5` downloads approximately 274 MB and produces
+768-dimensional embeddings locally. Full inputs are retained, with document/query
+prefixes and no silent truncation. Exact cosine search filters the requested
+version before scoring; hybrid uses fixed reciprocal-rank fusion over twenty
+candidates per engine. There is no reranker or similarity confidence threshold.
+
+The vector cache binds every chunk and its provenance to the model digest,
+dimensions and preprocessing revision. Missing, changed or incomplete caches
+fail explicitly; rerun `embed` when those inputs change. Failed builds preserve
+the previous index. Both SQLite indexes and all model weights remain ignored.
+
+The [development comparison](reports/day3-retrieval-comparison.json) uses sixteen
+answerable questions and four separate qualitative probes. Labels are
+AI-authored, source-checked and **not human-reviewed or held out**.
+
+| Retrieval | Known-evidence hit at 5 | Known-evidence MRR at 5 |
+| --- | --- | --- |
+| Keyword | 13/16 | 0.65625 |
+| Vector | 12/16 | 0.71875 |
+| Hybrid | 13/16 | 0.653125 |
+
+These scores describe nonexhaustive source anchors, not answer accuracy or
+complete relevance judgments. Hybrid did not improve coverage over the simpler
+keyword baseline, so keyword stays the default. No reranker was added.
+See [methodology, latency and limitations](docs/RETRIEVAL_EVALUATION.md).
+
+`ask --retriever vector` and `ask --retriever hybrid` are explicit experimental
+options. Dense search returns neighbors even for unsupported questions. An
+[initial smoke run](reports/day3-initial-answer-smoke.json) showed unrelated
+answers for the missing-token probe. Generation now requires at least one
+keyword match before using either experimental mode; otherwise it abstains
+without embedding or generation. This conservative check can reject useful
+paraphrases and does **not** prove semantic support when a term matches.
+The [final smoke run](reports/day3-answer-smoke.json) retains the remaining
+upgrade-generation failure. All answers remain unverified drafts.
+
+**Verified on 22 October:** 132 automated checks pass. Model/API fees were zero;
+local memory, disk, electricity and elapsed time are still resources consumed.
 
 ## Evaluation commitments
 

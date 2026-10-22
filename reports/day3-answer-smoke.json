@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "kind": "local_retriever_answer_development_smoke",
+  "recorded_at_utc": "2026-10-22T17:41:52.088809+00:00",
+  "not_a_held_out_benchmark": true,
+  "human_reviewed": false,
+  "semantic_support_verified": false,
+  "api_fee_usd": 0,
+  "corpus_fingerprint": "81a58b9c965a0efdc45c95df7052842d8f7007e08bdf4e41871d8d98afa63fab",
+  "generation_model_inventory": {
+    "name": "qwen3:1.7b",
+    "model": "qwen3:1.7b",
+    "modified_at": "2026-10-21T18:49:56.438845335+02:00",
+    "size": 1359293444,
+    "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "2.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 40960,
+      "embedding_length": 2048,
+      "runner": "ggml"
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  },
+  "embedding_model": {
+    "model": "nomic-embed-text:v1.5",
+    "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "dimensions": 768
+  },
+  "limitations": [
+    "Repeated development probes; no answer-accuracy or entailment score.",
+    "Fixed request order and model swapping affect end-to-end latency.",
+    "Dense neighbors do not establish answerability; abstention requires evaluation."
+  ],
+  "implementation_sha256": {
+    "src/versionlens/__init__.py": "520382b9792c29197fd3272f39622a48f55fa84d18fec1a4ea91e30be52b0b21",
+    "src/versionlens/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/versionlens/answering.py": "91b8de57389566a6e0d0566cac9e96e1291cd3fd75592b81126699f7b7aa5229",
+    "src/versionlens/cli.py": "d266ce187e1eb67c42c3bdf2fe3a64ae29f89294f3a07e65bd1990dbc883fdb2",
+    "src/versionlens/config.py": "74afec06b376b8a04018ad60283c719aaecf2f5cc603e8a034a2bc12ecf2f669",
+    "src/versionlens/embeddings.py": "f8f0d6f7a953b988d0262114c79927e0285d2afd7f9c5a3453fc3ab9b5784870",
+    "src/versionlens/evaluation.py": "7bc209c7f355b2bc738175800c0dfe57c138ffa0a02c9108f920fadeaed371ca",
+    "src/versionlens/hybrid.py": "3efabbe4435b764b0da18284c26d3c7895ca6b25f0e151d0df7320b4245fd044",
+    "src/versionlens/ingest.py": "9af59d0a7c5090f22a02cd1529f74a42ee5be00453c8a1c1d8ed793e827532ca",
+    "src/versionlens/local_model.py": "a44551070df5a95f9f67894c1ff41a2417fa95c54701a23add270cb709623bf1",
+    "src/versionlens/models.py": "52b2bc9383697968aff4f3a1e64cde1be5624066077744e40d432d2d65f47ae7",
+    "src/versionlens/retrieval.py": "33d85b793139fb0b08026610361261d21af5f3de5f133f6a5cdb978d0b0f9d1d",
+    "src/versionlens/search_service.py": "860cf03e487e08b883016fabd0632dde070a43d8d9f61dafb1a0c1c54ceb973f",
+    "src/versionlens/store.py": "7286ecda9fff529275d45c3fa0c2e840cc53b19c677562aeff4f539c1b09425d",
+    "src/versionlens/vector_store.py": "c400a8e378a426c7fecb15da8b9a84dd92572f052a1b0b2b3c4b40a3a0fa4d2d"
+  },
+  "results": [
+    {
+      "case_id": "upgrade",
+      "status": "abstained",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "keyword",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": false,
+      "question": "Why did the proxies argument stop working after upgrading?",
+      "version": "0.28.1",
+      "claims": [],
+      "answer": null,
+      "reason": "invalid_generation",
+      "evidence_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "model_called": true,
+      "model": "qwen3:1.7b",
+      "usage": {
+        "prompt_tokens": 1169,
+        "output_tokens": 90,
+        "model_duration_ns": 3177422667,
+        "api_fee_usd": 0
+      },
+      "citation_identity_and_quotes_checked": false,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 3181.871
+    },
+    {
+      "case_id": "upgrade",
+      "status": "abstained",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "vector",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": true,
+      "question": "Why did the proxies argument stop working after upgrading?",
+      "version": "0.28.1",
+      "claims": [],
+      "answer": null,
+      "reason": "invalid_generation",
+      "evidence_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "model_called": true,
+      "model": "qwen3:1.7b",
+      "usage": {
+        "prompt_tokens": 958,
+        "output_tokens": 134,
+        "model_duration_ns": 3634169083,
+        "api_fee_usd": 0
+      },
+      "citation_identity_and_quotes_checked": false,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 4125.47
+    },
+    {
+      "case_id": "upgrade",
+      "status": "abstained",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "hybrid",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": true,
+      "question": "Why did the proxies argument stop working after upgrading?",
+      "version": "0.28.1",
+      "claims": [],
+      "answer": null,
+      "reason": "invalid_generation",
+      "evidence_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "model_called": true,
+      "model": "qwen3:1.7b",
+      "usage": {
+        "prompt_tokens": 1259,
+        "output_tokens": 81,
+        "model_duration_ns": 3150606542,
+        "api_fee_usd": 0
+      },
+      "citation_identity_and_quotes_checked": false,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 3648.548
+    },
+    {
+      "case_id": "old_version",
+      "status": "answered",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "keyword",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": false,
+      "question": "Is the proxies argument deprecated?",
+      "version": "0.27.2",
+      "claims": [
+        {
+          "text": "The `proxies` argument is deprecated.",
+          "citations": [
+            {
+              "evidence_id": "E1",
+              "quote_id": "Q2",
+              "quote": "* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)",
+              "chunk_id": "7648595b0888753be2f82ca7",
+              "version": "0.27.2",
+              "section": "Changelog > 0.26.0 (20th December, 2023) > Deprecated",
+              "text": "### Deprecated\n\n* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)\n",
+              "source_id": "httpx:0.27.2:CHANGELOG.md",
+              "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+              "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+              "start_line": 41,
+              "end_line": 44,
+              "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L41-L44",
+              "score": 12.510775360792366
+            }
+          ]
+        }
+      ],
+      "answer": "The `proxies` argument is deprecated. [E1](https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L41-L44)",
+      "reason": "",
+      "evidence_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "model_called": true,
+      "model": "qwen3:1.7b",
+      "usage": {
+        "prompt_tokens": 884,
+        "output_tokens": 67,
+        "model_duration_ns": 1649043625,
+        "api_fee_usd": 0
+      },
+      "citation_identity_and_quotes_checked": true,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 1653.884
+    },
+    {
+      "case_id": "old_version",
+      "status": "answered",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "vector",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": true,
+      "question": "Is the proxies argument deprecated?",
+      "version": "0.27.2",
+      "claims": [
+        {
+          "text": "The `proxies` argument is deprecated.",
+          "citations": [
+            {
+              "evidence_id": "E1",
+              "quote_id": "Q2",
+              "quote": "* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)",
+              "chunk_id": "7648595b0888753be2f82ca7",
+              "version": "0.27.2",
+              "section": "Changelog > 0.26.0 (20th December, 2023) > Deprecated",
+              "text": "### Deprecated\n\n* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)\n",
+              "source_id": "httpx:0.27.2:CHANGELOG.md",
+              "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+              "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+              "start_line": 41,
+              "end_line": 44,
+              "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L41-L44",
+              "score": 0.8806103346715649
+            }
+          ]
+        }
+      ],
+      "answer": "The `proxies` argument is deprecated. [E1](https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L41-L44)",
+      "reason": "",
+      "evidence_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "model_called": true,
+      "model": "qwen3:1.7b",
+      "usage": {
+        "prompt_tokens": 824,
+        "output_tokens": 67,
+        "model_duration_ns": 2416008542,
+        "api_fee_usd": 0
+      },
+      "citation_identity_and_quotes_checked": true,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 2889.54
+    },
+    {
+      "case_id": "old_version",
+      "status": "answered",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "hybrid",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": true,
+      "question": "Is the proxies argument deprecated?",
+      "version": "0.27.2",
+      "claims": [
+        {
+          "text": "The `proxies` argument is deprecated and will be removed in the future.",
+          "citations": [
+            {
+              "evidence_id": "E1",
+              "quote_id": "Q2",
+              "quote": "* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)",
+              "chunk_id": "7648595b0888753be2f82ca7",
+              "version": "0.27.2",
+              "section": "Changelog > 0.26.0 (20th December, 2023) > Deprecated",
+              "text": "### Deprecated\n\n* The `proxies` argument is now deprecated. It will still continue to work, but it will be removed in the future. (#2879)\n",
+              "source_id": "httpx:0.27.2:CHANGELOG.md",
+              "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+              "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+              "start_line": 41,
+              "end_line": 44,
+              "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L41-L44",
+              "score": 0.03278688524590164
+            }
+          ]
+        }
+      ],
+      "answer": "The `proxies` argument is deprecated and will be removed in the future. [E1](https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L41-L44)",
+      "reason": "",
+      "evidence_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "model_called": true,
+      "model": "qwen3:1.7b",
+      "usage": {
+        "prompt_tokens": 1111,
+        "output_tokens": 74,
+        "model_duration_ns": 2861797750,
+        "api_fee_usd": 0
+      },
+      "citation_identity_and_quotes_checked": true,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 3353.791
+    },
+    {
+      "case_id": "missing_evidence",
+      "status": "abstained",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "keyword",
+      "retrieval_executed": true,
+      "lexical_support_gate_applied": false,
+      "question": "quantumgiraffeunsupported",
+      "version": "0.28.1",
+      "claims": [],
+      "answer": null,
+      "reason": "no_matching_evidence",
+      "evidence_ids": [],
+      "model_called": false,
+      "model": null,
+      "usage": null,
+      "citation_identity_and_quotes_checked": false,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 0.614
+    },
+    {
+      "case_id": "missing_evidence",
+      "status": "abstained",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "vector",
+      "retrieval_executed": false,
+      "lexical_support_gate_applied": true,
+      "question": "quantumgiraffeunsupported",
+      "version": "0.28.1",
+      "claims": [],
+      "answer": null,
+      "reason": "no_lexical_support_for_experimental_retrieval",
+      "evidence_ids": [],
+      "model_called": false,
+      "model": null,
+      "usage": null,
+      "citation_identity_and_quotes_checked": false,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 0.393
+    },
+    {
+      "case_id": "missing_evidence",
+      "status": "abstained",
+      "mode": "local_cited_draft",
+      "pipeline_version": "quote_menu_v2",
+      "retrieval_method": "hybrid",
+      "retrieval_executed": false,
+      "lexical_support_gate_applied": true,
+      "question": "quantumgiraffeunsupported",
+      "version": "0.28.1",
+      "claims": [],
+      "answer": null,
+      "reason": "no_lexical_support_for_experimental_retrieval",
+      "evidence_ids": [],
+      "model_called": false,
+      "model": null,
+      "usage": null,
+      "citation_identity_and_quotes_checked": false,
+      "semantic_support_verified": false,
+      "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+      "latency_ms": 0.408
+    }
+  ]
+}

@@ -9,7 +9,7 @@ the project must be free; no paid services under any circumstances.**
 | --- | --- | --- |
 | Runtime | Python on existing hardware | No rented compute |
 | Database | Local SQLite with FTS5 | No hosted database |
-| Retrieval | Local keyword and later local embeddings | No remote embedding API |
+| Retrieval | Local keyword, Nomic embeddings, cosine and RRF hybrid | No remote embedding API |
 | Generation | Local Ollama and a permissively licensed open model | Cloud disabled, loopback only |
 | Repository | Public GitHub Free repository | No Codespaces, LFS, paid add-ons, or paid runners |
 | Demo | Local application and checked-in screenshots | No paid hosting; no uptime promise |
@@ -23,7 +23,7 @@ Existing hardware, electricity, and Internet are prerequisites rather than
 services purchased by this project. No claim is made that running a computer
 consumes no resources.
 
-## Enforcement to implement before generation
+## Enforcement
 
 - Use an explicit local model allowlist, rejecting cloud tags and remote hosts.
 - Start the project-managed Ollama server with `OLLAMA_NO_CLOUD=1`.
