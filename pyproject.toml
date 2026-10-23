@@ -15,3 +15,6 @@ versionlens = "versionlens.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+versionlens = ["web/*.html", "web/*.css", "web/*.js"]

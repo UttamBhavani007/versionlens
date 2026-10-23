@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="Explore version-specific HTTPX documentation and local cited drafts with VersionLens.">
+    <title>VersionLens — HTTPX support workspace</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#question">Skip to your question</a>
+    <header class="app-header">
+      <a class="brand" href="/" aria-label="VersionLens home">
+        <span class="brand-mark" aria-hidden="true">V<span>∕</span></span>
+        <span>Version<span class="brand-light">Lens</span></span>
+      </a>
+      <div class="header-context">
+        <span class="product-label">HTTPX support</span>
+        <span class="local-label"><span class="status-dot" aria-hidden="true"></span>Local workspace</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">DOCUMENTATION, IN CONTEXT</p>
+          <h1 id="page-title">Support starts<br>with the source.</h1>
+          <p class="hero-description">Explore the docs for your HTTPX version.<br class="desktop-break"> Inspect the evidence before trusting a draft.</p>
+        </div>
+        <div class="corpus-summary" aria-label="Available documentation">
+          <span class="summary-symbol" aria-hidden="true">↳</span>
+          <p class="summary-title">Two snapshots. Clear provenance.</p>
+          <p id="corpus-count" class="summary-detail">Loading local documentation…</p>
+          <p class="summary-caption">Historical releases · public sources</p>
+        </div>
+      </section>
+
+      <div class="workspace">
+        <section class="composer panel" aria-labelledby="composer-title">
+          <div class="panel-heading">
+            <span class="step-number" aria-hidden="true">01</span>
+            <h2 id="composer-title">Ask your question</h2>
+          </div>
+          <form id="question-form" novalidate>
+            <div class="selection-grid">
+              <div class="field">
+                <label for="version">HTTPX version</label>
+                <select id="version" name="version" disabled aria-describedby="version-help">
+                  <option value="">Loading versions…</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="retriever">Retrieval</label>
+                <select id="retriever" name="retriever" disabled aria-describedby="retriever-help">
+                  <option value="">Loading methods…</option>
+                </select>
+              </div>
+            </div>
+            <p id="version-help" class="field-help">Evidence stays within the selected snapshot.</p>
+            <p id="retriever-help" class="retriever-help">Keyword is the default. Vector and hybrid are experimental.</p>
+
+            <div class="question-field">
+              <div class="question-label-row">
+                <label for="question">Your question</label>
+                <span id="character-count" class="character-count" aria-hidden="true">0 / 2000</span>
+              </div>
+              <textarea id="question" name="question" rows="6" maxlength="2000" aria-describedby="question-help question-error" placeholder="What changed after an upgrade?">What is the default timeout in HTTPX?</textarea>
+              <p id="question-help" class="field-help">A focused question makes the excerpts easier to inspect.</p>
+              <p id="question-error" class="field-error" hidden></p>
+            </div>
+
+            <div class="examples" aria-labelledby="examples-label">
+              <p id="examples-label" class="examples-label">TRY A QUESTION</p>
+              <div class="example-buttons">
+                <button class="example-chip" type="button" data-example="timeout">Default timeout</button>
+                <button class="example-chip" type="button" data-example="upgrade">Upgrade &amp; proxies</button>
+                <button class="example-chip" type="button" data-example="missing">Missing evidence</button>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button id="search-button" class="button button-primary" type="submit" disabled><span>Find evidence</span><span aria-hidden="true">→</span></button>
+              <button id="ask-button" class="button button-secondary" type="button" disabled>Generate draft</button>
+            </div>
+            <p class="action-note">Drafts use a local model and may be withheld when checks fail.</p>
+          </form>
+          <div class="composer-footer"><span class="small-dot" aria-hidden="true"></span>Local processing · no service fees</div>
+        </section>
+
+        <section class="results panel" aria-labelledby="results-title" aria-busy="false">
+          <div class="results-heading">
+            <div>
+              <p class="eyebrow">SOURCE WORKSPACE</p>
+              <h2 id="results-title">Inspect the evidence</h2>
+            </div>
+            <span id="result-context" class="context-label" hidden></span>
+          </div>
+          <div id="request-status" class="request-status" role="status" aria-live="polite" aria-atomic="true">Connecting to your local workspace…</div>
+          <div id="catalog-error" class="catalog-error" hidden>
+            <p id="catalog-error-message"></p>
+            <button id="retry-catalog" class="text-button" type="button">Try connecting again</button>
+          </div>
+          <div id="result-body" class="result-body">
+            <div class="empty-state">
+              <div class="source-illustration" aria-hidden="true"><span class="illustration-tag">HTTPX</span><i></i><i></i><i></i><span class="illustration-corner">↗</span></div>
+              <h3>A version. A question. A source.</h3>
+              <p>Find documentation excerpts with exact source links.<br>Then explore a cited draft if the evidence allows it.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="page-footer"><span>VersionLens <span class="footer-divider">/</span> Evidence before answers.</span><span>Public HTTPX snapshots · 0.27.2 &amp; 0.28.1</span></footer>
+    </main>
+
+    <dialog id="source-dialog" class="source-dialog" aria-labelledby="source-title" aria-describedby="source-description">
+      <div class="dialog-heading"><div><p class="eyebrow">SOURCE INSPECTOR</p><h2 id="source-title">Source chunk</h2></div><button id="close-source" class="close-button" type="button" aria-label="Close source inspector">×</button></div>
+      <p id="source-description" class="dialog-description">Original excerpt and immutable source metadata.</p>
+      <div id="source-body" class="source-body" aria-live="polite"></div>
+    </dialog>
+  </body>
+</html>
