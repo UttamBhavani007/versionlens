@@ -1,0 +1,99 @@
+{
+  "kind": "local_browser_integration",
+  "recorded_at_utc": "2026-10-23T22:59:08.907Z",
+  "browser": "155.0.8059.40",
+  "origin": "http://127.0.0.1:8765",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "catalog and default selection",
+      "status": "passed"
+    },
+    {
+      "name": "real keyword evidence and immutable links",
+      "status": "passed"
+    },
+    {
+      "name": "source inspector matches returned excerpt",
+      "status": "passed"
+    },
+    {
+      "name": "version change invalidates prior evidence",
+      "status": "passed"
+    },
+    {
+      "name": "real missing-evidence abstention without generation",
+      "status": "passed"
+    },
+    {
+      "name": "real cited draft retains warnings and source quotes",
+      "status": "passed"
+    },
+    {
+      "name": "empty-question validation and focus",
+      "status": "passed"
+    },
+    {
+      "name": "fixture: stale response cannot cross a version change",
+      "status": "passed"
+    },
+    {
+      "name": "fixture: source markup is displayed only as text",
+      "status": "passed"
+    },
+    {
+      "name": "fixture: unsafe source URLs fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "fixture: HTTP failures preserve inputs and show an error",
+      "status": "passed"
+    },
+    {
+      "name": "real mobile layout has no horizontal overflow",
+      "status": "passed"
+    },
+    {
+      "name": "labels, live status and keyboard skip link",
+      "status": "passed"
+    }
+  ],
+  "generation_checked": true,
+  "implementation_sha256": {
+    "src/versionlens/__init__.py": "520382b9792c29197fd3272f39622a48f55fa84d18fec1a4ea91e30be52b0b21",
+    "src/versionlens/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/versionlens/answering.py": "91b8de57389566a6e0d0566cac9e96e1291cd3fd75592b81126699f7b7aa5229",
+    "src/versionlens/api.py": "eb46552a8e439ae372c1886c098497a356b523bc23007dc2ae5884d946fc48a2",
+    "src/versionlens/cli.py": "5bc0e67276d39d88367ce51324b966b30a2e87fd99ee2346d33d9805e50f0a1b",
+    "src/versionlens/config.py": "74afec06b376b8a04018ad60283c719aaecf2f5cc603e8a034a2bc12ecf2f669",
+    "src/versionlens/embeddings.py": "f8f0d6f7a953b988d0262114c79927e0285d2afd7f9c5a3453fc3ab9b5784870",
+    "src/versionlens/evaluation.py": "7bc209c7f355b2bc738175800c0dfe57c138ffa0a02c9108f920fadeaed371ca",
+    "src/versionlens/hybrid.py": "3efabbe4435b764b0da18284c26d3c7895ca6b25f0e151d0df7320b4245fd044",
+    "src/versionlens/ingest.py": "9af59d0a7c5090f22a02cd1529f74a42ee5be00453c8a1c1d8ed793e827532ca",
+    "src/versionlens/local_model.py": "a44551070df5a95f9f67894c1ff41a2417fa95c54701a23add270cb709623bf1",
+    "src/versionlens/models.py": "52b2bc9383697968aff4f3a1e64cde1be5624066077744e40d432d2d65f47ae7",
+    "src/versionlens/retrieval.py": "33d85b793139fb0b08026610361261d21af5f3de5f133f6a5cdb978d0b0f9d1d",
+    "src/versionlens/search_service.py": "860cf03e487e08b883016fabd0632dde070a43d8d9f61dafb1a0c1c54ceb973f",
+    "src/versionlens/server.py": "fe9360612a693e17300d2fedb749590845b0f1b03b66b1c4473e68b627642fd0",
+    "src/versionlens/store.py": "7286ecda9fff529275d45c3fa0c2e840cc53b19c677562aeff4f539c1b09425d",
+    "src/versionlens/vector_store.py": "c400a8e378a426c7fecb15da8b9a84dd92572f052a1b0b2b3c4b40a3a0fa4d2d",
+    "src/versionlens/web/index.html": "8a1e920feba37d33419a00d6f3ee8250bd5632cce9a55426c692f85bb039014e",
+    "src/versionlens/web/style.css": "485a498792441d867fd2ef88c6dfb9ba34a11ce57a327dde833e7f7a9bf485f5",
+    "src/versionlens/web/app.js": "4abe5729c4b1753ab79c1d943274e4db8c89d919e40199a4a469772ce34c5ebf",
+    "scripts/check_web.cjs": "f9a2d21cc7373ea35a1948bfc584ddc427342902916a3afd4ecb0f326ecd441e"
+  },
+  "screenshots": [
+    "day4-desktop-evidence.png",
+    "day4-source-inspector.png",
+    "day4-cited-draft.png",
+    "day4-mobile-evidence.png"
+  ],
+  "external_requests": [],
+  "page_errors": [],
+  "limitations": [
+    "Some negative/race cases use clearly labelled browser fixtures.",
+    "Screenshots use actual local API results and no mocked responses.",
+    "Labels, focus and responsive checks are not a complete WCAG or screen-reader audit.",
+    "This does not measure answer quality or held-out performance."
+  ]
+}

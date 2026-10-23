@@ -15,6 +15,13 @@ verification. If a milestone needs longer, record that honestly and continue.
 | 6 | 2026-10-25 | 20–22 | Candidate 80–120-question evaluation set and review protocol; evaluation runner and citation audit; freeze reviewed holdout and publish actual results with limitations |
 | 7 | 2026-10-26 | 23–25 | Reproducible local deployment and smoke checks; actual screenshots and interview demo; final README, release notes, clean setup verification and GitHub release |
 
+## Actual progress
+
+Day 4 started on 23 October and finished on 24 October after an interruption.
+The remaining commits use their actual 24 October dates. Day 5 was not started
+on that date; the table above retains the original targets. The authorized
+schedule still ends on 26 October, with no unapproved deadline extension.
+
 ## Human input and external requirements
 
 - GitHub publication needs an authenticated GitHub connection. Do not invent

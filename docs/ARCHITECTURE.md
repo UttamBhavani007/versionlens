@@ -1,25 +1,29 @@
 # Architecture and boundaries
 
-## Implemented through day 3
+## Implemented through day 4
 
 ```mermaid
 flowchart LR
     A[HTTPX Git commit snapshots] --> B[Checksum and schema validation]
     B --> C[Markdown chunks with line references]
     C --> D[Local SQLite index]
-    E[Question and exact version] --> F[Keyword, cosine or RRF hybrid]
+    L[Local browser or CLI] --> E[Question and exact version]
+    E --> F[Keyword, cosine or RRF hybrid]
     D --> F
     D --> H[Local Nomic embeddings]
     H --> I[Digest-bound SQLite vector sidecar]
     I --> F
     F --> G[Ranked evidence with source links]
     G --> J[Bounded quote menus and local draft generation]
-    J --> K[Validated citations or explicit abstention]
+    J --> K[Validated citation identity and quotes, or abstention]
+    G --> M[Version-scoped source inspector]
+    K --> N[Plain-text draft with unverified-support warning]
 ```
 
 The application uses Python's standard library, SQLite and project-local Ollama.
-The API/UI, document updates and synthetic access-controlled documents remain
-planned. Reranking is deferred because the first development comparison does
+A loopback-only API and bundled browser workspace expose the same validated
+application operations. Incremental document updates and synthetic
+access-controlled documents remain planned. Reranking is deferred because the first development comparison does
 not justify additional complexity.
 
 The vector sidecar records the complete corpus fingerprint, embedding model
@@ -39,6 +43,23 @@ require a keyword match before retrieval/generation, because dense neighbors
 alone do not establish answerability. This conservative veto can miss relevant
 semantic paraphrases and does not validate entailment. Search-only comparisons
 do not apply this generation gate.
+
+## Local API and browser boundary
+
+The standard-library HTTP server binds only to literal `127.0.0.1`. An explicit
+asset allowlist, exact Host/Origin checks, strict bounded JSON, eight handler
+slots, read timeouts and a single POST operation limit protect this workstation
+demo. It is not an authenticated public server. See [the API contract](API.md).
+
+Source inspection resolves a validated chunk ID within the selected snapshot;
+clients cannot supply filesystem paths. The browser builds nodes with plain
+text, validates immutable citation URLs and invalidates results when inputs
+change. Aborted or late responses cannot replace evidence for a newer question
+or version. Browser cancellation does not stop backend model work.
+
+The interface calls only its local same-origin API. No external fonts, libraries,
+analytics or cloud model calls are loaded. Opening a source link is an explicit
+user navigation to the pinned upstream GitHub document.
 
 ## Version policy
 

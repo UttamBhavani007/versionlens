@@ -183,3 +183,67 @@ The old-version probe produced cited drafts in all modes, still labelled
 Day 4 on 23 October: local API contracts and validation, web UI, source/version
 inspection, integration checks and accessibility. Holdout review, synthetic
 permission filtering and final screenshots remain later milestones.
+
+
+## 2026-10-23–24 — day 4
+
+### Implemented and verified
+
+- Added validated API operations for catalog, exact-version retrieval, existing
+  draft generation and source inspection by validated chunk ID. Source metadata
+  is resolved from the index, with no client-controlled file paths.
+- Added a standard-library loopback HTTP server and `serve` command. Requests
+  have strict Host/Origin checks, JSON/framing validation, body/read limits,
+  bounded handlers and one active POST operation. Capacity errors return JSON;
+  malformed targets are input errors. Only three bundled assets are served.
+- Built a responsive browser workspace with exact snapshot selection, ranked
+  excerpts, immutable source links, provenance inspection, cited drafts and
+  explicit abstention/error states. Input changes invalidate previous output
+  and prevent late responses from crossing question/version boundaries.
+- Dynamic content remains plain text. Unsafe citation links fail closed. Labels,
+  live status, keyboard focus, dialog Escape, mobile overflow and selected text
+  contrast were checked; this is not full accessibility certification.
+- [176 software tests passed](../reports/day4-software-checks.json), including
+  18 API contract and 26 real socket boundary tests. Model calls in this suite
+  use deterministic substitutes. SQLite test fixture connections now close
+  explicitly; the final run emitted no ResourceWarning.
+- [13 browser checks passed](../reports/day4-browser-check.json) using isolated
+  headless Chrome 155.0.8059.40 and free Playwright 1.62.1. Real interactions
+  cover retrieval, version changes, source inspection, abstention and a local
+  draft. Negative markup/link/race/error checks use labelled fixtures. No
+  external application requests or browser script errors were observed.
+- [Actual screenshots](SCREENSHOTS.md) show real API results at desktop and
+  360-pixel widths, including an actual model-generated timeout draft. No
+  synthetic UI images or fixture responses were used for screenshots.
+
+### Recorded behavior and limits
+
+The [final HTTP development run](../reports/day4-http-smoke.json) records thirteen
+actual requests: both snapshots, source identity, wrong-version 404, invalid
+version 400, all three missing-evidence abstentions, two generation probes and
+vector/hybrid evidence. The timeout draft completed in 1114.575 ms; the upgrade
+probe was withheld with `invalid_generation` in 2298.835 ms. Missing-evidence
+probes skipped generation, including the experimental lexical veto. Latencies
+are fixed-order, repeated development observations, not performance guarantees.
+The [initial HTTP run](../reports/day4-initial-http-smoke.json) is retained from
+before final transport hardening. Final reports include implementation hashes.
+
+Mechanical source/quote checks still do not establish semantic entailment;
+`semantic_support_verified` remains false. No human-reviewed holdout, answer
+accuracy, production authentication, synthetic permission filtering, public
+hosted service or cloud execution is claimed. All inference and embeddings use
+the cached cloud-disabled local server; model/API fees were zero. The optional
+browser test dependency is free and is not an application runtime dependency.
+
+### Actual dates and next milestone
+
+The API contract commit was made on 23 October. Work was interrupted and resumed
+on 24 October; server, interface and verification commits use their actual
+24 October dates. No backdating or extra milestone was used to recover a daily
+quota. Finishing day 4 consumes the 24 October development slot; day 5 was not
+started. The original target dates remain visible in the delivery plan.
+
+Next unfinished milestone: incremental snapshots/deletion and prominently
+labelled synthetic permission filtering, with a version/permission change demo.
+The daily schedule remains local, with the existing 26 October cutoff; later
+work is not silently scheduled beyond the approved window.

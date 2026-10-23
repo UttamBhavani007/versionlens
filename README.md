@@ -4,12 +4,38 @@ A local, version-aware technical support service for **HTTPX**. The goal is to
 answer upgrade and troubleshooting questions from the documentation that matches
 the requested version, with inspectable evidence and explicit abstention.
 
-**Status: day 3 complete, local retrieval comparison.** Pinned ingestion,
+**Status: day 4 complete, local API and browser workspace.** Pinned ingestion,
 version-filtered keyword/vector/hybrid retrieval, cloud-disabled local models,
-cited draft answers and abstention are implemented. Keyword retrieval remains
-the default after the first development comparison. The API, UI, held-out
-evaluation and screenshots remain future milestones.
+cited drafts, abstention and version-scoped source inspection are implemented.
+Keyword remains the default. Incremental updates, synthetic permission filtering
+and human-reviewed held-out evaluation remain future milestones.
 See [the delivery plan](docs/DELIVERY_PLAN.md).
+
+![VersionLens running locally with actual HTTPX evidence](docs/screenshots/day4-desktop-evidence.png)
+
+## Run the local interface
+
+Requires Python 3.11 or newer with SQLite FTS5. From this repository:
+
+```sh
+PYTHONPATH=src python3 -m versionlens ingest
+PYTHONPATH=src python3 -m versionlens serve
+```
+
+Open **http://127.0.0.1:8765**. Keyword evidence search and source inspection
+work without a model. Start the separate local model server described below
+for draft answers; build the vector cache for experimental vector/hybrid search.
+The interface provides exact snapshot selection, immutable source links,
+original excerpts, provenance and explicit draft/abstention states.
+
+**Verified on 24 October:** [176 software tests](reports/day4-software-checks.json),
+[13 browser checks](reports/day4-browser-check.json) and
+[13 real API probes](reports/day4-http-smoke.json). The timeout probe produced a
+cited draft; the upgrade probe still abstained with `invalid_generation`.
+These development checks do not establish answer accuracy or citation entailment.
+See [API and browser setup](docs/API.md), [actual screenshots](docs/SCREENSHOTS.md)
+and [architecture](docs/ARCHITECTURE.md). This is a local workstation demo;
+public hosting and production authentication are not provided.
 
 ## Zero paid services
 

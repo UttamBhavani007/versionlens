@@ -1,3 +1,4 @@
+from contextlib import closing
 from dataclasses import replace
 import json
 from pathlib import Path
@@ -87,7 +88,7 @@ class VectorStoreTests(unittest.TestCase):
         )
 
     def snapshot(self):
-        with sqlite3.connect(self.vectors) as connection:
+        with closing(sqlite3.connect(self.vectors)) as connection, connection:
             return (
                 connection.execute("SELECT * FROM vector_metadata ORDER BY key").fetchall(),
                 connection.execute("SELECT * FROM vectors ORDER BY chunk_id").fetchall(),
@@ -195,11 +196,11 @@ class VectorStoreTests(unittest.TestCase):
 
     def test_incomplete_or_wrong_version_vector_rows_are_rejected(self):
         self.build()
-        with sqlite3.connect(self.vectors) as connection:
+        with closing(sqlite3.connect(self.vectors)) as connection, connection:
             connection.execute("UPDATE vectors SET version='0.27.2'")
         with self.assertRaisesRegex(VectorIndexError, "version metadata"):
             self.search()
-        with sqlite3.connect(self.vectors) as connection:
+        with closing(sqlite3.connect(self.vectors)) as connection, connection:
             connection.execute("DELETE FROM vectors")
         with self.assertRaisesRegex(VectorIndexError, "incomplete"):
             self.search()
@@ -210,7 +211,7 @@ class VectorStoreTests(unittest.TestCase):
                    json.dumps([float("nan")] + [0.0] * 767))
         for serialized in invalid:
             with self.subTest(vector=serialized[:30]):
-                with sqlite3.connect(self.vectors) as connection:
+                with closing(sqlite3.connect(self.vectors)) as connection, connection:
                     connection.execute("UPDATE vectors SET vector_json=?", (serialized,))
                 with self.assertRaises(VectorIndexError):
                     self.search()
@@ -278,7 +279,7 @@ class VectorStoreTests(unittest.TestCase):
     def test_sqlite_failure_rolls_back_deletes_and_metadata_replacement(self):
         self.build()
         previous = self.snapshot()
-        with sqlite3.connect(self.vectors) as connection:
+        with closing(sqlite3.connect(self.vectors)) as connection, connection:
             connection.execute(
                 "CREATE TRIGGER reject_replacement BEFORE INSERT ON vectors "
                 "BEGIN SELECT RAISE(ABORT, 'test rejection'); END"
@@ -318,12 +319,12 @@ class VectorStoreTests(unittest.TestCase):
         self.assertEqual(self.index.read_bytes(), original)
 
     def test_empty_corpus_and_unknown_sidecar_schema_are_not_overwritten(self):
-        with sqlite3.connect(self.vectors) as connection:
+        with closing(sqlite3.connect(self.vectors)) as connection, connection:
             connection.execute("CREATE TABLE unrelated (value TEXT)")
             connection.execute("INSERT INTO unrelated VALUES ('keep')")
         with self.assertRaisesRegex(VectorIndexError, "Unknown vector sidecar schema"):
             self.build()
-        with sqlite3.connect(self.vectors) as connection:
+        with closing(sqlite3.connect(self.vectors)) as connection, connection:
             self.assertEqual(connection.execute("SELECT value FROM unrelated").fetchall(), [("keep",)])
         with connect(self.index) as connection:
             connection.execute("DELETE FROM chunks")

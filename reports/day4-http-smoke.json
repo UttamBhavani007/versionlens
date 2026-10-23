@@ -1,0 +1,751 @@
+{
+  "schema_version": 1,
+  "kind": "local_http_development_smoke",
+  "recorded_at_utc": "2026-10-23T22:57:43.507387+00:00",
+  "not_a_held_out_benchmark": true,
+  "human_reviewed": false,
+  "semantic_support_verified": false,
+  "api_fee_usd": 0,
+  "generation_model_inventory": {
+    "name": "qwen3:1.7b",
+    "model": "qwen3:1.7b",
+    "modified_at": "2026-10-21T18:49:56.438845335+02:00",
+    "size": 1359293444,
+    "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "2.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 40960,
+      "embedding_length": 2048,
+      "runner": "ggml"
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  },
+  "limitations": [
+    "Repeated development probes; no answer-accuracy or citation-entailment score.",
+    "End-to-end latencies include model loading/swapping in a fixed order.",
+    "This verifies a local API, not public hosting or production readiness."
+  ],
+  "implementation_sha256": {
+    "src/versionlens/__init__.py": "520382b9792c29197fd3272f39622a48f55fa84d18fec1a4ea91e30be52b0b21",
+    "src/versionlens/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/versionlens/answering.py": "91b8de57389566a6e0d0566cac9e96e1291cd3fd75592b81126699f7b7aa5229",
+    "src/versionlens/api.py": "eb46552a8e439ae372c1886c098497a356b523bc23007dc2ae5884d946fc48a2",
+    "src/versionlens/cli.py": "5bc0e67276d39d88367ce51324b966b30a2e87fd99ee2346d33d9805e50f0a1b",
+    "src/versionlens/config.py": "74afec06b376b8a04018ad60283c719aaecf2f5cc603e8a034a2bc12ecf2f669",
+    "src/versionlens/embeddings.py": "f8f0d6f7a953b988d0262114c79927e0285d2afd7f9c5a3453fc3ab9b5784870",
+    "src/versionlens/evaluation.py": "7bc209c7f355b2bc738175800c0dfe57c138ffa0a02c9108f920fadeaed371ca",
+    "src/versionlens/hybrid.py": "3efabbe4435b764b0da18284c26d3c7895ca6b25f0e151d0df7320b4245fd044",
+    "src/versionlens/ingest.py": "9af59d0a7c5090f22a02cd1529f74a42ee5be00453c8a1c1d8ed793e827532ca",
+    "src/versionlens/local_model.py": "a44551070df5a95f9f67894c1ff41a2417fa95c54701a23add270cb709623bf1",
+    "src/versionlens/models.py": "52b2bc9383697968aff4f3a1e64cde1be5624066077744e40d432d2d65f47ae7",
+    "src/versionlens/retrieval.py": "33d85b793139fb0b08026610361261d21af5f3de5f133f6a5cdb978d0b0f9d1d",
+    "src/versionlens/search_service.py": "860cf03e487e08b883016fabd0632dde070a43d8d9f61dafb1a0c1c54ceb973f",
+    "src/versionlens/server.py": "fe9360612a693e17300d2fedb749590845b0f1b03b66b1c4473e68b627642fd0",
+    "src/versionlens/store.py": "7286ecda9fff529275d45c3fa0c2e840cc53b19c677562aeff4f539c1b09425d",
+    "src/versionlens/vector_store.py": "c400a8e378a426c7fecb15da8b9a84dd92572f052a1b0b2b3c4b40a3a0fa4d2d"
+  },
+  "results": [
+    {
+      "case_id": "catalog",
+      "route": "/api/catalog",
+      "request": null,
+      "http_status": 200,
+      "latency_ms": 0.931,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "product": "httpx",
+        "versions": [
+          "0.27.2",
+          "0.28.1"
+        ],
+        "retrievers": [
+          "keyword",
+          "vector",
+          "hybrid"
+        ],
+        "default_retriever": "keyword",
+        "index": {
+          "schema_version": "1",
+          "sources": 32,
+          "chunks": 644,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "keyword_0.27.2",
+      "route": "/api/search",
+      "request": {
+        "question": "default timeout",
+        "version": "0.27.2"
+      },
+      "http_status": 200,
+      "latency_ms": 1.065,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.27.2",
+        "question": "default timeout",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "f759c74ff342074e00b214d2",
+            "version": "0.27.2",
+            "section": "Setting a default timeout on a client",
+            "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+            "source_id": "httpx:0.27.2:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 30,
+            "end_line": 40,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/advanced/timeouts.md?plain=1#L30-L40",
+            "score": 9.5095968184306
+          },
+          {
+            "chunk_id": "81ce8f11dbefc6b077a42e75",
+            "version": "0.27.2",
+            "section": "QuickStart > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+            "source_id": "httpx:0.27.2:docs/quickstart.md",
+            "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 448,
+            "end_line": 468,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/quickstart.md?plain=1#L448-L468",
+            "score": 6.9134266982636525
+          },
+          {
+            "chunk_id": "155dc8b2b6f4d486465bb4d8",
+            "version": "0.27.2",
+            "section": "Requests Compatibility Guide > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable [timeouts](quickstart.md#timeouts) for all network operations, while Requests has no timeouts by default.\n\nTo get the same behavior as Requests, set the `timeout` parameter to `None`:\n\n```python\nhttpx.get('https://www.example.com', timeout=None)\n```\n",
+            "source_id": "httpx:0.27.2:docs/compatibility.md",
+            "source_sha256": "27757d0b50b32469b109f263b75df939782175981ca67020a66d5900deb41b5f",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 148,
+            "end_line": 157,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/compatibility.md?plain=1#L148-L157",
+            "score": 6.757256741996812
+          },
+          {
+            "chunk_id": "8cfe3d22a040eb07f202f9d8",
+            "version": "0.27.2",
+            "section": "Changelog > 0.18.2 (17th June, 2021) > Added",
+            "text": "### Added\n\n* Support for Python 3.10. (Pull #1687)\n* Expose `httpx.USE_CLIENT_DEFAULT`, used as the default to `auth` and `timeout` parameters in request methods. (Pull #1634)\n* Support [HTTP/2 \"prior knowledge\"](https://python-hyper.org/projects/hyper-h2/en/v2.3.1/negotiating-http2.html#prior-knowledge), using `httpx.Client(http1=False, http2=True)`. (Pull #1624)\n",
+            "source_id": "httpx:0.27.2:CHANGELOG.md",
+            "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 312,
+            "end_line": 317,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L312-L317",
+            "score": 5.833307363375023
+          },
+          {
+            "chunk_id": "65fcc04bcd814886f925fb43",
+            "version": "0.27.2",
+            "section": "Fine tuning the configuration",
+            "text": "## Fine tuning the configuration\n\nHTTPX also allows you to specify the timeout behavior in more fine grained detail.\n\nThere are four different types of timeouts that may occur. These are **connect**,\n**read**, **write**, and **pool** timeouts.\n\n* The **connect** timeout specifies the maximum amount of time to wait until\na socket connection to the requested host is established. If HTTPX is unable to connect\nwithin this time frame, a `ConnectTimeout` exception is raised.\n* The **read** timeout specifies the maximum duration to wait for a chunk of\ndata to be received (for example, a chunk of the response body). If HTTPX is\nunable to receive data within this time frame, a `ReadTimeout` exception is raised.\n* The **write** timeout specifies the maximum duration to wait for a chunk of\ndata to be sent (for example, a chunk of the request body). If HTTPX is unable\nto send data within this time frame, a `WriteTimeout` exception is raised.\n* The **pool** timeout specifies the maximum duration to wait for acquiring\na connection from the connection pool. If HTTPX is unable to acquire a connection\nwithin this time frame, a `PoolTimeout` exception is raised. A related\nconfiguration here is the maximum number of allowable connections in the\nconnection pool, which is configured by the `limits` argument.\n\nYou can configure the timeout behavior for any of these values...\n\n```python\n# A client with a 60s timeout for connecting, and a 10s timeout elsewhere.\ntimeout = httpx.Timeout(10.0, connect=60.0)\nclient = httpx.Client(timeout=timeout)\n\nresponse = client.get('http://example.com/')\n```",
+            "source_id": "httpx:0.27.2:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 41,
+            "end_line": 71,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/advanced/timeouts.md?plain=1#L41-L71",
+            "score": 4.914360657074394
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "keyword_0.28.1",
+      "route": "/api/search",
+      "request": {
+        "question": "default timeout",
+        "version": "0.28.1"
+      },
+      "http_status": 200,
+      "latency_ms": 0.759,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.28.1",
+        "question": "default timeout",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "267f3cdadbaa1e27ca2038ad",
+            "version": "0.28.1",
+            "section": "Setting a default timeout on a client",
+            "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 30,
+            "end_line": 40,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L30-L40",
+            "score": 9.5095968184306
+          },
+          {
+            "chunk_id": "84c4aad941b6d1e060fb0ab5",
+            "version": "0.28.1",
+            "section": "QuickStart > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+            "source_id": "httpx:0.28.1:docs/quickstart.md",
+            "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 468,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/quickstart.md?plain=1#L448-L468",
+            "score": 6.9134266982636525
+          },
+          {
+            "chunk_id": "295814f78dc346460858f9a1",
+            "version": "0.28.1",
+            "section": "Requests Compatibility Guide > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable [timeouts](quickstart.md#timeouts) for all network operations, while Requests has no timeouts by default.\n\nTo get the same behavior as Requests, set the `timeout` parameter to `None`:\n\n```python\nhttpx.get('https://www.example.com', timeout=None)\n```\n",
+            "source_id": "httpx:0.28.1:docs/compatibility.md",
+            "source_sha256": "e30d0a254fc89e5a891739607e289432b48930ac68be285810dd4e540f304776",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 148,
+            "end_line": 157,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/compatibility.md?plain=1#L148-L157",
+            "score": 6.757256741996812
+          },
+          {
+            "chunk_id": "f61ed6566cf4e9266f8a3a69",
+            "version": "0.28.1",
+            "section": "Changelog > 0.18.2 (17th June, 2021) > Added",
+            "text": "### Added\n\n* Support for Python 3.10. (Pull #1687)\n* Expose `httpx.USE_CLIENT_DEFAULT`, used as the default to `auth` and `timeout` parameters in request methods. (Pull #1634)\n* Support [HTTP/2 \"prior knowledge\"](https://python-hyper.org/projects/hyper-h2/en/v2.3.1/negotiating-http2.html#prior-knowledge), using `httpx.Client(http1=False, http2=True)`. (Pull #1624)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 342,
+            "end_line": 347,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L342-L347",
+            "score": 5.833307363375023
+          },
+          {
+            "chunk_id": "3e5f47bcefed24dde7a7652b",
+            "version": "0.28.1",
+            "section": "Fine tuning the configuration",
+            "text": "## Fine tuning the configuration\n\nHTTPX also allows you to specify the timeout behavior in more fine grained detail.\n\nThere are four different types of timeouts that may occur. These are **connect**,\n**read**, **write**, and **pool** timeouts.\n\n* The **connect** timeout specifies the maximum amount of time to wait until\na socket connection to the requested host is established. If HTTPX is unable to connect\nwithin this time frame, a `ConnectTimeout` exception is raised.\n* The **read** timeout specifies the maximum duration to wait for a chunk of\ndata to be received (for example, a chunk of the response body). If HTTPX is\nunable to receive data within this time frame, a `ReadTimeout` exception is raised.\n* The **write** timeout specifies the maximum duration to wait for a chunk of\ndata to be sent (for example, a chunk of the request body). If HTTPX is unable\nto send data within this time frame, a `WriteTimeout` exception is raised.\n* The **pool** timeout specifies the maximum duration to wait for acquiring\na connection from the connection pool. If HTTPX is unable to acquire a connection\nwithin this time frame, a `PoolTimeout` exception is raised. A related\nconfiguration here is the maximum number of allowable connections in the\nconnection pool, which is configured by the `limits` argument.\n\nYou can configure the timeout behavior for any of these values...\n\n```python\n# A client with a 60s timeout for connecting, and a 10s timeout elsewhere.\ntimeout = httpx.Timeout(10.0, connect=60.0)\nclient = httpx.Client(timeout=timeout)\n\nresponse = client.get('http://example.com/')\n```",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 41,
+            "end_line": 71,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L41-L71",
+            "score": 4.914360657074394
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "source_inspection",
+      "route": "/api/chunks/267f3cdadbaa1e27ca2038ad?version=0.28.1",
+      "request": null,
+      "http_status": 200,
+      "latency_ms": 5.237,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "chunk_id": "267f3cdadbaa1e27ca2038ad",
+        "version": "0.28.1",
+        "section": "Setting a default timeout on a client",
+        "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+        "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+        "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+        "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+        "start_line": 30,
+        "end_line": 40,
+        "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L30-L40",
+        "product": "httpx",
+        "title": "Timeouts",
+        "upstream_path": "docs/advanced/timeouts.md"
+      }
+    },
+    {
+      "case_id": "source_wrong_version",
+      "route": "/api/chunks/267f3cdadbaa1e27ca2038ad?version=0.27.2",
+      "request": null,
+      "http_status": 404,
+      "latency_ms": 4.89,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "error": {
+          "code": "not_found",
+          "message": "The requested source excerpt was not found in this version."
+        }
+      }
+    },
+    {
+      "case_id": "unsupported_version",
+      "route": "/api/search",
+      "request": {
+        "question": "timeout",
+        "version": "latest"
+      },
+      "http_status": 400,
+      "latency_ms": 0.346,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "Select an exact supported version: 0.27.2, 0.28.1."
+        }
+      }
+    },
+    {
+      "case_id": "missing_keyword",
+      "route": "/api/ask",
+      "request": {
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "retriever": "keyword"
+      },
+      "http_status": 200,
+      "latency_ms": 0.631,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v2",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "claims": [],
+        "answer": null,
+        "reason": "no_matching_evidence",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.263
+      }
+    },
+    {
+      "case_id": "missing_vector",
+      "route": "/api/ask",
+      "request": {
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "retriever": "vector"
+      },
+      "http_status": 200,
+      "latency_ms": 0.568,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v2",
+        "retrieval_method": "vector",
+        "retrieval_executed": false,
+        "lexical_support_gate_applied": true,
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "claims": [],
+        "answer": null,
+        "reason": "no_lexical_support_for_experimental_retrieval",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.239
+      }
+    },
+    {
+      "case_id": "missing_hybrid",
+      "route": "/api/ask",
+      "request": {
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "retriever": "hybrid"
+      },
+      "http_status": 200,
+      "latency_ms": 0.528,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v2",
+        "retrieval_method": "hybrid",
+        "retrieval_executed": false,
+        "lexical_support_gate_applied": true,
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "claims": [],
+        "answer": null,
+        "reason": "no_lexical_support_for_experimental_retrieval",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.204
+      }
+    },
+    {
+      "case_id": "timeout_draft",
+      "route": "/api/ask",
+      "request": {
+        "question": "What is the default timeout in HTTPX?",
+        "version": "0.28.1"
+      },
+      "http_status": 200,
+      "latency_ms": 1114.575,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "answered",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v2",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "What is the default timeout in HTTPX?",
+        "version": "0.28.1",
+        "claims": [
+          {
+            "text": "The default timeout in HTTPX is five seconds for network inactivity.",
+            "citations": [
+              {
+                "evidence_id": "E2",
+                "quote_id": "Q2",
+                "quote": "The default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:",
+                "chunk_id": "84c4aad941b6d1e060fb0ab5",
+                "version": "0.28.1",
+                "section": "QuickStart > Timeouts",
+                "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+                "source_id": "httpx:0.28.1:docs/quickstart.md",
+                "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+                "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+                "start_line": 448,
+                "end_line": 468,
+                "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/quickstart.md?plain=1#L448-L468",
+                "score": 7.057405394541835
+              }
+            ]
+          }
+        ],
+        "answer": "The default timeout in HTTPX is five seconds for network inactivity. [E2](https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/quickstart.md?plain=1#L448-L468)",
+        "reason": "",
+        "evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ],
+        "model_called": true,
+        "model": "qwen3:1.7b",
+        "usage": {
+          "prompt_tokens": 937,
+          "output_tokens": 72,
+          "model_duration_ns": 1100537125,
+          "api_fee_usd": 0
+        },
+        "citation_identity_and_quotes_checked": true,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 1114.008
+      }
+    },
+    {
+      "case_id": "upgrade_draft",
+      "route": "/api/ask",
+      "request": {
+        "question": "Why did the proxies argument stop working after upgrading?",
+        "version": "0.28.1"
+      },
+      "http_status": 200,
+      "latency_ms": 2298.835,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v2",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "Why did the proxies argument stop working after upgrading?",
+        "version": "0.28.1",
+        "claims": [],
+        "answer": null,
+        "reason": "invalid_generation",
+        "evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ],
+        "model_called": true,
+        "model": "qwen3:1.7b",
+        "usage": {
+          "prompt_tokens": 1169,
+          "output_tokens": 90,
+          "model_duration_ns": 2281386917,
+          "api_fee_usd": 0
+        },
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 2297.956
+      }
+    },
+    {
+      "case_id": "vector_evidence",
+      "route": "/api/search",
+      "request": {
+        "question": "default timeout",
+        "version": "0.28.1",
+        "retriever": "vector"
+      },
+      "http_status": 200,
+      "latency_ms": 776.684,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "evidence_found",
+        "mode": "vector_retrieval_only",
+        "retrieval_method": "vector",
+        "version": "0.28.1",
+        "question": "default timeout",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "267f3cdadbaa1e27ca2038ad",
+            "version": "0.28.1",
+            "section": "Setting a default timeout on a client",
+            "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 30,
+            "end_line": 40,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L30-L40",
+            "score": 0.741345604756777
+          },
+          {
+            "chunk_id": "84c4aad941b6d1e060fb0ab5",
+            "version": "0.28.1",
+            "section": "QuickStart > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+            "source_id": "httpx:0.28.1:docs/quickstart.md",
+            "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 468,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/quickstart.md?plain=1#L448-L468",
+            "score": 0.7335223283702674
+          },
+          {
+            "chunk_id": "59d4e8cc41cb8189b66bf40e",
+            "version": "0.28.1",
+            "section": "Timeouts",
+            "text": "HTTPX is careful to enforce timeouts everywhere by default.\n\nThe default behavior is to raise a `TimeoutException` after 5 seconds of\nnetwork inactivity.\n",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L1-L5",
+            "score": 0.7207497254970153
+          },
+          {
+            "chunk_id": "295814f78dc346460858f9a1",
+            "version": "0.28.1",
+            "section": "Requests Compatibility Guide > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable [timeouts](quickstart.md#timeouts) for all network operations, while Requests has no timeouts by default.\n\nTo get the same behavior as Requests, set the `timeout` parameter to `None`:\n\n```python\nhttpx.get('https://www.example.com', timeout=None)\n```\n",
+            "source_id": "httpx:0.28.1:docs/compatibility.md",
+            "source_sha256": "e30d0a254fc89e5a891739607e289432b48930ac68be285810dd4e540f304776",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 148,
+            "end_line": 157,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/compatibility.md?plain=1#L148-L157",
+            "score": 0.7084254704164414
+          },
+          {
+            "chunk_id": "86132549b5dad252383b3d65",
+            "version": "0.28.1",
+            "section": "Changelog > 0.6.4 (June 25, 2019)",
+            "text": "## 0.6.4 (June 25, 2019)\n\n- Implement read and write timeouts (Pull #104)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1112,
+            "end_line": 1115,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L1112-L1115",
+            "score": 0.6539268883628426
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "hybrid_evidence",
+      "route": "/api/search",
+      "request": {
+        "question": "default timeout",
+        "version": "0.28.1",
+        "retriever": "hybrid"
+      },
+      "http_status": 200,
+      "latency_ms": 217.464,
+      "security_headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "X-Content-Type-Options": "nosniff",
+        "Cache-Control": "no-store"
+      },
+      "result": {
+        "status": "evidence_found",
+        "mode": "hybrid_retrieval_only",
+        "retrieval_method": "hybrid",
+        "version": "0.28.1",
+        "question": "default timeout",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "267f3cdadbaa1e27ca2038ad",
+            "version": "0.28.1",
+            "section": "Setting a default timeout on a client",
+            "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 30,
+            "end_line": 40,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L30-L40",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "84c4aad941b6d1e060fb0ab5",
+            "version": "0.28.1",
+            "section": "QuickStart > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+            "source_id": "httpx:0.28.1:docs/quickstart.md",
+            "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 468,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/quickstart.md?plain=1#L448-L468",
+            "score": 0.03225806451612903
+          },
+          {
+            "chunk_id": "295814f78dc346460858f9a1",
+            "version": "0.28.1",
+            "section": "Requests Compatibility Guide > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable [timeouts](quickstart.md#timeouts) for all network operations, while Requests has no timeouts by default.\n\nTo get the same behavior as Requests, set the `timeout` parameter to `None`:\n\n```python\nhttpx.get('https://www.example.com', timeout=None)\n```\n",
+            "source_id": "httpx:0.28.1:docs/compatibility.md",
+            "source_sha256": "e30d0a254fc89e5a891739607e289432b48930ac68be285810dd4e540f304776",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 148,
+            "end_line": 157,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/compatibility.md?plain=1#L148-L157",
+            "score": 0.03149801587301587
+          },
+          {
+            "chunk_id": "3e5f47bcefed24dde7a7652b",
+            "version": "0.28.1",
+            "section": "Fine tuning the configuration",
+            "text": "## Fine tuning the configuration\n\nHTTPX also allows you to specify the timeout behavior in more fine grained detail.\n\nThere are four different types of timeouts that may occur. These are **connect**,\n**read**, **write**, and **pool** timeouts.\n\n* The **connect** timeout specifies the maximum amount of time to wait until\na socket connection to the requested host is established. If HTTPX is unable to connect\nwithin this time frame, a `ConnectTimeout` exception is raised.\n* The **read** timeout specifies the maximum duration to wait for a chunk of\ndata to be received (for example, a chunk of the response body). If HTTPX is\nunable to receive data within this time frame, a `ReadTimeout` exception is raised.\n* The **write** timeout specifies the maximum duration to wait for a chunk of\ndata to be sent (for example, a chunk of the request body). If HTTPX is unable\nto send data within this time frame, a `WriteTimeout` exception is raised.\n* The **pool** timeout specifies the maximum duration to wait for acquiring\na connection from the connection pool. If HTTPX is unable to acquire a connection\nwithin this time frame, a `PoolTimeout` exception is raised. A related\nconfiguration here is the maximum number of allowable connections in the\nconnection pool, which is configured by the `limits` argument.\n\nYou can configure the timeout behavior for any of these values...\n\n```python\n# A client with a 60s timeout for connecting, and a 10s timeout elsewhere.\ntimeout = httpx.Timeout(10.0, connect=60.0)\nclient = httpx.Client(timeout=timeout)\n\nresponse = client.get('http://example.com/')\n```",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 41,
+            "end_line": 71,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L41-L71",
+            "score": 0.030309988518943745
+          },
+          {
+            "chunk_id": "f61ed6566cf4e9266f8a3a69",
+            "version": "0.28.1",
+            "section": "Changelog > 0.18.2 (17th June, 2021) > Added",
+            "text": "### Added\n\n* Support for Python 3.10. (Pull #1687)\n* Expose `httpx.USE_CLIENT_DEFAULT`, used as the default to `auth` and `timeout` parameters in request methods. (Pull #1634)\n* Support [HTTP/2 \"prior knowledge\"](https://python-hyper.org/projects/hyper-h2/en/v2.3.1/negotiating-http2.html#prior-knowledge), using `httpx.Client(http1=False, http2=True)`. (Pull #1624)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 342,
+            "end_line": 347,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L342-L347",
+            "score": 0.030117753623188408
+          }
+        ]
+      }
+    }
+  ]
+}
