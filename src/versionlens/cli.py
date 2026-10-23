@@ -23,6 +23,8 @@ def main(argv: list[str] | None = None) -> int:
     commands.add_parser("stats", help="Inspect index counts and supported snapshots")
     commands.add_parser("doctor", help="Check the approved local model; never contact cloud inference")
     commands.add_parser("embed", help="Build a local vector index for the current corpus and model digest")
+    web = commands.add_parser("serve", help="Start the local API and browser UI on 127.0.0.1")
+    web.add_argument("--port", type=int, default=8765)
     query = commands.add_parser("search", help="Return ranked evidence; this does not generate an answer")
     query.add_argument("question")
     query.add_argument("--version", choices=SUPPORTED_VERSIONS, required=True)
@@ -38,7 +40,10 @@ def main(argv: list[str] | None = None) -> int:
     index = args.index if args.index.is_absolute() else root / args.index
     vectors = args.vector_index if args.vector_index.is_absolute() else root / args.vector_index
     try:
-        if args.command == "ingest":
+        if args.command == "serve":
+            from .server import serve
+            return serve(index, vectors, args.port)
+        elif args.command == "ingest":
             result = replace_corpus(index, load_corpus(root))
         elif args.command == "stats":
             result = index_stats(index)
