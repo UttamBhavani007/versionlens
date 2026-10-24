@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "synthetic:httpx:0.27.2:orchidrelay.md",
+      "product": "httpx",
+      "version": "0.27.2",
+      "path": "data/synthetic/httpx/0.27.2/orchidrelay.md",
+      "upstream_path": "orchidrelay.md",
+      "commit": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+      "sha256": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+      "url": "versionlens://synthetic/httpx/0.27.2/orchidrelay.md?sha256=ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+      "title": "SYNTHETIC DEMO: Orchidrelay support runbook",
+      "source_kind": "synthetic",
+      "access": "support"
+    },
+    {
+      "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+      "product": "httpx",
+      "version": "0.28.1",
+      "path": "data/synthetic/httpx/0.28.1/orchidrelay.md",
+      "upstream_path": "orchidrelay.md",
+      "commit": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+      "sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+      "url": "versionlens://synthetic/httpx/0.28.1/orchidrelay.md?sha256=66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+      "title": "SYNTHETIC DEMO: Orchidrelay support runbook",
+      "source_kind": "synthetic",
+      "access": "support"
+    }
+  ]
+}

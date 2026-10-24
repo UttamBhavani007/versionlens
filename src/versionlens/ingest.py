@@ -89,7 +89,7 @@ def chunk_markdown(source: Source, content: str, max_chars: int = 1800) -> tuple
     return tuple(chunks)
 
 
-def load_corpus(root: Path, manifest_path: str = "data/sources.json") -> Corpus:
+def load_corpus(root: Path, manifest_path: str = "data/sources.json", *, allow_synthetic: bool = False) -> Corpus:
     """Validate the complete batch before returning any indexable documents."""
     from .models import validate_relative_path
 
@@ -113,6 +113,8 @@ def load_corpus(root: Path, manifest_path: str = "data/sources.json") -> Corpus:
             source = Source(**entry)
         except (TypeError, AttributeError) as exc:
             raise ValidationError("Source entry does not match the metadata schema.") from exc
+        if (source.source_kind == "synthetic") != allow_synthetic:
+            raise ValidationError("Synthetic documents require their separate, explicit demo manifest.")
         if source.source_id in seen:
             raise ValidationError(f"Duplicate source ID: {source.source_id}")
         seen.add(source.source_id)
@@ -123,9 +125,18 @@ def load_corpus(root: Path, manifest_path: str = "data/sources.json") -> Corpus:
             content = raw.decode("utf-8")
         except UnicodeDecodeError as exc:
             raise ValidationError(f"Source is not UTF-8: {source.path}") from exc
+        if source.source_kind == "synthetic" and content.splitlines()[:1] != ["# " + source.title]:
+            raise ValidationError("Synthetic content must start with its prominent SYNTHETIC DEMO title.")
         source_chunks = chunk_markdown(source, content)
         if not source_chunks:
             raise ValidationError(f"Source is empty: {source.path}")
         sources.append(source)
         chunks.extend(source_chunks)
     return Corpus(tuple(sources), tuple(chunks))
+
+
+def load_demo_corpus(root: Path) -> Corpus:
+    """Opt-in fictional material; public upstream sources stay unmodified."""
+    public = load_corpus(root)
+    synthetic = load_corpus(root, "data/synthetic/sources.json", allow_synthetic=True)
+    return Corpus(public.sources + synthetic.sources, public.chunks + synthetic.chunks)
