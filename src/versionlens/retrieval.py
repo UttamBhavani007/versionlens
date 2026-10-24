@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import re
 
-from .models import Chunk, SearchRequest, Source
+from .models import Chunk, SearchRequest, Source, ValidationError
 from .store import _check_schema, connect
 
 
@@ -31,6 +31,8 @@ class SearchHit:
             "text": self.chunk.text,
             "source_id": self.chunk.source.source_id,
             "source_sha256": self.chunk.source.sha256,
+            "source_kind": self.chunk.source.source_kind,
+            "access": self.chunk.source.access,
             "upstream_commit": self.chunk.source.commit,
             "start_line": self.chunk.start_line,
             "end_line": self.chunk.end_line,
@@ -54,17 +56,22 @@ def search(index_path: Path, request: SearchRequest) -> tuple[SearchHit, ...]:
     with connect(index_path, readonly=True) as connection:
         _check_schema(connection)
         rows = connection.execute(
-            "SELECT c.*, s.metadata_json, bm25(chunk_fts, 2.0, 1.0) AS rank "
+            "SELECT c.*, s.metadata_json, s.access AS source_access, s.source_kind AS stored_source_kind, bm25(chunk_fts, 2.0, 1.0) AS rank "
             "FROM chunk_fts JOIN chunks c ON c.rowid=chunk_fts.rowid "
             "JOIN sources s ON s.source_id=c.source_id "
-            "WHERE chunk_fts MATCH ? AND c.version=? "
+            "WHERE chunk_fts MATCH ? AND c.version=? AND (?='support' OR s.access='public') "
             "ORDER BY rank, c.chunk_id LIMIT ?",
-            (expression, request.version, request.limit),
+            (expression, request.version, request.access_profile, request.limit),
         ).fetchall()
-    return tuple(
-        SearchHit(
-            Chunk(row["chunk_id"], Source(**json.loads(row["metadata_json"])),
-                  row["section"], row["start_line"], row["end_line"], row["text"]),
-            -row["rank"],
-        ) for row in rows
-    )
+    hits = []
+    for row in rows:
+        source = Source(**json.loads(row["metadata_json"]))
+        if (source.source_id != row["source_id"] or source.version != row["version"]
+                or source.access != row["source_access"] or source.source_kind != row["stored_source_kind"]
+                or not request.allows(source)):
+            raise ValidationError("Source index contains inconsistent access or version metadata.")
+        chunk = Chunk.create(source, row["section"], row["start_line"], row["end_line"], row["text"])
+        if chunk.chunk_id != row["chunk_id"]:
+            raise ValidationError("Source index contains an invalid chunk identity.")
+        hits.append(SearchHit(chunk, -row["rank"]))
+    return tuple(hits)

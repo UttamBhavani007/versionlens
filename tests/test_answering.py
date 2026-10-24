@@ -1,5 +1,8 @@
 import json
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from versionlens.ingest import Corpus
+from versionlens.store import replace_corpus
 from unittest.mock import patch
 import unittest
 
@@ -121,8 +124,13 @@ class DraftValidationTests(unittest.TestCase):
 
 class AnswerPipelineTests(unittest.TestCase):
     def run_with(self, hits, generator):
-        with patch("versionlens.answering.search", return_value=hits):
-            return answer(Path("unused.sqlite3"), SearchRequest("Why proxies?", "0.28.1"), generator)
+        with TemporaryDirectory() as directory:
+            index = Path(directory) / "source.sqlite3"
+            if hits:
+                sources = tuple({hit.chunk.source.source_id: hit.chunk.source for hit in hits}.values())
+                replace_corpus(index, Corpus(sources, tuple(hit.chunk for hit in hits)))
+            with patch("versionlens.answering.search", return_value=hits):
+                return answer(index, SearchRequest("Why proxies?", "0.28.1"), generator)
 
     def test_no_matches_do_not_call_model(self):
         model = FakeGenerator(draft())

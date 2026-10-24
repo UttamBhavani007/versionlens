@@ -25,7 +25,7 @@ def hybrid_search(index_path: Path, vector_path: Path, request: SearchRequest,
     before any fused result is returned.
     """
     initial_corpus = corpus_fingerprint(load_chunks(index_path))
-    pool_request = SearchRequest(request.question, request.version, CANDIDATE_POOL)
+    pool_request = SearchRequest(request.question, request.version, CANDIDATE_POOL, request.access_profile)
     rankings = (
         search(index_path, pool_request),
         vector_search(index_path, vector_path, pool_request, client=client),
@@ -40,6 +40,8 @@ def hybrid_search(index_path: Path, vector_path: Path, request: SearchRequest,
             chunk = hit.chunk
             if chunk.source.version != request.version:
                 raise ValidationError("Retriever returned evidence from another version.")
+            if not request.allows(chunk.source):
+                raise ValidationError("Retriever returned evidence outside the configured access profile.")
             if chunk.chunk_id in seen:
                 raise ValidationError("Retriever returned duplicate chunk IDs.")
             seen.add(chunk.chunk_id)

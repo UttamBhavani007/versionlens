@@ -245,10 +245,10 @@ def create_server(service: ApiService, host: str = "127.0.0.1", port: int = 8765
     return VersionLensHTTPServer((host, port), service)
 
 
-def serve(index_path: Path, vector_path: Path, port: int = 8765) -> int:
+def serve(index_path: Path, vector_path: Path, port: int = 8765, access_profile: str = "public") -> int:
     if type(port) is not int or not 1024 <= port <= 65535:
         raise ValidationError("Choose an unprivileged local port from 1024 to 65535.")
-    with create_server(ApiService(index_path, vector_path), port=port) as server:
+    with create_server(ApiService(index_path, vector_path, access_profile), port=port) as server:
         print(f"VersionLens local UI: http://127.0.0.1:{server.server_port}", flush=True)
         print("Local workstation demo. Start the separate model server for draft answers.", flush=True)
         try:

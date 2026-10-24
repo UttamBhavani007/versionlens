@@ -36,7 +36,7 @@ def _canonical_json(value) -> str:
 def _chunks_from_connection(connection) -> tuple[Chunk, ...]:
     _check_schema(connection)
     rows = connection.execute(
-        "SELECT c.*, s.metadata_json FROM chunks c "
+        "SELECT c.*, s.metadata_json, s.access AS source_access, s.source_kind AS stored_source_kind FROM chunks c "
         "LEFT JOIN sources s ON s.source_id=c.source_id ORDER BY c.chunk_id"
     ).fetchall()
     if not rows:
@@ -45,7 +45,8 @@ def _chunks_from_connection(connection) -> tuple[Chunk, ...]:
     try:
         for row in rows:
             source = Source(**json.loads(row["metadata_json"]))
-            if row["source_id"] != source.source_id or row["version"] != source.version:
+            if (row["source_id"] != source.source_id or row["version"] != source.version
+                    or row["source_access"] != source.access or row["stored_source_kind"] != source.source_kind):
                 raise VectorIndexError("Source index contains inconsistent version metadata.")
             if (
                 type(row["start_line"]) is not int or type(row["end_line"]) is not int
@@ -274,7 +275,7 @@ def vector_search(index_path: Path, vector_path: Path, request: SearchRequest, c
     with _source_snapshot(index_path) as current_chunks:
         if corpus_fingerprint(current_chunks) != corpus_fingerprint(chunks):
             raise VectorIndexError("Source index changed during retrieval. Rebuild the vector index.")
-        candidates = (chunk for chunk in chunks if chunk.source.version == request.version)
+        candidates = (chunk for chunk in chunks if chunk.source.version == request.version and request.allows(chunk.source))
         hits = [
             SearchHit(chunk, max(-1.0, min(1.0, math.fsum(
                 left * right for left, right in zip(query_vector, vectors[chunk.chunk_id])

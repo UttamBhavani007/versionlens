@@ -43,7 +43,8 @@ class ApiServiceTests(unittest.TestCase):
         self.assertEqual(result, {
             "product": "httpx", "versions": ["0.27.2", "0.28.1"],
             "retrievers": ["keyword", "vector", "hybrid"], "default_retriever": "keyword",
-            "index": {"schema_version": "1", "sources": 2, "chunks": 2,
+            "access_profile": "public", "permission_demo": True,
+            "index": {"schema_version": "2", "sources": 2, "chunks": 2,
                       "versions": ["0.27.2", "0.28.1"]},
         })
         self.assertNotIn(str(self.root), str(result))

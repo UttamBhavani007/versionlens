@@ -45,6 +45,8 @@ class Source:
     sha256: str
     url: str
     title: str
+    source_kind: str = "upstream"
+    access: str = "public"
 
     def __post_init__(self) -> None:
         if not all(isinstance(value, str) and value for value in vars(self).values()):
@@ -52,6 +54,19 @@ class Source:
         validate_version(self.version)
         validate_relative_path(self.path)
         validate_relative_path(self.upstream_path)
+        if self.source_kind not in {"upstream", "synthetic"} or self.access not in {"public", "support"}:
+            raise ValidationError("Source kind or access policy is unsupported.")
+        if self.source_kind == "synthetic":
+            if (self.product != "httpx" or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,63}\.md", self.upstream_path)
+                    or not re.fullmatch(r"[0-9a-f]{64}", self.sha256) or self.commit != self.sha256
+                    or self.source_id != f"synthetic:httpx:{self.version}:{self.upstream_path}"
+                    or self.path != f"data/synthetic/httpx/{self.version}/{self.upstream_path}"
+                    or self.url != f"versionlens://synthetic/httpx/{self.version}/{self.upstream_path}?sha256={self.sha256}"
+                    or not self.title.startswith("SYNTHETIC DEMO:")):
+                raise ValidationError("Synthetic source needs a labelled, digest-bound local identity.")
+            return
+        if self.access != "public":
+            raise ValidationError("Only labelled synthetic documents may use restricted demo access.")
         if self.product != "httpx" or self.commit != UPSTREAM_COMMITS[self.version]:
             raise ValidationError("Source must match its approved HTTPX snapshot commit.")
         if not re.fullmatch(r"[0-9a-f]{64}", self.sha256):
@@ -76,6 +91,8 @@ class Chunk:
 
     @property
     def citation_url(self) -> str:
+        if self.source.source_kind == "synthetic":
+            return f"/api/chunks/{self.chunk_id}?version={self.source.version}"
         # GitHub needs source mode for line anchors in Markdown files.
         return f"{self.source.url}?plain=1#L{self.start_line}-L{self.end_line}"
 
@@ -92,9 +109,14 @@ class SearchRequest:
     question: str
     version: str
     limit: int = 5
+    access_profile: str = "public"
+
+    def allows(self, source: Source) -> bool:
+        return can_access(source, self.access_profile)
 
     def __post_init__(self) -> None:
         validate_version(self.version)
+        validate_access_profile(self.access_profile)
         if not isinstance(self.question, str) or not self.question.strip():
             raise ValidationError("Question must not be empty.")
         if len(self.question) > 2000:
@@ -105,3 +127,14 @@ class SearchRequest:
             raise ValidationError("Question must contain valid Unicode text.") from exc
         if type(self.limit) is not int or not 1 <= self.limit <= 20:
             raise ValidationError("Result limit must be between 1 and 20.")
+
+
+def validate_access_profile(value: str) -> str:
+    if not isinstance(value, str) or value not in {"public", "support"}:
+        raise ValidationError("Choose the public or support demo access profile.")
+    return value
+
+
+def can_access(source: Source, access_profile: str) -> bool:
+    validate_access_profile(access_profile)
+    return source.access == "public" or access_profile == "support"
