@@ -1,0 +1,1082 @@
+{
+  "kind": "local_synthetic_update_and_permission_demo",
+  "recorded_at_utc": "2026-10-24T17:54:59.310520+00:00",
+  "synthetic_documents": true,
+  "isolated_scratch_index": true,
+  "real_local_generation": true,
+  "real_local_embeddings": true,
+  "api_fee_usd": 0,
+  "human_reviewed": false,
+  "held_out_benchmark": false,
+  "semantic_support_verified": false,
+  "steps": [
+    {
+      "case_id": "initial_ingestion",
+      "latency_ms": 16.124,
+      "result": {
+        "schema_version": "2",
+        "sources": 34,
+        "chunks": 646,
+        "versions": [
+          "0.27.2",
+          "0.28.1"
+        ]
+      }
+    },
+    {
+      "case_id": "public_catalog",
+      "latency_ms": 0.289,
+      "result": {
+        "product": "httpx",
+        "versions": [
+          "0.27.2",
+          "0.28.1"
+        ],
+        "retrievers": [
+          "keyword",
+          "vector",
+          "hybrid"
+        ],
+        "default_retriever": "keyword",
+        "access_profile": "public",
+        "permission_demo": true,
+        "index": {
+          "schema_version": "2",
+          "sources": 32,
+          "chunks": 644,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "support_catalog",
+      "latency_ms": 0.234,
+      "result": {
+        "product": "httpx",
+        "versions": [
+          "0.27.2",
+          "0.28.1"
+        ],
+        "retrievers": [
+          "keyword",
+          "vector",
+          "hybrid"
+        ],
+        "default_retriever": "keyword",
+        "access_profile": "support",
+        "permission_demo": true,
+        "index": {
+          "schema_version": "2",
+          "sources": 34,
+          "chunks": 646,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "real_vector_build",
+      "latency_ms": 12661.465,
+      "result": {
+        "schema_version": "1",
+        "corpus_fingerprint": "04c51317461318e891a6ad0b1076b2940e424cce6d3410fb84107c348b2299f5",
+        "index_fingerprint": "7b56a4af10b9953cf44ae090034e365000e4c941a95a604e43f4e06cf7d66a3f",
+        "model": "nomic-embed-text:v1.5",
+        "model_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+        "dimensions": 768,
+        "preprocessing_revision": "nomic-search-prefix-v1",
+        "chunks": 646,
+        "versions": [
+          "0.27.2",
+          "0.28.1"
+        ],
+        "batches": 41,
+        "prompt_tokens": 86995,
+        "total_duration_ns": 11995737876
+      }
+    },
+    {
+      "case_id": "public_keyword",
+      "latency_ms": 1.225,
+      "result": {
+        "access_profile": "public",
+        "status": "no_matching_evidence",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": []
+      }
+    },
+    {
+      "case_id": "support_keyword",
+      "latency_ms": 0.484,
+      "result": {
+        "access_profile": "support",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "c2b628e0c6b549d0bfe325b9",
+            "version": "0.28.1",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+            "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+            "source_sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+            "source_kind": "synthetic",
+            "access": "support",
+            "upstream_commit": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/c2b628e0c6b549d0bfe325b9?version=0.28.1",
+            "score": 10.068434184919859
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "public_vector",
+      "latency_ms": 191.284,
+      "result": {
+        "access_profile": "public",
+        "status": "evidence_found",
+        "mode": "vector_retrieval_only",
+        "retrieval_method": "vector",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "96bcb04385ee96ef4aa4924d",
+            "version": "0.28.1",
+            "section": "Environment Variables",
+            "text": "# Environment Variables\n\nThe HTTPX library can be configured via environment variables.\nEnvironment variables are used by default. To ignore environment variables, `trust_env` has to be set `False`. There are two ways to set `trust_env` to disable environment variables:\n\n* On the client via `httpx.Client(trust_env=False)`.\n* Using the top-level API, such as `httpx.get(\"<url>\", trust_env=False)`.\n\nHere is a list of environment variables that HTTPX recognizes and what function they serve:\n",
+            "source_id": "httpx:0.28.1:docs/environment_variables.md",
+            "source_sha256": "d0cdf4d740dc3ed8b21c4ee45735551e05d4e57d0fda05a2f18c4684197a27eb",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1,
+            "end_line": 10,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/environment_variables.md?plain=1#L1-L10",
+            "score": 0.518118538949019
+          },
+          {
+            "chunk_id": "fb72c72f8c79e64c022fad2b",
+            "version": "0.28.1",
+            "section": "Async Support > Supported async environments > [AnyIO](https://github.com/agronholm/anyio)",
+            "text": "### [AnyIO](https://github.com/agronholm/anyio)\n\nAnyIO is an [asynchronous networking and concurrency library](https://anyio.readthedocs.io/) that works on top of either `asyncio` or `trio`. It blends in with native libraries of your chosen backend (defaults to `asyncio`).\n\n```python\nimport httpx\nimport anyio\n\nasync def main():\n    async with httpx.AsyncClient() as client:\n        response = await client.get('https://www.example.com/')\n        print(response)\n\nanyio.run(main, backend='trio')\n```\n",
+            "source_id": "httpx:0.28.1:docs/async.md",
+            "source_sha256": "dd32e675ef994bb136e5414e5a2636db6e75418ce557ee6f731fddb924e47e4e",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 176,
+            "end_line": 191,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/async.md?plain=1#L176-L191",
+            "score": 0.5100908450358617
+          },
+          {
+            "chunk_id": "11ae36abfa49ea7f79d11adf",
+            "version": "0.28.1",
+            "section": "Changelog > 0.7.3 (September 20, 2019) > Added",
+            "text": "### Added\n\n- HTTP Proxy support. (Pulls #259, #353)\n- Add Digest authentication. (Pull #332)\n- Add `.build_request()` method to `Client` and `AsyncClient`. (Pull #319)\n- Add `.elapsed` property on responses. (Pull #351)\n- Add support for `SSLKEYLOGFILE` in Python 3.8b4+. (Pull #301)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1030,
+            "end_line": 1037,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L1030-L1037",
+            "score": 0.5062060692026042
+          },
+          {
+            "chunk_id": "1a32dee9b56ebb2b708d5cf0",
+            "version": "0.28.1",
+            "section": "Mounting transports > Environment variables",
+            "text": "### Environment variables\n\nThere are also environment variables that can be used to control the dictionary of the client mounts. \nThey can be used to configure HTTP proxying for clients.\n\nSee documentation on [`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`](../environment_variables.md#http_proxy-https_proxy-all_proxy)\nand [`NO_PROXY`](../environment_variables.md#no_proxy) for more information.",
+            "source_id": "httpx:0.28.1:docs/advanced/transports.md",
+            "source_sha256": "55648dd15c551f151f538aa79c8d2934bb581528d85bcc0fe3d810ac4a5ca382",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 454,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/transports.md?plain=1#L448-L454",
+            "score": 0.5026702542714621
+          },
+          {
+            "chunk_id": "10c0c6a2ae47e22cef4dbf86",
+            "version": "0.28.1",
+            "section": "Changelog > 0.10.0 (December 29th, 2019) > Removed",
+            "text": "### Removed\n\n- When using a client instance, the per-request usage of `verify`, `cert`, and `trust_env` have now escalated from raising a warning to raising an error. You should set these arguments on the client instead. (Pull #617)\n- Removed the undocumented `request.read()`, since end users should not require it.\n\n---\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 875,
+            "end_line": 881,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L875-L881",
+            "score": 0.4948804714434202
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "support_vector",
+      "latency_ms": 196.531,
+      "result": {
+        "access_profile": "support",
+        "status": "evidence_found",
+        "mode": "vector_retrieval_only",
+        "retrieval_method": "vector",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "c2b628e0c6b549d0bfe325b9",
+            "version": "0.28.1",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+            "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+            "source_sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+            "source_kind": "synthetic",
+            "access": "support",
+            "upstream_commit": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/c2b628e0c6b549d0bfe325b9?version=0.28.1",
+            "score": 0.6967824959908435
+          },
+          {
+            "chunk_id": "96bcb04385ee96ef4aa4924d",
+            "version": "0.28.1",
+            "section": "Environment Variables",
+            "text": "# Environment Variables\n\nThe HTTPX library can be configured via environment variables.\nEnvironment variables are used by default. To ignore environment variables, `trust_env` has to be set `False`. There are two ways to set `trust_env` to disable environment variables:\n\n* On the client via `httpx.Client(trust_env=False)`.\n* Using the top-level API, such as `httpx.get(\"<url>\", trust_env=False)`.\n\nHere is a list of environment variables that HTTPX recognizes and what function they serve:\n",
+            "source_id": "httpx:0.28.1:docs/environment_variables.md",
+            "source_sha256": "d0cdf4d740dc3ed8b21c4ee45735551e05d4e57d0fda05a2f18c4684197a27eb",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1,
+            "end_line": 10,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/environment_variables.md?plain=1#L1-L10",
+            "score": 0.518118538949019
+          },
+          {
+            "chunk_id": "fb72c72f8c79e64c022fad2b",
+            "version": "0.28.1",
+            "section": "Async Support > Supported async environments > [AnyIO](https://github.com/agronholm/anyio)",
+            "text": "### [AnyIO](https://github.com/agronholm/anyio)\n\nAnyIO is an [asynchronous networking and concurrency library](https://anyio.readthedocs.io/) that works on top of either `asyncio` or `trio`. It blends in with native libraries of your chosen backend (defaults to `asyncio`).\n\n```python\nimport httpx\nimport anyio\n\nasync def main():\n    async with httpx.AsyncClient() as client:\n        response = await client.get('https://www.example.com/')\n        print(response)\n\nanyio.run(main, backend='trio')\n```\n",
+            "source_id": "httpx:0.28.1:docs/async.md",
+            "source_sha256": "dd32e675ef994bb136e5414e5a2636db6e75418ce557ee6f731fddb924e47e4e",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 176,
+            "end_line": 191,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/async.md?plain=1#L176-L191",
+            "score": 0.5100908450358617
+          },
+          {
+            "chunk_id": "11ae36abfa49ea7f79d11adf",
+            "version": "0.28.1",
+            "section": "Changelog > 0.7.3 (September 20, 2019) > Added",
+            "text": "### Added\n\n- HTTP Proxy support. (Pulls #259, #353)\n- Add Digest authentication. (Pull #332)\n- Add `.build_request()` method to `Client` and `AsyncClient`. (Pull #319)\n- Add `.elapsed` property on responses. (Pull #351)\n- Add support for `SSLKEYLOGFILE` in Python 3.8b4+. (Pull #301)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1030,
+            "end_line": 1037,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L1030-L1037",
+            "score": 0.5062060692026042
+          },
+          {
+            "chunk_id": "1a32dee9b56ebb2b708d5cf0",
+            "version": "0.28.1",
+            "section": "Mounting transports > Environment variables",
+            "text": "### Environment variables\n\nThere are also environment variables that can be used to control the dictionary of the client mounts. \nThey can be used to configure HTTP proxying for clients.\n\nSee documentation on [`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`](../environment_variables.md#http_proxy-https_proxy-all_proxy)\nand [`NO_PROXY`](../environment_variables.md#no_proxy) for more information.",
+            "source_id": "httpx:0.28.1:docs/advanced/transports.md",
+            "source_sha256": "55648dd15c551f151f538aa79c8d2934bb581528d85bcc0fe3d810ac4a5ca382",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 454,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/transports.md?plain=1#L448-L454",
+            "score": 0.5026702542714621
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "public_hybrid",
+      "latency_ms": 212.593,
+      "result": {
+        "access_profile": "public",
+        "status": "evidence_found",
+        "mode": "hybrid_retrieval_only",
+        "retrieval_method": "hybrid",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "96bcb04385ee96ef4aa4924d",
+            "version": "0.28.1",
+            "section": "Environment Variables",
+            "text": "# Environment Variables\n\nThe HTTPX library can be configured via environment variables.\nEnvironment variables are used by default. To ignore environment variables, `trust_env` has to be set `False`. There are two ways to set `trust_env` to disable environment variables:\n\n* On the client via `httpx.Client(trust_env=False)`.\n* Using the top-level API, such as `httpx.get(\"<url>\", trust_env=False)`.\n\nHere is a list of environment variables that HTTPX recognizes and what function they serve:\n",
+            "source_id": "httpx:0.28.1:docs/environment_variables.md",
+            "source_sha256": "d0cdf4d740dc3ed8b21c4ee45735551e05d4e57d0fda05a2f18c4684197a27eb",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1,
+            "end_line": 10,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/environment_variables.md?plain=1#L1-L10",
+            "score": 0.01639344262295082
+          },
+          {
+            "chunk_id": "fb72c72f8c79e64c022fad2b",
+            "version": "0.28.1",
+            "section": "Async Support > Supported async environments > [AnyIO](https://github.com/agronholm/anyio)",
+            "text": "### [AnyIO](https://github.com/agronholm/anyio)\n\nAnyIO is an [asynchronous networking and concurrency library](https://anyio.readthedocs.io/) that works on top of either `asyncio` or `trio`. It blends in with native libraries of your chosen backend (defaults to `asyncio`).\n\n```python\nimport httpx\nimport anyio\n\nasync def main():\n    async with httpx.AsyncClient() as client:\n        response = await client.get('https://www.example.com/')\n        print(response)\n\nanyio.run(main, backend='trio')\n```\n",
+            "source_id": "httpx:0.28.1:docs/async.md",
+            "source_sha256": "dd32e675ef994bb136e5414e5a2636db6e75418ce557ee6f731fddb924e47e4e",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 176,
+            "end_line": 191,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/async.md?plain=1#L176-L191",
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "11ae36abfa49ea7f79d11adf",
+            "version": "0.28.1",
+            "section": "Changelog > 0.7.3 (September 20, 2019) > Added",
+            "text": "### Added\n\n- HTTP Proxy support. (Pulls #259, #353)\n- Add Digest authentication. (Pull #332)\n- Add `.build_request()` method to `Client` and `AsyncClient`. (Pull #319)\n- Add `.elapsed` property on responses. (Pull #351)\n- Add support for `SSLKEYLOGFILE` in Python 3.8b4+. (Pull #301)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1030,
+            "end_line": 1037,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L1030-L1037",
+            "score": 0.015873015873015872
+          },
+          {
+            "chunk_id": "1a32dee9b56ebb2b708d5cf0",
+            "version": "0.28.1",
+            "section": "Mounting transports > Environment variables",
+            "text": "### Environment variables\n\nThere are also environment variables that can be used to control the dictionary of the client mounts. \nThey can be used to configure HTTP proxying for clients.\n\nSee documentation on [`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`](../environment_variables.md#http_proxy-https_proxy-all_proxy)\nand [`NO_PROXY`](../environment_variables.md#no_proxy) for more information.",
+            "source_id": "httpx:0.28.1:docs/advanced/transports.md",
+            "source_sha256": "55648dd15c551f151f538aa79c8d2934bb581528d85bcc0fe3d810ac4a5ca382",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 454,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/transports.md?plain=1#L448-L454",
+            "score": 0.015625
+          },
+          {
+            "chunk_id": "10c0c6a2ae47e22cef4dbf86",
+            "version": "0.28.1",
+            "section": "Changelog > 0.10.0 (December 29th, 2019) > Removed",
+            "text": "### Removed\n\n- When using a client instance, the per-request usage of `verify`, `cert`, and `trust_env` have now escalated from raising a warning to raising an error. You should set these arguments on the client instead. (Pull #617)\n- Removed the undocumented `request.read()`, since end users should not require it.\n\n---\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 875,
+            "end_line": 881,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L875-L881",
+            "score": 0.015384615384615385
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "support_hybrid",
+      "latency_ms": 214.72,
+      "result": {
+        "access_profile": "support",
+        "status": "evidence_found",
+        "mode": "hybrid_retrieval_only",
+        "retrieval_method": "hybrid",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "c2b628e0c6b549d0bfe325b9",
+            "version": "0.28.1",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+            "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+            "source_sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+            "source_kind": "synthetic",
+            "access": "support",
+            "upstream_commit": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/c2b628e0c6b549d0bfe325b9?version=0.28.1",
+            "score": 0.03278688524590164
+          },
+          {
+            "chunk_id": "96bcb04385ee96ef4aa4924d",
+            "version": "0.28.1",
+            "section": "Environment Variables",
+            "text": "# Environment Variables\n\nThe HTTPX library can be configured via environment variables.\nEnvironment variables are used by default. To ignore environment variables, `trust_env` has to be set `False`. There are two ways to set `trust_env` to disable environment variables:\n\n* On the client via `httpx.Client(trust_env=False)`.\n* Using the top-level API, such as `httpx.get(\"<url>\", trust_env=False)`.\n\nHere is a list of environment variables that HTTPX recognizes and what function they serve:\n",
+            "source_id": "httpx:0.28.1:docs/environment_variables.md",
+            "source_sha256": "d0cdf4d740dc3ed8b21c4ee45735551e05d4e57d0fda05a2f18c4684197a27eb",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1,
+            "end_line": 10,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/environment_variables.md?plain=1#L1-L10",
+            "score": 0.016129032258064516
+          },
+          {
+            "chunk_id": "fb72c72f8c79e64c022fad2b",
+            "version": "0.28.1",
+            "section": "Async Support > Supported async environments > [AnyIO](https://github.com/agronholm/anyio)",
+            "text": "### [AnyIO](https://github.com/agronholm/anyio)\n\nAnyIO is an [asynchronous networking and concurrency library](https://anyio.readthedocs.io/) that works on top of either `asyncio` or `trio`. It blends in with native libraries of your chosen backend (defaults to `asyncio`).\n\n```python\nimport httpx\nimport anyio\n\nasync def main():\n    async with httpx.AsyncClient() as client:\n        response = await client.get('https://www.example.com/')\n        print(response)\n\nanyio.run(main, backend='trio')\n```\n",
+            "source_id": "httpx:0.28.1:docs/async.md",
+            "source_sha256": "dd32e675ef994bb136e5414e5a2636db6e75418ce557ee6f731fddb924e47e4e",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 176,
+            "end_line": 191,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/async.md?plain=1#L176-L191",
+            "score": 0.015873015873015872
+          },
+          {
+            "chunk_id": "11ae36abfa49ea7f79d11adf",
+            "version": "0.28.1",
+            "section": "Changelog > 0.7.3 (September 20, 2019) > Added",
+            "text": "### Added\n\n- HTTP Proxy support. (Pulls #259, #353)\n- Add Digest authentication. (Pull #332)\n- Add `.build_request()` method to `Client` and `AsyncClient`. (Pull #319)\n- Add `.elapsed` property on responses. (Pull #351)\n- Add support for `SSLKEYLOGFILE` in Python 3.8b4+. (Pull #301)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 1030,
+            "end_line": 1037,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L1030-L1037",
+            "score": 0.015625
+          },
+          {
+            "chunk_id": "1a32dee9b56ebb2b708d5cf0",
+            "version": "0.28.1",
+            "section": "Mounting transports > Environment variables",
+            "text": "### Environment variables\n\nThere are also environment variables that can be used to control the dictionary of the client mounts. \nThey can be used to configure HTTP proxying for clients.\n\nSee documentation on [`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`](../environment_variables.md#http_proxy-https_proxy-all_proxy)\nand [`NO_PROXY`](../environment_variables.md#no_proxy) for more information.",
+            "source_id": "httpx:0.28.1:docs/advanced/transports.md",
+            "source_sha256": "55648dd15c551f151f538aa79c8d2934bb581528d85bcc0fe3d810ac4a5ca382",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 454,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/transports.md?plain=1#L448-L454",
+            "score": 0.015384615384615385
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "support_source",
+      "latency_ms": 5.687,
+      "result": {
+        "chunk_id": "c2b628e0c6b549d0bfe325b9",
+        "version": "0.28.1",
+        "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+        "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+        "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+        "source_sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+        "source_kind": "synthetic",
+        "access": "support",
+        "upstream_commit": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+        "start_line": 1,
+        "end_line": 5,
+        "citation_url": "/api/chunks/c2b628e0c6b549d0bfe325b9?version=0.28.1",
+        "product": "httpx",
+        "title": "SYNTHETIC DEMO: Orchidrelay support runbook",
+        "upstream_path": "orchidrelay.md"
+      }
+    },
+    {
+      "case_id": "public_source_denied",
+      "latency_ms": 5.579,
+      "result": {
+        "status": "not_found",
+        "equivalent_http_status": 404
+      }
+    },
+    {
+      "case_id": "public_missing_answer",
+      "latency_ms": 0.298,
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "orchidrelay",
+        "version": "0.28.1",
+        "access_profile": "public",
+        "claims": [],
+        "answer": null,
+        "reason": "no_matching_evidence",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.289
+      }
+    },
+    {
+      "case_id": "support_draft_0.27.2",
+      "latency_ms": 3343.543,
+      "result": {
+        "status": "answered",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "orchidrelay",
+        "version": "0.27.2",
+        "access_profile": "support",
+        "claims": [
+          {
+            "text": "In the synthetic demo for HTTPX 0.27.2, the orchidrelay retry budget is 2 attempts.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote_id": "Q3",
+                "quote": "In the synthetic demo for HTTPX 0.27.2, the orchidrelay retry budget is 2 attempts.",
+                "chunk_id": "7ea92265e087a7f5baf43640",
+                "version": "0.27.2",
+                "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+                "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.27.2, the orchidrelay retry budget is 2 attempts.",
+                "source_id": "synthetic:httpx:0.27.2:orchidrelay.md",
+                "source_sha256": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+                "source_kind": "synthetic",
+                "access": "support",
+                "upstream_commit": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+                "start_line": 1,
+                "end_line": 5,
+                "citation_url": "/api/chunks/7ea92265e087a7f5baf43640?version=0.27.2",
+                "score": 10.068434184919859
+              }
+            ]
+          }
+        ],
+        "answer": "In the synthetic demo for HTTPX 0.27.2, the orchidrelay retry budget is 2 attempts. [E1](/api/chunks/7ea92265e087a7f5baf43640?version=0.27.2)",
+        "reason": "",
+        "evidence_ids": [
+          "E1"
+        ],
+        "model_called": true,
+        "model": "qwen3:1.7b",
+        "usage": {
+          "prompt_tokens": 531,
+          "output_tokens": 84,
+          "model_duration_ns": 3317222833,
+          "api_fee_usd": 0
+        },
+        "citation_identity_and_quotes_checked": true,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 3343.529
+      }
+    },
+    {
+      "case_id": "support_draft_0.28.1",
+      "latency_ms": 1457.788,
+      "result": {
+        "status": "answered",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "orchidrelay",
+        "version": "0.28.1",
+        "access_profile": "support",
+        "claims": [
+          {
+            "text": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote_id": "Q3",
+                "quote": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+                "chunk_id": "c2b628e0c6b549d0bfe325b9",
+                "version": "0.28.1",
+                "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+                "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts.",
+                "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+                "source_sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+                "source_kind": "synthetic",
+                "access": "support",
+                "upstream_commit": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+                "start_line": 1,
+                "end_line": 5,
+                "citation_url": "/api/chunks/c2b628e0c6b549d0bfe325b9?version=0.28.1",
+                "score": 10.068434184919859
+              }
+            ]
+          }
+        ],
+        "answer": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 3 attempts. [E1](/api/chunks/c2b628e0c6b549d0bfe325b9?version=0.28.1)",
+        "reason": "",
+        "evidence_ids": [
+          "E1"
+        ],
+        "model_called": true,
+        "model": "qwen3:1.7b",
+        "usage": {
+          "prompt_tokens": 531,
+          "output_tokens": 84,
+          "model_duration_ns": 1428352834,
+          "api_fee_usd": 0
+        },
+        "citation_identity_and_quotes_checked": true,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 1457.769
+      }
+    },
+    {
+      "case_id": "update_document_revision",
+      "latency_ms": 18.697,
+      "result": {
+        "operation": "sync_snapshot",
+        "version": "0.28.1",
+        "added": 0,
+        "updated": 1,
+        "deleted": 0,
+        "unchanged": 16,
+        "index": {
+          "schema_version": "2",
+          "sources": 34,
+          "chunks": 646,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "updated_support_evidence",
+      "latency_ms": 0.467,
+      "result": {
+        "access_profile": "support",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "72478eb2a57da76e35ffe024",
+            "version": "0.28.1",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+            "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+            "source_sha256": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+            "source_kind": "synthetic",
+            "access": "support",
+            "upstream_commit": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/72478eb2a57da76e35ffe024?version=0.28.1",
+            "score": 10.068434184919859
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "other_version_unchanged",
+      "latency_ms": 0.473,
+      "result": {
+        "access_profile": "support",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.27.2",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "7ea92265e087a7f5baf43640",
+            "version": "0.27.2",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.27.2, the orchidrelay retry budget is 2 attempts.",
+            "source_id": "synthetic:httpx:0.27.2:orchidrelay.md",
+            "source_sha256": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+            "source_kind": "synthetic",
+            "access": "support",
+            "upstream_commit": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/7ea92265e087a7f5baf43640?version=0.27.2",
+            "score": 10.068434184919859
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "old_revision_source_removed",
+      "latency_ms": 6.165,
+      "result": {
+        "status": "not_found",
+        "equivalent_http_status": 404
+      }
+    },
+    {
+      "case_id": "changed_corpus_rejects_old_vectors",
+      "latency_ms": 25.782,
+      "result": {
+        "status": "rejected",
+        "reason": "stale_vector_cache",
+        "automatic_fallback": false
+      }
+    },
+    {
+      "case_id": "revised_support_draft",
+      "latency_ms": 1293.256,
+      "result": {
+        "status": "answered",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "orchidrelay",
+        "version": "0.28.1",
+        "access_profile": "support",
+        "claims": [
+          {
+            "text": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote_id": "Q3",
+                "quote": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+                "chunk_id": "72478eb2a57da76e35ffe024",
+                "version": "0.28.1",
+                "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+                "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+                "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+                "source_sha256": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+                "source_kind": "synthetic",
+                "access": "support",
+                "upstream_commit": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+                "start_line": 1,
+                "end_line": 5,
+                "citation_url": "/api/chunks/72478eb2a57da76e35ffe024?version=0.28.1",
+                "score": 10.068434184919859
+              }
+            ]
+          }
+        ],
+        "answer": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts. [E1](/api/chunks/72478eb2a57da76e35ffe024?version=0.28.1)",
+        "reason": "",
+        "evidence_ids": [
+          "E1"
+        ],
+        "model_called": true,
+        "model": "qwen3:1.7b",
+        "usage": {
+          "prompt_tokens": 531,
+          "output_tokens": 84,
+          "model_duration_ns": 1266212000,
+          "api_fee_usd": 0
+        },
+        "citation_identity_and_quotes_checked": true,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 1293.233
+      }
+    },
+    {
+      "case_id": "grant_public_demo_access",
+      "latency_ms": 15.006,
+      "result": {
+        "operation": "sync_snapshot",
+        "version": "0.28.1",
+        "added": 0,
+        "updated": 1,
+        "deleted": 0,
+        "unchanged": 16,
+        "index": {
+          "schema_version": "2",
+          "sources": 34,
+          "chunks": 646,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "newly_public_evidence",
+      "latency_ms": 0.413,
+      "result": {
+        "access_profile": "public",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.28.1",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "72478eb2a57da76e35ffe024",
+            "version": "0.28.1",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+            "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+            "source_sha256": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+            "source_kind": "synthetic",
+            "access": "public",
+            "upstream_commit": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/72478eb2a57da76e35ffe024?version=0.28.1",
+            "score": 10.068434184919859
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "newly_public_draft",
+      "latency_ms": 1261.627,
+      "result": {
+        "status": "answered",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "orchidrelay",
+        "version": "0.28.1",
+        "access_profile": "public",
+        "claims": [
+          {
+            "text": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote_id": "Q3",
+                "quote": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+                "chunk_id": "72478eb2a57da76e35ffe024",
+                "version": "0.28.1",
+                "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+                "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts.",
+                "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+                "source_sha256": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+                "source_kind": "synthetic",
+                "access": "public",
+                "upstream_commit": "0d3d62d53ddf82f9db4047b612f0e90f7cb10cdbda5b82f1fc046b5db139df70",
+                "start_line": 1,
+                "end_line": 5,
+                "citation_url": "/api/chunks/72478eb2a57da76e35ffe024?version=0.28.1",
+                "score": 10.068434184919859
+              }
+            ]
+          }
+        ],
+        "answer": "In the synthetic demo for HTTPX 0.28.1, the orchidrelay retry budget is 4 attempts. [E1](/api/chunks/72478eb2a57da76e35ffe024?version=0.28.1)",
+        "reason": "",
+        "evidence_ids": [
+          "E1"
+        ],
+        "model_called": true,
+        "model": "qwen3:1.7b",
+        "usage": {
+          "prompt_tokens": 531,
+          "output_tokens": 84,
+          "model_duration_ns": 1234219375,
+          "api_fee_usd": 0
+        },
+        "citation_identity_and_quotes_checked": true,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 1261.613
+      }
+    },
+    {
+      "case_id": "revoke_public_demo_access",
+      "latency_ms": 14.851,
+      "result": {
+        "operation": "sync_snapshot",
+        "version": "0.28.1",
+        "added": 0,
+        "updated": 1,
+        "deleted": 0,
+        "unchanged": 16,
+        "index": {
+          "schema_version": "2",
+          "sources": 34,
+          "chunks": 646,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "revoked_public_answer",
+      "latency_ms": 0.439,
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "orchidrelay",
+        "version": "0.28.1",
+        "access_profile": "public",
+        "claims": [],
+        "answer": null,
+        "reason": "no_matching_evidence",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.422
+      }
+    },
+    {
+      "case_id": "previously_known_id_denied",
+      "latency_ms": 6.247,
+      "result": {
+        "status": "not_found",
+        "equivalent_http_status": 404
+      }
+    },
+    {
+      "case_id": "delete_selected_snapshot",
+      "latency_ms": 5.09,
+      "result": {
+        "operation": "delete_snapshot",
+        "version": "0.28.1",
+        "added": 0,
+        "updated": 0,
+        "deleted": 17,
+        "unchanged": 0,
+        "index": {
+          "schema_version": "2",
+          "sources": 17,
+          "chunks": 323,
+          "versions": [
+            "0.27.2"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "remaining_version_still_available",
+      "latency_ms": 0.349,
+      "result": {
+        "access_profile": "support",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.27.2",
+        "question": "orchidrelay",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "7ea92265e087a7f5baf43640",
+            "version": "0.27.2",
+            "section": "SYNTHETIC DEMO: Orchidrelay support runbook",
+            "text": "# SYNTHETIC DEMO: Orchidrelay support runbook\n\nThis is fictional access-demo material, not official HTTPX guidance or a real organization policy.\n\nIn the synthetic demo for HTTPX 0.27.2, the orchidrelay retry budget is 2 attempts.",
+            "source_id": "synthetic:httpx:0.27.2:orchidrelay.md",
+            "source_sha256": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+            "source_kind": "synthetic",
+            "access": "support",
+            "upstream_commit": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+            "start_line": 1,
+            "end_line": 5,
+            "citation_url": "/api/chunks/7ea92265e087a7f5baf43640?version=0.27.2",
+            "score": 9.741576992103155
+          }
+        ]
+      }
+    }
+  ],
+  "implementation_sha256": {
+    "src/versionlens/__init__.py": "520382b9792c29197fd3272f39622a48f55fa84d18fec1a4ea91e30be52b0b21",
+    "src/versionlens/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/versionlens/answering.py": "2f92e235eb6a37830fe0ecb126105758dc7fc52c19476ff8b086ecc6d3a07084",
+    "src/versionlens/api.py": "5d3296587487539beaeb9761abc9639c59a650ef98ab6be541322a3a5d12fe31",
+    "src/versionlens/cli.py": "daaebf967dba028d6ff99979f94db0bf5bcc1726099086c7300db21bb3e24272",
+    "src/versionlens/config.py": "74afec06b376b8a04018ad60283c719aaecf2f5cc603e8a034a2bc12ecf2f669",
+    "src/versionlens/embeddings.py": "f8f0d6f7a953b988d0262114c79927e0285d2afd7f9c5a3453fc3ab9b5784870",
+    "src/versionlens/evaluation.py": "7bc209c7f355b2bc738175800c0dfe57c138ffa0a02c9108f920fadeaed371ca",
+    "src/versionlens/hybrid.py": "da9b0c175bfd48f8fba1a6a1d76e8180ceebb91215971705e521b7aca9e902b6",
+    "src/versionlens/ingest.py": "167c45df50a20d89574d6a014d80ea58438a9f45323070c6548ea0b4a727586e",
+    "src/versionlens/local_model.py": "a44551070df5a95f9f67894c1ff41a2417fa95c54701a23add270cb709623bf1",
+    "src/versionlens/models.py": "a4c804b5991b887bd50cc28c03d7466f43c49d624be3410cf1312ac5d30273b1",
+    "src/versionlens/retrieval.py": "7d3d773bfcd29d0128c7fc83241189a33d4483cbfbea5647c4beb3cac2c9cb3d",
+    "src/versionlens/search_service.py": "860cf03e487e08b883016fabd0632dde070a43d8d9f61dafb1a0c1c54ceb973f",
+    "src/versionlens/server.py": "eeb28b346c4e1913d0ec95f927d5f39a626a69b312641711a3295b05a1b6070f",
+    "src/versionlens/store.py": "d3abc9993aee57517200cf67f1287a0590a439ee1025e715396c3ec0f67dcae8",
+    "src/versionlens/updates.py": "f89621d14b3e0dc96ad79cebeca31f11d67b16cf5667d672800646aeaa9b904d",
+    "src/versionlens/vector_store.py": "1ac04c3c10ec062eb3bc3d487c0679c3ba8453c21e878f4aaca86fe4faacf940"
+  },
+  "script_sha256": "877bdf731a6e49379113d44d0e3894d5161a648a26ce20e8b04fb87469998bad",
+  "limitations": [
+    "Profiles simulate permissions; this is not production authentication.",
+    "Synthetic facts are fictional, not HTTPX guidance.",
+    "Generated outcomes are retained as observed; no answer-accuracy or entailment score is inferred.",
+    "Fixed-order repeated development probes include model loading and swapping."
+  ]
+}

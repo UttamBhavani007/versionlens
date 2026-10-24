@@ -1,6 +1,6 @@
 # Architecture and boundaries
 
-## Implemented through day 4
+## Implemented through day 5
 
 ```mermaid
 flowchart LR
@@ -8,7 +8,8 @@ flowchart LR
     B --> C[Markdown chunks with line references]
     C --> D[Local SQLite index]
     L[Local browser or CLI] --> E[Question and exact version]
-    E --> F[Keyword, cosine or RRF hybrid]
+    E --> P[Exact version and trusted demo access profile]
+    P --> F[Keyword, cosine or RRF hybrid]
     D --> F
     D --> H[Local Nomic embeddings]
     H --> I[Digest-bound SQLite vector sidecar]
@@ -22,8 +23,9 @@ flowchart LR
 
 The application uses Python's standard library, SQLite and project-local Ollama.
 A loopback-only API and bundled browser workspace expose the same validated
-application operations. Incremental document updates and synthetic
-access-controlled documents remain planned. Reranking is deferred because the first development comparison does
+application operations. Transactional per-snapshot updates and clearly labelled
+synthetic access-demo documents are implemented. Reranking is deferred because
+the first development comparison does
 not justify additional complexity.
 
 The vector sidecar records the complete corpus fingerprint, embedding model
@@ -77,15 +79,24 @@ user navigation to the pinned upstream GitHub document.
 
 ## Evidence and access
 
-Each chunk carries a source ID, snapshot version, upstream commit, source
-checksum, section, line range, and immutable source URL. Source identity and
-permissions are server-controlled metadata, never instructions taken from
-document text. Day 1 accepts only public HTTPX documentation; no private corpus
-or authorization claims exist yet.
+Each chunk carries source identity, snapshot version, checksum, line span and
+provenance kind. Upstream sources retain immutable HTTPX Git references.
+Synthetic sources use distinct IDs and digest revisions with access-checked
+local citations; they cannot impersonate upstream GitHub documentation.
 
-Later synthetic internal documents must be prominently labelled. Permissions
-must constrain candidates before ranking and before any model context is built.
-Role switching in an interview demo is not production authentication.
+Validated policy is stored consistently in source metadata and SQL columns.
+A trusted startup profile constrains keyword candidates before LIMIT, cosine
+candidates before scoring, both hybrid pools, catalog counts and source lookup.
+Model context independently rejects inaccessible evidence. Selected evidence is
+rechecked before and after generation; a concurrent change suppresses output.
+This is a synthetic local permission simulation, not production authentication.
+
+`sync` reconciles one nonempty complete desired snapshot and retains unchanged
+rows. Explicit deletion can remove a whole snapshot. Both preserve other
+versions and roll back failed writes, including FTS changes. Schema-1 migration
+occurs only during explicit full ingestion. All source/policy changes invalidate
+the vector sidecar; incremental embedding reuse is not implemented.
+See [update and access contracts](PERMISSIONS_AND_UPDATES.md).
 
 ## Evaluation boundaries
 

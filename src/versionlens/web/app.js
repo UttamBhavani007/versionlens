@@ -11,6 +11,7 @@
     catalogError: byId("catalog-error"), catalogMessage: byId("catalog-error-message"),
     retry: byId("retry-catalog"), dialog: byId("source-dialog"), sourceTitle: byId("source-title"),
     sourceBody: byId("source-body"), closeSource: byId("close-source"),
+    accessProfile: byId("access-profile"),
   };
   const METHODS = { keyword: "Keyword", vector: "Vector · experimental", hybrid: "Hybrid · experimental" };
   const VERSIONS = new Set(["0.27.2", "0.28.1"]);
@@ -28,6 +29,7 @@
     conflicting_evidence: "The model reported unresolved conflicting evidence.",
     unrelated_evidence: "The model judged the retrieved excerpts unrelated to the question.",
     invalid_generation: "The model draft failed validation and was withheld.",
+    evidence_changed: "The source or its access changed during processing. Run a new request.",
     local_model_error: "The local model is unavailable or returned an unusable response. Check the local runtime and try again.",
   };
   const state = { catalog: null, busy: false, epoch: 0, controller: null, inspector: null, currentResult: null };
@@ -124,12 +126,21 @@
   }
 
   function sourcePath(hit) {
-    return hit.source_id.slice(`httpx:${hit.version}:`.length);
+    const prefix = hit.source_kind === "synthetic" ? `synthetic:httpx:${hit.version}:` : `httpx:${hit.version}:`;
+    return hit.source_id.slice(prefix.length);
   }
 
   function citationUrl(hit) {
     if (typeof hit.citation_url !== "string" || hit.citation_url.length > 2048) return null;
     try {
+      if (hit.source_kind === "synthetic") {
+        const expected = `/api/chunks/${hit.chunk_id}?version=${hit.version}`;
+        const url = new URL(hit.citation_url, window.location.origin);
+        if (hit.citation_url !== expected || url.origin !== window.location.origin || url.hash ||
+            url.username || url.password || url.pathname + url.search !== expected) return null;
+        return url.href;
+      }
+      if (hit.source_kind !== "upstream") return null;
       const url = new URL(hit.citation_url);
       if (url.href !== hit.citation_url || url.protocol !== "https:" || url.hostname !== "github.com" ||
           url.port || url.username || url.password || url.search !== "?plain=1") return null;
@@ -145,11 +156,18 @@
   }
 
   function checkedHit(hit, version) {
-    if (!hit || typeof hit !== "object" || hit.version !== version ||
+    const synthetic = hit && hit.source_kind === "synthetic";
+    const knownAccess = hit && ["public", "support"].includes(hit.access);
+    const allowedAccess = knownAccess && (hit.access === "public" || state.catalog?.access_profile === "support");
+    const sourceIdentity = hit && typeof hit.source_id === "string" && (synthetic ?
+      new RegExp(`^synthetic:httpx:${version.replaceAll(".", "\\.")}:[a-z0-9][a-z0-9_-]{0,63}\\.md$`).test(hit.source_id) &&
+        /^[0-9a-f]{64}$/.test(hit.upstream_commit) && hit.upstream_commit === hit.source_sha256 :
+      hit.source_kind === "upstream" && hit.access === "public" && /^[0-9a-f]{40}$/.test(hit.upstream_commit) &&
+        hit.source_id.startsWith(`httpx:${version}:`));
+    if (!hit || typeof hit !== "object" || hit.version !== version || !allowedAccess || !sourceIdentity ||
         !/^[0-9a-f]{24}$/.test(hit.chunk_id) || !/^[0-9a-f]{64}$/.test(hit.source_sha256) ||
-        !/^[0-9a-f]{40}$/.test(hit.upstream_commit) || typeof hit.source_id !== "string" ||
-        !hit.source_id.startsWith(`httpx:${version}:`) || typeof hit.section !== "string" ||
-        !hit.section.trim() || hit.section.length > 5000 || typeof hit.text !== "string" || hit.text.length > 2000000 ||
+        typeof hit.section !== "string" || !hit.section.trim() || hit.section.length > 5000 ||
+        typeof hit.text !== "string" || hit.text.length > 2000000 ||
         !Number.isSafeInteger(hit.start_line) || !Number.isSafeInteger(hit.end_line) ||
         hit.start_line < 1 || hit.end_line < hit.start_line || !citationUrl(hit)) {
       throw new Error("The service returned inconsistent source metadata. Run a new search.");
@@ -158,6 +176,9 @@
   }
 
   function sourceLink(hit, label = "Open source ↗", className = "source-link") {
+    if (hit.source_kind === "synthetic") {
+      label = label === "Open source ↗" ? "Open demo source ↗" : `${label} · synthetic demo`;
+    }
     const link = node("a", className, label);
     link.href = citationUrl(hit);
     link.target = "_blank";
@@ -166,15 +187,23 @@
     return link;
   }
 
+  function sourceNotice(hit) {
+    return node("p", hit.source_kind === "synthetic" ? "source-kind synthetic-notice" : "source-kind",
+      hit.source_kind === "synthetic" ? `SYNTHETIC DEMO · ${hit.access === "support" ? "Support" : "Public"} access · not official HTTPX guidance` : "Official HTTPX source · public access");
+  }
+
   function provenance(hit) {
     const list = node("dl", "provenance");
+    const synthetic = hit.source_kind === "synthetic";
     const fields = [
+      ["Origin", synthetic ? "Synthetic demo document" : "Upstream HTTPX document"],
+      ["Access", hit.access === "support" ? "Support demo profile" : "Public"],
       ["Version", `HTTPX ${hit.version}`], ["Source", sourcePath(hit)],
-      ["Lines", `${hit.start_line}–${hit.end_line}`], ["Commit", hit.upstream_commit],
+      ["Lines", `${hit.start_line}–${hit.end_line}`], [synthetic ? "Revision SHA" : "Commit", hit.upstream_commit],
       ["SHA-256", hit.source_sha256], ["Chunk ID", hit.chunk_id],
     ];
     for (const [label, value] of fields) {
-      const detail = node("dd", label === "Commit" || label === "SHA-256" || label === "Chunk ID" ? "mono" : "", value);
+      const detail = node("dd", ["Commit", "Revision SHA", "SHA-256", "Chunk ID"].includes(label) ? "mono" : "", value);
       list.append(node("dt", "", label), detail);
     }
     return list;
@@ -191,7 +220,7 @@
     inspect.type = "button";
     inspect.addEventListener("click", () => inspectSource(hit, selection, ticket));
     details.append(node("summary", "", "Read excerpt & provenance"), node("pre", "source-text", hit.text), provenance(hit), inspect);
-    card.append(top, node("h3", "", hit.section), node("p", "source-lines", `${sourcePath(hit)} · lines ${hit.start_line}–${hit.end_line}`),
+    card.append(top, sourceNotice(hit), node("h3", "", hit.section), node("p", "source-lines", `${sourcePath(hit)} · lines ${hit.start_line}–${hit.end_line}`),
       node("p", "excerpt-preview", hit.text), details);
     return card;
   }
@@ -366,11 +395,12 @@
       const response = await fetch(url.pathname + url.search, { credentials: "same-origin", cache: "no-store", headers: { "Accept": "application/json" }, signal: controller.signal });
       const chunk = checkedHit(await jsonResponse(response), selection.version);
       if (!isCurrent(selection, ticket) || !ui.dialog.open || state.inspector !== controller) return;
-      if (chunk.chunk_id !== hit.chunk_id || chunk.source_sha256 !== hit.source_sha256 || chunk.upstream_commit !== hit.upstream_commit || chunk.text !== hit.text) {
+      if (chunk.chunk_id !== hit.chunk_id || chunk.source_sha256 !== hit.source_sha256 || chunk.upstream_commit !== hit.upstream_commit ||
+          chunk.source_kind !== hit.source_kind || chunk.access !== hit.access || chunk.source_id !== hit.source_id || chunk.text !== hit.text) {
         throw new Error("The source changed after this result. Close the inspector and find evidence again.");
       }
       ui.sourceTitle.textContent = sourcePath(chunk);
-      ui.sourceBody.replaceChildren(node("span", "version-badge", `HTTPX ${chunk.version}`),
+      ui.sourceBody.replaceChildren(node("span", "version-badge", `HTTPX ${chunk.version}`), sourceNotice(chunk),
         node("pre", "source-text", chunk.text), provenance(chunk), sourceLink(chunk, "Open original source ↗"));
     } catch (error) {
       if (!isCurrent(selection, ticket) || !ui.dialog.open || state.inspector !== controller) return;
@@ -391,10 +421,12 @@
       if (catalog.product !== "httpx" || !Array.isArray(catalog.versions) || !catalog.versions.length ||
           !catalog.versions.every((version) => VERSIONS.has(version)) || !Array.isArray(catalog.retrievers) ||
           !catalog.retrievers.length || !catalog.retrievers.every((method) => Object.hasOwn(METHODS, method)) ||
-          catalog.default_retriever !== "keyword" || !catalog.retrievers.includes("keyword")) {
+          catalog.default_retriever !== "keyword" || !catalog.retrievers.includes("keyword") ||
+          !["public", "support"].includes(catalog.access_profile) || catalog.permission_demo !== true) {
         throw new Error("The local service returned an unsupported documentation catalog.");
       }
       state.catalog = catalog;
+      ui.accessProfile.textContent = `${catalog.access_profile === "support" ? "Support" : "Public"} demo access`;
       ui.version.replaceChildren(...catalog.versions.map((version) => {
         const option = node("option", "", `HTTPX ${version}`);
         option.value = version;
@@ -420,6 +452,7 @@
         error instanceof TypeError ? "Could not reach the local service. Check that the workspace is running." : error.message;
       ui.catalogError.hidden = false;
       ui.corpus.textContent = "Local documentation unavailable";
+      ui.accessProfile.textContent = "Demo access unavailable";
       status("Could not load the local workspace. Try connecting again.", "error");
       updateButtons();
     } finally {

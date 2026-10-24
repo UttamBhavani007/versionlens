@@ -4,14 +4,15 @@ A local, version-aware technical support service for **HTTPX**. The goal is to
 answer upgrade and troubleshooting questions from the documentation that matches
 the requested version, with inspectable evidence and explicit abstention.
 
-**Status: day 4 complete, local API and browser workspace.** Pinned ingestion,
+**Status: day 5 complete, snapshot updates and synthetic access demonstration.** Pinned ingestion,
 version-filtered keyword/vector/hybrid retrieval, cloud-disabled local models,
 cited drafts, abstention and version-scoped source inspection are implemented.
-Keyword remains the default. Incremental updates, synthetic permission filtering
-and human-reviewed held-out evaluation remain future milestones.
+Keyword remains the default. Transactional snapshot updates and deletion,
+labelled synthetic documents and server-selected demo access profiles are
+implemented. Human-reviewed held-out evaluation remains a future milestone.
 See [the delivery plan](docs/DELIVERY_PLAN.md).
 
-![VersionLens running locally with actual HTTPX evidence](docs/screenshots/day4-desktop-evidence.png)
+![VersionLens running locally with actual HTTPX evidence](docs/screenshots/day5-core-desktop-evidence.png)
 
 ## Run the local interface
 
@@ -28,14 +29,30 @@ for draft answers; build the vector cache for experimental vector/hybrid search.
 The interface provides exact snapshot selection, immutable source links,
 original excerpts, provenance and explicit draft/abstention states.
 
-**Verified on 24 October:** [176 software tests](reports/day4-software-checks.json),
-[13 browser checks](reports/day4-browser-check.json) and
-[13 real API probes](reports/day4-http-smoke.json). The timeout probe produced a
-cited draft; the upgrade probe still abstained with `invalid_generation`.
+**Verified on 24 October:** [227 software tests](reports/day5-software-checks.json),
+[8 live permission browser checks](reports/day5-access-browser.json),
+[23 labelled browser-fixture checks](reports/day5-permission-fixtures.json),
+[13 browser regression checks](reports/day5-browser-regression.json) and
+[13 public API probes](reports/day5-http-smoke.json). The timeout probe produced
+a cited draft; the upgrade probe still abstained with `invalid_generation`.
 These development checks do not establish answer accuracy or citation entailment.
 See [API and browser setup](docs/API.md), [actual screenshots](docs/SCREENSHOTS.md)
 and [architecture](docs/ARCHITECTURE.md). This is a local workstation demo;
 public hosting and production authentication are not provided.
+
+## Updates and permission demonstration
+
+Opt in to two clearly labelled fictional runbooks with `ingest --include-synthetic`.
+The trusted local operator selects `serve --demo-profile public` or `support`;
+requests cannot grant themselves access. Filtering applies to all retrievers,
+source inspection and model context. These profiles simulate permissions and
+are not production authentication.
+
+The [29-step local change demo](reports/day5-change-demo.json) showed version-specific
+fictional budgets of 2 and 3 attempts, then 4 after a source update. Granting and
+revoking public access changed evidence and draft availability. The run retained
+four actual cited drafts and rejected obsolete source IDs and stale vector data.
+See [commands, boundaries and reproduction](docs/PERMISSIONS_AND_UPDATES.md).
 
 ## Zero paid services
 

@@ -18,8 +18,10 @@ verification. If a milestone needs longer, record that honestly and continue.
 ## Actual progress
 
 Day 4 started on 23 October and finished on 24 October after an interruption.
-The remaining commits use their actual 24 October dates. Day 5 was not started
-on that date; the table above retains the original targets. The authorized
+The remaining commits use their actual 24 October dates. The owner later
+explicitly requested the originally planned day-5 task on 24 October. It was completed on that date, with three additional meaningful
+commits; the instruction to defer day 5 was superseded by that direct request.
+The table above retains the original targets. The authorized
 schedule still ends on 26 October, with no unapproved deadline extension.
 
 ## Human input and external requirements

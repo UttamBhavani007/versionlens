@@ -33,14 +33,15 @@ index built with `embed`. Startup does not download models or rebuild indexes.
 | `GET /` | Browser workspace |
 | `GET /style.css`, `GET /app.js` | Bundled assets only |
 | `HEAD /`, `HEAD /style.css`, `HEAD /app.js` | Asset headers without a body |
-| `GET /api/catalog` | Indexed snapshots, available methods, default keyword method and source/chunk counts |
+| `GET /api/catalog` | Indexed snapshots, available methods, default keyword method, configured access profile and accessible source/chunk counts |
 | `POST /api/search` | Ranked version-scoped evidence; `answer` is null |
 | `POST /api/ask` | Cited local draft, explicit abstention or operational error |
 | `GET /api/chunks/{chunk_id}?version={version}` | Indexed source text, immutable reference, line span and provenance |
 
 No route accepts a filesystem path or changes corpus/index contents. A chunk
 ID is 24 lowercase hexadecimal characters and is resolved inside the selected
-snapshot; an ID from another snapshot is not a cross-version lookup.
+snapshot; an ID from another snapshot is not a cross-version lookup. Inaccessible IDs
+return the same 404 envelope as absent IDs.
 
 Search and answer requests use `Content-Type: application/json`:
 
@@ -61,7 +62,7 @@ Unicode and at most 2000 characters. Pasted LF, CR and tab whitespace is
 accepted; other controls and surrogates are rejected. Unexpected fields fail.
 
 Search hits contain `chunk_id`, `version`, `section`, `text`, `source_id`,
-`source_sha256`, `upstream_commit`, `start_line`, `end_line`, `citation_url` and
+`source_sha256`, `source_kind`, `access`, `upstream_commit`, `start_line`, `end_line`, `citation_url` and
 `score`. Scores describe ranking, not answer confidence. Source inspection
 adds the title, product and upstream path and omits score.
 
@@ -70,8 +71,17 @@ Answer responses preserve the [answer policy](ANSWER_POLICY.md), including
 and the draft notice. The browser renders claim text and source quotes as text,
 not Markdown/HTML. Citation links are constructed from server-owned metadata
 and checked again against the exact GitHub repository, commit, path and lines.
+Synthetic sources have a separate validated identity: their legacy
+`upstream_commit` field holds the 64-character content revision, labelled
+Revision SHA in the UI, and their citation is the protected local chunk route.
+Catalog returns `access_profile` and `permission_demo: true`. Profile selection
+is trusted server configuration (`serve --demo-profile public|support`); role,
+access and profile fields in request JSON are rejected. Source counts and
+versions reflect that profile. See [the demo boundary](PERMISSIONS_AND_UPDATES.md).
 Experimental vector/hybrid answer modes retain the conservative lexical
-prerequisite; a missing keyword match avoids both embedding and generation.
+prerequisite on accessible documents; a missing keyword match avoids both
+embedding and generation. Changed selected evidence or access detected during
+inference suppresses the draft with reason `evidence_changed`.
 
 ## Errors and transport boundaries
 
@@ -126,7 +136,9 @@ npm run check:web
 Run the local server first. `VERSIONLENS_WEB_URL` can select another literal
 loopback port. `VERSIONLENS_BROWSER_EXECUTABLE` selects an already installed
 Chromium browser. `VERSIONLENS_BROWSER_REPORT` selects the JSON report path;
-the default is ignored `reports/local/day4-browser.json`. Set
+the default is ignored `reports/local/day4-browser.json`.
+`VERSIONLENS_SCREENSHOT_PREFIX` selects new capture filenames when preserving
+earlier observations. Set
 `VERSIONLENS_CHECK_GENERATION=1` to include a real local cited-draft check;
 this requires the separate local model server. The default checks need no model.
 

@@ -247,3 +247,76 @@ Next unfinished milestone: incremental snapshots/deletion and prominently
 labelled synthetic permission filtering, with a version/permission change demo.
 The daily schedule remains local, with the existing 26 October cutoff; later
 work is not silently scheduled beyond the approved window.
+
+
+## 2026-10-24 — day 5, explicitly resumed by the owner
+
+The owner requested today's originally planned work after the overnight day-4
+completion. This new instruction resumed day 5 on 24 October; it supersedes the
+earlier instruction to defer that milestone. All three milestone commits use
+the actual date. No future evaluation or final-delivery milestone was started.
+An approval-review usage limit interrupted final verification; work resumed
+when review became available. Earlier saved observations were preserved.
+
+### Implemented and verified
+
+- Added schema-2 access/provenance metadata and transactional explicit migration
+  from schema 1 during ingestion. Unknown schemas are rejected and preserved.
+- Added validated per-snapshot synchronization: add/change/remove desired
+  sources, retain unchanged rows, preserve other versions and roll back SQL/FTS
+  failures. Whole-snapshot deletion is explicit and supports the final snapshot.
+- Added two opt-in MIT-licensed synthetic runbooks with prominent fictional
+  labels, independent checksums and protected local source citations. Original
+  pinned HTTPX files remain unchanged. Opt-in totals: 34 sources/646 chunks;
+  the public profile sees only its accessible 32 sources/644 chunks.
+- Added trusted `public`/`support` demo profiles to CLI/server configuration.
+  Browser JSON cannot grant roles or override source ACLs. Keyword, vector,
+  hybrid pools, source inspection, catalog and model context enforce the same
+  profile. Selected evidence changed during inference suppresses the draft.
+- Updated the UI with visible demo-only profile/provenance labels and strict
+  synthetic revision/link validation. This is not production authentication.
+- [227 software tests passed](../reports/day5-software-checks.json), including
+  28 permission, 15 snapshot update and eight synthetic-ingestion/CLI tests.
+  Tests cover restricted top candidates before LIMIT, unknown policies, source
+  ID probing, metadata-only policy changes, actual schema-1 migration, SQL/FTS
+  rollback, stale vectors and content/access deletion during generation.
+- [Eight real access browser checks](../reports/day5-access-browser.json),
+  [23 explicitly mocked UI fixture checks](../reports/day5-permission-fixtures.json),
+  [13 browser regression checks](../reports/day5-browser-regression.json) and
+  [13 public API probes](../reports/day5-http-smoke.json) passed. Actual screenshots
+  include source inspection, public abstention, a synthetic draft and mobile UI.
+  No external application requests or browser script errors were observed.
+
+### Observed changes and limitations
+
+The [29-step isolated change run](../reports/day5-change-demo.json) used real
+local embeddings and generation. Support drafts cited the fictional budget of
+2 attempts for 0.27.2 and 3 for 0.28.1, then 4 after revising the newer document.
+Granting public access produced another cited draft of 4. Revoking access
+restored abstention without generation and denied a previously known source ID.
+The changed document's obsolete source ID was absent; its vector cache was
+rejected as stale. Deleting only the newer snapshot preserved the older one.
+The demonstration changed scratch copies, not checked-in source documents.
+
+These are repeated synthetic development observations, not human review or a
+held-out answer-quality benchmark. `semantic_support_verified` remains false.
+The real HTTPX upgrade probe still abstains with `invalid_generation`; the
+remaining release-reasoning limitation is not considered solved. Keyword
+remains default and no reranker was added. No new model, paid service or cloud
+execution was used; local model/API fees were zero. Both local interfaces and
+the foreground model server were stopped after verification; weights and
+indexes remain local ignored artifacts.
+
+Raw source SHA verification belongs to the manifest loader; normalized chunks
+cannot reconstruct original raw newline bytes. Permission revocation does not
+erase previously viewed content or cancel an authorized in-flight model call.
+FTS5 ranking statistics are collection-wide; no score/timing isolation or
+production multi-user security is claimed. Vector rebuilds still embed the full
+corpus and are explicit after content or ACL changes.
+
+### Next milestone
+
+Day 6 on 25 October: draft evaluation candidates and review workflow, evaluation
+runner and citation audit. Candidate labels remain drafts until human review;
+a frozen holdout must remain separate from tuning. Day 7 and the approved local
+schedule still end on 26 October. No further day-5 work is needed after delivery.

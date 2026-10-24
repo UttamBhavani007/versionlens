@@ -54,3 +54,27 @@ that browser checks have already passed.
 Small muted text and placeholder foregrounds use `#677262`. A limited computed
 contrast check against their solid backgrounds exceeds 4.5:1; this does not
 constitute a complete WCAG or assistive-technology audit.
+
+
+## Synthetic provenance and permission demo
+
+The catalog provides a server-selected `public` or `support` demo profile. A
+visible notice names the profile and explains that this demonstrates access
+rules without signing in real users. There is no browser role selector or
+role field in query payloads; the local operator selects the server profile.
+
+Every hit must declare a known source kind and access level. The UI rejects
+support-only evidence under a public catalog, unknown access levels, and
+unknown provenance kinds. Official HTTPX sources retain strict immutable
+GitHub link validation. Synthetic documents use a separate source-ID prefix,
+SHA-256 revision and an exact same-origin protected chunk route. No synthetic
+document is given an HTTPX Git commit or upstream source link.
+
+Synthetic evidence has a prominent `SYNTHETIC DEMO` notice on cards and in the
+source inspector, identifies its access level, and says it is not official
+HTTPX guidance. Synthetic citation links also name the demo origin. The
+inspector verifies source kind, access and source identity against the displayed
+result before showing the fetched excerpt. Dynamic labels remain plain text.
+These browser checks are an additional consistency guard; backend filtering
+and source-route access checks are authoritative. Previously viewed material
+cannot be erased from a user's memory by changing a demo profile.

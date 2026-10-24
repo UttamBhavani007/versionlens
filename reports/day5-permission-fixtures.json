@@ -1,0 +1,16 @@
+{
+  "kind": "isolated_browser_fixtures",
+  "recorded_at_utc": "2026-10-24T17:55:36.639Z",
+  "browser": "155.0.8059.40",
+  "passed": 23,
+  "failed": 0,
+  "page_errors": [],
+  "screenshots": false,
+  "implementation_sha256": {
+    "src/versionlens/web/app.js": "efe920f95c0ee4aab14cf01c258e154de6f73cd17c3cb3e87b324dae50494efb",
+    "src/versionlens/web/index.html": "69465bcf08a899ab87685ca0beba5b9ea3f61f79e0fa4a729c7b3131bfa8b357",
+    "src/versionlens/web/style.css": "f89c41e8f9507e6ce64ddc3ac2e07351a0380cb338d1d866799af4543444f859",
+    "scripts/check_permission_fixtures.cjs": "a42b5f7ee4c20b843af714b624e14f8ddbdcfc31676053f99abb73c069ce50e4"
+  },
+  "limitations": "Every API response is a browser fixture. This checks client consistency guards, not backend access or real model behavior."
+}

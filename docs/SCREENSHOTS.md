@@ -25,3 +25,24 @@ retains this result.
 ## Mobile evidence
 
 ![Actual evidence panel at a 360-pixel viewport](screenshots/day4-mobile-evidence.png)
+
+
+## Day 5: real synthetic access demonstration
+
+These additional 24 October captures use real responses from separate public
+and support demo-profile servers. No fixtures were used in their screenshots.
+The [live browser report](../reports/day5-access-browser.json) records all eight
+checks and the actual draft observation. Synthetic facts remain fictional.
+
+![Public-profile abstention](screenshots/day5-public-abstention.png)
+
+![Support-profile synthetic evidence](screenshots/day5-support-evidence.png)
+
+![Synthetic source inspector and digest revision](screenshots/day5-synthetic-inspector.png)
+
+![Real local synthetic draft](screenshots/day5-synthetic-draft.png)
+
+![Mobile synthetic evidence](screenshots/day5-mobile-synthetic.png)
+
+The separate [browser regression report](../reports/day5-browser-regression.json)
+records four additional `day5-core-*` captures. Original day-4 images are retained.

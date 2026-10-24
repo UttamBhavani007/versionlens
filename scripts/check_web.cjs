@@ -14,6 +14,8 @@ assert.equal(origin.hostname, "127.0.0.1");
 assert.equal(origin.username + origin.password + origin.search + origin.hash, "");
 const OUTPUT = path.resolve(ROOT, process.env.VERSIONLENS_BROWSER_REPORT || "reports/local/day4-browser.json");
 const IMAGES = path.join(ROOT, "docs/screenshots");
+const PREFIX = process.env.VERSIONLENS_SCREENSHOT_PREFIX || "day4";
+assert.match(PREFIX,/^[a-z0-9-]+$/);
 const checks = [];
 const externalRequests = [];
 const pageErrors = [];
@@ -59,7 +61,7 @@ async function main() {
       assert(evidence.hits.every(hit=>hit.version==="0.28.1"));
       const links=await page.locator(".evidence-card a").evaluateAll(items=>items.map(item=>({href:item.href,rel:item.rel})));
       assert(links.every(item=>item.href.startsWith("https://github.com/encode/httpx/blob/") && item.rel.includes("noopener")));
-      const filename="day4-desktop-evidence.png";
+      const filename=`${PREFIX}-desktop-evidence.png`;
       await page.screenshot({path:path.join(IMAGES,filename),fullPage:false});
       screenshots.push(filename);
     });
@@ -70,7 +72,7 @@ async function main() {
       await page.locator("#source-dialog .source-text").waitFor();
       assert.equal(await page.locator("#source-dialog .source-text").textContent(),evidence.hits[0].text);
       assert((await page.locator("#source-body").textContent()).includes(evidence.hits[0].source_sha256));
-      const filename="day4-source-inspector.png";
+      const filename=`${PREFIX}-source-inspector.png`;
       await page.screenshot({path:path.join(IMAGES,filename),fullPage:false});
       screenshots.push(filename);
       await page.keyboard.press("Escape");
@@ -109,7 +111,7 @@ async function main() {
         const quotes=await page.locator(".citation-quote").allTextContents();
         assert.deepEqual(quotes,result.claims.flatMap(claim=>claim.citations.map(citation=>citation.quote)));
         await page.locator("h1").click();
-        const filename="day4-cited-draft.png";
+        const filename=`${PREFIX}-cited-draft.png`;
         await page.screenshot({path:path.join(IMAGES,filename),fullPage:false});
         screenshots.push(filename);
       });
@@ -177,7 +179,7 @@ async function main() {
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
       await page.locator("h1").click();
       await page.locator(".results").evaluate(el=>el.scrollIntoView({block:"start"}));
-      const filename="day4-mobile-evidence.png";
+      const filename=`${PREFIX}-mobile-evidence.png`;
       await page.screenshot({path:path.join(IMAGES,filename),fullPage:false});
       screenshots.push(filename);
     });
