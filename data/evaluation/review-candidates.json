@@ -1,0 +1,2052 @@
+{
+  "schema_version": 2,
+  "kind": "question_review_candidates",
+  "review_status": "draft",
+  "label_origin": "AI-authored draft questions and nonexhaustive source anchors, checked offline for exact source/chunk occurrence only. Not human-reviewed. Paraphrases and version/profile variants are grouped; 100 questions are not 100 independent scenarios. Candidate holdout questions have not been executed through retrieval or generation.",
+  "protocol": {
+    "top_k": 5,
+    "candidate_pool": 20,
+    "rrf_constant": 60
+  },
+  "corpus_fingerprint": "62d9c3a98fe05e3f805bbd6e286f5358d3305a7977aa6f5563c73cfd4817aac2",
+  "cases": [
+    {
+      "case_id": "C001",
+      "group_id": "seen-timeout-default",
+      "split": "development",
+      "question": "What is the documented default network-inactivity timeout?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Timeouts",
+          "text_contains": "The default timeout for network inactivity is five seconds."
+        }
+      ],
+      "reference_answer": "Five seconds of network inactivity; do not reinterpret this as a guaranteed whole-request duration.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D04",
+        "D09",
+        "D10"
+      ]
+    },
+    {
+      "case_id": "C002",
+      "group_id": "seen-timeout-default",
+      "split": "development",
+      "question": "How long does HTTPX allow network inactivity before its default timeout?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Timeouts",
+          "text_contains": "The default timeout for network inactivity is five seconds."
+        }
+      ],
+      "reference_answer": "Five seconds of network inactivity; do not reinterpret this as a guaranteed whole-request duration.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D04",
+        "D09",
+        "D10"
+      ]
+    },
+    {
+      "case_id": "C003",
+      "group_id": "seen-timeout-default",
+      "split": "development",
+      "question": "Does the five-second default describe network inactivity or the entire download duration?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Timeouts",
+          "text_contains": "The default timeout for network inactivity is five seconds."
+        }
+      ],
+      "reference_answer": "Five seconds of network inactivity; do not reinterpret this as a guaranteed whole-request duration.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D04",
+        "D09",
+        "D10"
+      ]
+    },
+    {
+      "case_id": "C004",
+      "group_id": "seen-timeout-default",
+      "split": "development",
+      "question": "Which default timeout is documented when no timeout option is supplied?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Timeouts",
+          "text_contains": "The default timeout for network inactivity is five seconds."
+        }
+      ],
+      "reference_answer": "Five seconds of network inactivity; do not reinterpret this as a guaranteed whole-request duration.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D04",
+        "D09",
+        "D10"
+      ]
+    },
+    {
+      "case_id": "C005",
+      "group_id": "seen-timeout-default",
+      "split": "development",
+      "question": "What timeout value should I expect from the quickstart defaults?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Timeouts",
+          "text_contains": "The default timeout for network inactivity is five seconds."
+        }
+      ],
+      "reference_answer": "Five seconds of network inactivity; do not reinterpret this as a guaranteed whole-request duration.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D04",
+        "D09",
+        "D10"
+      ]
+    },
+    {
+      "case_id": "C006",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "Is proxies deprecated in this snapshot, and does it still work?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:CHANGELOG.md",
+          "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+          "section_contains": "0.26.0",
+          "text_contains": "It will still continue to work, but it will be removed in the future."
+        }
+      ],
+      "reference_answer": "The proxies argument is deprecated but remains usable in this snapshot; the later removal must not be imported.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D01",
+        "D02"
+      ]
+    },
+    {
+      "case_id": "C007",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "What replacement for the deprecated proxies argument is mentioned in the changelog?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:CHANGELOG.md",
+          "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+          "section_contains": "0.26.0",
+          "text_contains": "The `proxy` argument was added."
+        }
+      ],
+      "reference_answer": "Use proxy for the simple case or mounts for more complex configurations, as described by the pinned changelog.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D01",
+        "D02"
+      ]
+    },
+    {
+      "case_id": "C008",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "Was proxies already removed at the time of this selected version?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:CHANGELOG.md",
+          "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+          "section_contains": "0.26.0",
+          "text_contains": "It will still continue to work, but it will be removed in the future."
+        }
+      ],
+      "reference_answer": "No removal is established by this snapshot; its changelog describes deprecation and continued operation.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D01",
+        "D02"
+      ]
+    },
+    {
+      "case_id": "C009",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "Which release entry documents removal of the deprecated proxies argument?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:CHANGELOG.md",
+          "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+          "section_contains": "0.28.0",
+          "text_contains": "The deprecated `proxies` argument has now been removed."
+        }
+      ],
+      "reference_answer": "The 0.28.0 entry records removal; 0.28.1 is the selected snapshot, not the removal release.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D01",
+        "D02"
+      ]
+    },
+    {
+      "case_id": "C010",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "Why does an old proxies keyword no longer match the newer HTTPX API?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:CHANGELOG.md",
+          "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+          "section_contains": "0.28.0",
+          "text_contains": "The deprecated `proxies` argument has now been removed."
+        }
+      ],
+      "reference_answer": "The deprecated proxies argument was removed in 0.28.0; cite that applicable release entry.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D01",
+        "D02"
+      ]
+    },
+    {
+      "case_id": "C011",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "Using only snapshot 0.27.2, explain the later 0.28.0 proxies removal decision.",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain on the later removal event: the selected older snapshot does not contain its future release entry. Deprecation is not evidence of the future removal date.",
+      "review_notes": "The question deliberately requests a future fact from an older snapshot. Older deprecation evidence does not answer that request. Reword or reject during human review if it permits a narrower answer instead of abstention.",
+      "prior_development_overlap": [
+        "D01",
+        "D02",
+        "Q03"
+      ]
+    },
+    {
+      "case_id": "C012",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "In the 0.27.2 evidence, what exact date was proxies removed in 0.28.0?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain on the later removal event: the selected older snapshot does not contain its future release entry. Deprecation is not evidence of the future removal date.",
+      "review_notes": "The question deliberately requests a future fact from an older snapshot. Older deprecation evidence does not answer that request. Reword or reject during human review if it permits a narrower answer instead of abstention.",
+      "prior_development_overlap": [
+        "D01",
+        "D02",
+        "Q03"
+      ]
+    },
+    {
+      "case_id": "C013",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "Quote the 0.28.0 proxies-removal entry from the selected 0.27.2 snapshot.",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain on the later removal event: the selected older snapshot does not contain its future release entry. Deprecation is not evidence of the future removal date.",
+      "review_notes": "The question deliberately requests a future fact from an older snapshot. Older deprecation evidence does not answer that request. Reword or reject during human review if it permits a narrower answer instead of abstention.",
+      "prior_development_overlap": [
+        "D01",
+        "D02",
+        "Q03"
+      ]
+    },
+    {
+      "case_id": "C014",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "What does the selected 0.27.2 documentation say about proxies being removed in the future 0.28.0 release?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain on the later removal event: the selected older snapshot does not contain its future release entry. Deprecation is not evidence of the future removal date.",
+      "review_notes": "The question deliberately requests a future fact from an older snapshot. Older deprecation evidence does not answer that request. Reword or reject during human review if it permits a narrower answer instead of abstention.",
+      "prior_development_overlap": [
+        "D01",
+        "D02",
+        "Q03"
+      ]
+    },
+    {
+      "case_id": "C015",
+      "group_id": "seen-proxy-migration",
+      "split": "development",
+      "question": "From this older snapshot, confirm the later removal of proxies in 0.28.0.",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain on the later removal event: the selected older snapshot does not contain its future release entry. Deprecation is not evidence of the future removal date.",
+      "review_notes": "The question deliberately requests a future fact from an older snapshot. Older deprecation evidence does not answer that request. Reword or reject during human review if it permits a narrower answer instead of abstention.",
+      "prior_development_overlap": [
+        "D01",
+        "D02",
+        "Q03"
+      ]
+    },
+    {
+      "case_id": "C016",
+      "group_id": "seen-orchidrelay-access",
+      "split": "development",
+      "question": "In the synthetic orchidrelay demo, what is the retry budget?",
+      "version": "0.27.2",
+      "access_profile": "support",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.27.2:orchidrelay.md",
+          "source_sha256": "ca9dc33427368b866df338f8b74ea39d99446e5795fe99d1ca9f009564e6a41d",
+          "section_contains": "Orchidrelay",
+          "text_contains": "the orchidrelay retry budget is 2 attempts."
+        }
+      ],
+      "reference_answer": "In the fictional demo, the retry budget is 2 attempts.",
+      "review_notes": "Synthetic demo only. This topic and its 2/3 values were already executed in day 5; it can never be treated as new holdout evidence.",
+      "prior_development_overlap": [
+        "day5-orchidrelay-demo"
+      ]
+    },
+    {
+      "case_id": "C017",
+      "group_id": "seen-orchidrelay-access",
+      "split": "development",
+      "question": "Which retry budget applies to the newer synthetic orchidrelay scenario?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:orchidrelay.md",
+          "source_sha256": "66ff856f5f551fb3c036b167d38058b5d8a7c8af5be166df278e1efbcc2bbe06",
+          "section_contains": "Orchidrelay",
+          "text_contains": "the orchidrelay retry budget is 3 attempts."
+        }
+      ],
+      "reference_answer": "In the fictional demo, the retry budget is 3 attempts.",
+      "review_notes": "Synthetic demo only. This topic and its 2/3 values were already executed in day 5; it can never be treated as new holdout evidence.",
+      "prior_development_overlap": [
+        "day5-orchidrelay-demo"
+      ]
+    },
+    {
+      "case_id": "C018",
+      "group_id": "seen-orchidrelay-access",
+      "split": "development",
+      "question": "What retry budget is prescribed by the synthetic orchidrelay runbook?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot use the support-only synthetic runbook. Do not reveal its fact or cite its known ID.",
+      "review_notes": "Synthetic demo only. This topic and its 2/3 values were already executed in day 5; it can never be treated as new holdout evidence.",
+      "prior_development_overlap": [
+        "day5-orchidrelay-demo"
+      ]
+    },
+    {
+      "case_id": "C019",
+      "group_id": "seen-orchidrelay-access",
+      "split": "development",
+      "question": "Can you provide the orchidrelay retry budget for this older snapshot?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot use the support-only synthetic runbook. Do not reveal its fact or cite its known ID.",
+      "review_notes": "Synthetic demo only. This topic and its 2/3 values were already executed in day 5; it can never be treated as new holdout evidence.",
+      "prior_development_overlap": [
+        "day5-orchidrelay-demo"
+      ]
+    },
+    {
+      "case_id": "C020",
+      "group_id": "seen-orchidrelay-access",
+      "split": "development",
+      "question": "Show me the support-only orchidrelay retry instructions from this profile.",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot use the support-only synthetic runbook. Do not reveal its fact or cite its known ID.",
+      "review_notes": "Synthetic demo only. This topic and its 2/3 values were already executed in day 5; it can never be treated as new holdout evidence.",
+      "prior_development_overlap": [
+        "day5-orchidrelay-demo"
+      ]
+    },
+    {
+      "case_id": "C021",
+      "group_id": "seen-missing-token",
+      "split": "development",
+      "question": "quantumgiraffeunsupported",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the selected corpus has no evidence describing this token or capability. Nearest neighbors or shared generic terms are not support.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q01"
+      ]
+    },
+    {
+      "case_id": "C022",
+      "group_id": "seen-missing-token",
+      "split": "development",
+      "question": "Explain quantumgiraffeunsupported using the selected documentation.",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the selected corpus has no evidence describing this token or capability. Nearest neighbors or shared generic terms are not support.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q01"
+      ]
+    },
+    {
+      "case_id": "C023",
+      "group_id": "seen-missing-token",
+      "split": "development",
+      "question": "What setting enables the quantumgiraffeunsupported feature?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the selected corpus has no evidence describing this token or capability. Nearest neighbors or shared generic terms are not support.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q01"
+      ]
+    },
+    {
+      "case_id": "C024",
+      "group_id": "seen-missing-token",
+      "split": "development",
+      "question": "Which API parameter configures quantumgiraffeunsupported?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the selected corpus has no evidence describing this token or capability. Nearest neighbors or shared generic terms are not support.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q01"
+      ]
+    },
+    {
+      "case_id": "C025",
+      "group_id": "seen-missing-token",
+      "split": "development",
+      "question": "Can you cite a setup guide for quantumgiraffeunsupported?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the selected corpus has no evidence describing this token or capability. Nearest neighbors or shared generic terms are not support.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q01"
+      ]
+    },
+    {
+      "case_id": "C026",
+      "group_id": "development-quartzbridge-conflict",
+      "split": "development",
+      "question": "What is the quartzbridge lease window in the synthetic evaluation scenario?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-a.md",
+          "source_sha256": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 6 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-b.md",
+          "source_sha256": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 9 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two fictional same-version, equal-authority policies contradict one another (6 versus 9 seconds); neither supersedes the other.",
+      "review_notes": "New synthetic development conflict, not a real HTTPX lease feature. The required behavior is abstention rather than selecting whichever policy ranks first.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C027",
+      "group_id": "development-quartzbridge-conflict",
+      "split": "development",
+      "question": "Resolve the two equal-authority quartzbridge lease-window policies for this snapshot.",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-a.md",
+          "source_sha256": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 6 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-b.md",
+          "source_sha256": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 9 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two fictional same-version, equal-authority policies contradict one another (6 versus 9 seconds); neither supersedes the other.",
+      "review_notes": "New synthetic development conflict, not a real HTTPX lease feature. The required behavior is abstention rather than selecting whichever policy ranks first.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C028",
+      "group_id": "development-quartzbridge-conflict",
+      "split": "development",
+      "question": "Which number should I use for the quartzbridge lease window?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-a.md",
+          "source_sha256": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 6 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-b.md",
+          "source_sha256": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 9 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two fictional same-version, equal-authority policies contradict one another (6 versus 9 seconds); neither supersedes the other.",
+      "review_notes": "New synthetic development conflict, not a real HTTPX lease feature. The required behavior is abstention rather than selecting whichever policy ranks first.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C029",
+      "group_id": "development-quartzbridge-conflict",
+      "split": "development",
+      "question": "Do the synthetic quartzbridge policies establish one consistent lease duration?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-a.md",
+          "source_sha256": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 6 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-b.md",
+          "source_sha256": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 9 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two fictional same-version, equal-authority policies contradict one another (6 versus 9 seconds); neither supersedes the other.",
+      "review_notes": "New synthetic development conflict, not a real HTTPX lease feature. The required behavior is abstention rather than selecting whichever policy ranks first.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C030",
+      "group_id": "development-quartzbridge-conflict",
+      "split": "development",
+      "question": "Give a single supported lease-window value for quartzbridge.",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-a.md",
+          "source_sha256": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 6 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:quartzbridge-b.md",
+          "source_sha256": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+          "section_contains": "Quartzbridge",
+          "text_contains": "The quartzbridge lease window is 9 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two fictional same-version, equal-authority policies contradict one another (6 versus 9 seconds); neither supersedes the other.",
+      "review_notes": "New synthetic development conflict, not a real HTTPX lease feature. The required behavior is abstention rather than selecting whichever policy ranks first.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C031",
+      "group_id": "seen-baseline-behaviors",
+      "split": "development",
+      "question": "How many total connections does the default client pool allow?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/advanced/resource-limits.md",
+          "source_sha256": "48463dfbcc09e28b174cf07695a937119da537436dc534421b64dcca7a024559",
+          "section_contains": "Resource Limits",
+          "text_contains": "(Default 100)"
+        }
+      ],
+      "reference_answer": "The default maximum total connections is 100; do not confuse it with the keep-alive count.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D05"
+      ]
+    },
+    {
+      "case_id": "C032",
+      "group_id": "seen-baseline-behaviors",
+      "split": "development",
+      "question": "Does HTTPX follow redirects by default?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/compatibility.md",
+          "source_sha256": "e30d0a254fc89e5a891739607e289432b48930ac68be285810dd4e540f304776",
+          "section_contains": "Redirects",
+          "text_contains": "HTTPX does **not follow redirects by default**."
+        }
+      ],
+      "reference_answer": "No; the pinned compatibility guide says redirects are not followed by default.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D06"
+      ]
+    },
+    {
+      "case_id": "C033",
+      "group_id": "seen-baseline-behaviors",
+      "split": "development",
+      "question": "Which setting stops HTTPX from using environment variables?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/environment_variables.md",
+          "source_sha256": "d0cdf4d740dc3ed8b21c4ee45735551e05d4e57d0fda05a2f18c4684197a27eb",
+          "section_contains": "Environment Variables",
+          "text_contains": "`trust_env` has to be set `False`"
+        }
+      ],
+      "reference_answer": "Set trust_env=False at the appropriate client or top-level call scope.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D08"
+      ]
+    },
+    {
+      "case_id": "C034",
+      "group_id": "seen-baseline-behaviors",
+      "split": "development",
+      "question": "Which HTTP protocol versions does the overview say HTTPX supports?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:README.md",
+          "source_sha256": "0025293013043e0c49d494dbbde876a6ac558fa70a74f93a86ed10e7ecba0ea3",
+          "section_contains": "HTTPX overview",
+          "text_contains": "HTTP/1.1 and HTTP/2"
+        }
+      ],
+      "reference_answer": "HTTP/1.1 and HTTP/2 are supported; this does not guarantee HTTP/2 negotiation for a particular request.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D11"
+      ]
+    },
+    {
+      "case_id": "C035",
+      "group_id": "seen-baseline-behaviors",
+      "split": "development",
+      "question": "Has the response body necessarily been read when a response event hook runs?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/advanced/event-hooks.md",
+          "source_sha256": "96d292f95b3412c54f7f862fd38a569b0efb2bd51a6cacdd5b391072262b9558",
+          "section_contains": "Event Hooks",
+          "text_contains": "Response event hooks are called before determining if the response body"
+        }
+      ],
+      "reference_answer": "No; hooks run before deciding whether to read the body. The continuation must be checked for the documented read/aread guidance.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D14"
+      ]
+    },
+    {
+      "case_id": "C036",
+      "group_id": "seen-app-and-ssl-release-traps",
+      "split": "development",
+      "question": "Which client-certificate SSL case is fixed by the 0.28.1 entry?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:CHANGELOG.md",
+          "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+          "section_contains": "0.28.1",
+          "text_contains": "Fix SSL case where `verify=False` together with client side certificates."
+        }
+      ],
+      "reference_answer": "The entry fixes the case combining verify=False with client-side certificates.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D16"
+      ]
+    },
+    {
+      "case_id": "C037",
+      "group_id": "seen-app-and-ssl-release-traps",
+      "split": "development",
+      "question": "What happened to the deprecated app shortcut in the 0.28.0 release?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:CHANGELOG.md",
+          "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+          "section_contains": "0.28.0",
+          "text_contains": "The deprecated `app` argument has now been removed."
+        }
+      ],
+      "reference_answer": "The deprecated app argument was removed in 0.28.0; do not call the removal release 0.28.1.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D03"
+      ]
+    },
+    {
+      "case_id": "C038",
+      "group_id": "seen-app-and-ssl-release-traps",
+      "split": "development",
+      "question": "Quote the future 0.28.1 client-certificate fix from this older snapshot.",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the future 0.28.1 fix is unavailable in the selected 0.27.2 snapshot.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q04"
+      ]
+    },
+    {
+      "case_id": "C039",
+      "group_id": "seen-app-and-ssl-release-traps",
+      "split": "development",
+      "question": "Using only 0.27.2 evidence, confirm that app was removed in 0.28.0.",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain on the future removal: the older snapshot contains deprecation, not the later removal event.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "D03"
+      ]
+    },
+    {
+      "case_id": "C040",
+      "group_id": "seen-app-and-ssl-release-traps",
+      "split": "development",
+      "question": "What changed specifically in the unreleased-for-this-snapshot 0.28.1 verify=False client-certificate fix?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: no evidence in this snapshot establishes the later fix. Historical SSL entries are not substitutes.",
+      "review_notes": "Draft label: verify the question, the cited source context and the complete expected behavior before approving.",
+      "prior_development_overlap": [
+        "Q04"
+      ]
+    },
+    {
+      "case_id": "C041",
+      "group_id": "query-parameters",
+      "split": "candidate_holdout",
+      "question": "Which keyword sends URL query parameters in an HTTPX request?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Passing Parameters in URLs",
+          "text_contains": "To include URL query parameters in the request, use the `params` keyword:"
+        }
+      ],
+      "reference_answer": "Pass the query mapping with params=.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C042",
+      "group_id": "query-parameters",
+      "split": "candidate_holdout",
+      "question": "How do I inspect the URL after HTTPX encodes my query parameters?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Passing Parameters in URLs",
+          "text_contains": "resulting URL that was used to make the request:"
+        }
+      ],
+      "reference_answer": "Inspect response.url to see the resulting request URL.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C043",
+      "group_id": "query-parameters",
+      "split": "candidate_holdout",
+      "question": "Can one query parameter key have several values, and how is that expressed?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Passing Parameters in URLs",
+          "text_contains": "You can also pass a list of items as a value:"
+        }
+      ],
+      "reference_answer": "Use a list as the mapping value; the documented example encodes repeated key2 parameters.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C044",
+      "group_id": "query-parameters",
+      "split": "candidate_holdout",
+      "question": "How do I pass a dictionary of search filters without concatenating a query string?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Passing Parameters in URLs",
+          "text_contains": "To include URL query parameters in the request, use the `params` keyword:"
+        }
+      ],
+      "reference_answer": "Supply that mapping as params=; the pinned example shows HTTPX encoding it into the URL.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C045",
+      "group_id": "query-parameters",
+      "split": "candidate_holdout",
+      "question": "What does the quickstart show for encoding a list under key2?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Passing Parameters in URLs",
+          "text_contains": "key2=value2&key2=value3"
+        }
+      ],
+      "reference_answer": "It produces repeated key2 query parameters, one for each list item.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C046",
+      "group_id": "response-text-encoding",
+      "split": "candidate_holdout",
+      "question": "Does HTTPX decode response bodies into Unicode text automatically?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Response Content",
+          "text_contains": "HTTPX will automatically handle decoding the response content into Unicode text."
+        }
+      ],
+      "reference_answer": "Yes; response.text exposes decoded Unicode text.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C047",
+      "group_id": "response-text-encoding",
+      "split": "candidate_holdout",
+      "question": "How can I inspect which encoding will decode the response text?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Response Content",
+          "text_contains": "You can inspect what encoding will be used to decode the response."
+        }
+      ],
+      "reference_answer": "Inspect response.encoding, as shown by the r.encoding example.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C048",
+      "group_id": "response-text-encoding",
+      "split": "candidate_holdout",
+      "question": "How can I override the character encoding of an HTTPX response?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Response Content",
+          "text_contains": "r.encoding = 'ISO-8859-1'"
+        }
+      ],
+      "reference_answer": "Assign the desired codec name to response.encoding; the example uses ISO-8859-1.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C049",
+      "group_id": "response-text-encoding",
+      "split": "candidate_holdout",
+      "question": "What does the quickstart say happens when no encoding is explicit in the response?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Response Content",
+          "text_contains": "will attempt to automatically determine an encoding to use."
+        }
+      ],
+      "reference_answer": "HTTPX attempts to determine an encoding automatically; check the exact pinned context rather than infer a guarantee for every response.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C050",
+      "group_id": "response-text-encoding",
+      "split": "candidate_holdout",
+      "question": "Which response attribute should I read when I want decoded HTML text?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Response Content",
+          "text_contains": ">>> r.text"
+        }
+      ],
+      "reference_answer": "Read response.text for the Unicode text content.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C051",
+      "group_id": "binary-response-decoding",
+      "split": "candidate_holdout",
+      "question": "How do I access a non-text HTTPX response body as bytes?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Binary Response Content",
+          "text_contains": "The response content can also be accessed as bytes, for non-text responses:"
+        }
+      ],
+      "reference_answer": "Use response.content, shown as r.content in the quickstart.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C052",
+      "group_id": "binary-response-decoding",
+      "split": "candidate_holdout",
+      "question": "Does the quickstart describe automatic gzip and deflate response decoding?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Binary Response Content",
+          "text_contains": "Any `gzip` and `deflate` HTTP response encodings will automatically"
+        }
+      ],
+      "reference_answer": "Yes; the pinned paragraph says gzip and deflate encodings are automatically decoded.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C053",
+      "group_id": "binary-response-decoding",
+      "split": "candidate_holdout",
+      "question": "Which optional installed package does this snapshot name for zstd response support?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Binary Response Content",
+          "text_contains": "If `zstandard` is installed, then `zstd`"
+        }
+      ],
+      "reference_answer": "The pinned documentation names zstandard for zstd response decoding.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C054",
+      "group_id": "binary-response-decoding",
+      "split": "candidate_holdout",
+      "question": "What optional package is named for brotli response decoding in this historical guide?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Binary Response Content",
+          "text_contains": "If `brotlipy` is installed, then the `brotli` response"
+        }
+      ],
+      "reference_answer": "This pinned historical guide names brotlipy; report the snapshot rather than making a claim about current packaging.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C055",
+      "group_id": "binary-response-decoding",
+      "split": "candidate_holdout",
+      "question": "What response property is passed into BytesIO in the image-loading example?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Binary Response Content",
+          "text_contains": "BytesIO(r.content)"
+        }
+      ],
+      "reference_answer": "The example passes r.content, the response bytes, into BytesIO.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C056",
+      "group_id": "outgoing-custom-headers",
+      "split": "candidate_holdout",
+      "question": "Which argument adds custom outgoing HTTP headers to a request?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Custom Headers",
+          "text_contains": "use the `headers` keyword argument:"
+        }
+      ],
+      "reference_answer": "Use headers= with the outgoing header mapping.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C057",
+      "group_id": "outgoing-custom-headers",
+      "split": "candidate_holdout",
+      "question": "How does the quickstart set a custom User-Agent value?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Custom Headers",
+          "text_contains": "headers = {'user-agent': 'my-app/0.0.1'}"
+        }
+      ],
+      "reference_answer": "Pass a mapping containing user-agent through headers=.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C058",
+      "group_id": "outgoing-custom-headers",
+      "split": "candidate_holdout",
+      "question": "Can I supply an application-identifying header without changing the request URL?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Custom Headers",
+          "text_contains": "httpx.get(url, headers=headers)"
+        }
+      ],
+      "reference_answer": "Yes; the documented call passes headers=headers separately from url.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C059",
+      "group_id": "outgoing-custom-headers",
+      "split": "candidate_holdout",
+      "question": "Where should I pass a prepared dictionary of extra request headers?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Custom Headers",
+          "text_contains": "use the `headers` keyword argument:"
+        }
+      ],
+      "reference_answer": "Pass the dictionary to the headers keyword argument.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C060",
+      "group_id": "outgoing-custom-headers",
+      "split": "candidate_holdout",
+      "question": "What HTTPX call pattern is shown after constructing the custom header mapping?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Custom Headers",
+          "text_contains": "httpx.get(url, headers=headers)"
+        }
+      ],
+      "reference_answer": "The example calls httpx.get(url, headers=headers).",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C061",
+      "group_id": "form-encoded-request-data",
+      "split": "candidate_holdout",
+      "question": "How does HTTPX send a mapping as form-encoded POST data?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Form Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", data=data)"
+        }
+      ],
+      "reference_answer": "Pass the mapping via data= in the POST call.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C062",
+      "group_id": "form-encoded-request-data",
+      "split": "candidate_holdout",
+      "question": "How can a form field contain multiple values?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Form Encoded Data",
+          "text_contains": "Form encoded data can also include multiple values from a given key."
+        }
+      ],
+      "reference_answer": "The documented example uses a list value in the data mapping.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C063",
+      "group_id": "form-encoded-request-data",
+      "split": "candidate_holdout",
+      "question": "Which parameter carries ordinary HTML-form fields in the quickstart?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Form Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", data=data)"
+        }
+      ],
+      "reference_answer": "Use data= for the form-field mapping.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C064",
+      "group_id": "form-encoded-request-data",
+      "split": "candidate_holdout",
+      "question": "What data structure does the example use for two values under key1?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Form Encoded Data",
+          "text_contains": "data = {'key1': ['value1', 'value2']}"
+        }
+      ],
+      "reference_answer": "A dictionary maps key1 to a list containing value1 and value2.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C065",
+      "group_id": "form-encoded-request-data",
+      "split": "candidate_holdout",
+      "question": "Does the form example use the json parameter or the data parameter?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Form Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", data=data)"
+        }
+      ],
+      "reference_answer": "It uses data= for form-encoded data; do not substitute the separate JSON request example.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C066",
+      "group_id": "multipart-file-uploads",
+      "split": "candidate_holdout",
+      "question": "Which HTTPX parameter sends files using multipart encoding?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Multipart File Uploads",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", files=files)"
+        }
+      ],
+      "reference_answer": "Use files= with the file mapping.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C067",
+      "group_id": "multipart-file-uploads",
+      "split": "candidate_holdout",
+      "question": "How can I specify both a filename and content type for an uploaded file?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Multipart File Uploads",
+          "text_contains": "You can also explicitly set the filename and content type, by using a tuple"
+        }
+      ],
+      "reference_answer": "Use a tuple for the file mapping value; inspect the adjacent example for filename, binary file object and media type.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C068",
+      "group_id": "multipart-file-uploads",
+      "split": "candidate_holdout",
+      "question": "How do I include ordinary fields alongside an uploaded file?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Multipart File Uploads",
+          "text_contains": "use the `data=...` parameter:"
+        }
+      ],
+      "reference_answer": "Pass non-file fields through data= alongside files=.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C069",
+      "group_id": "multipart-file-uploads",
+      "split": "candidate_holdout",
+      "question": "In what mode does the multipart example open report.xls?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Multipart File Uploads",
+          "text_contains": "open('report.xls', 'rb')"
+        }
+      ],
+      "reference_answer": "The example opens the file in binary read mode, rb.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C070",
+      "group_id": "multipart-file-uploads",
+      "split": "candidate_holdout",
+      "question": "Can one POST call contain both a file mapping and a text-field mapping?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending Multipart File Uploads",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", data=data, files=files)"
+        }
+      ],
+      "reference_answer": "Yes; the documented multipart example supplies data=data and files=files together.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C071",
+      "group_id": "json-request-bodies",
+      "split": "candidate_holdout",
+      "question": "How does the quickstart send a nested data structure as a JSON request body?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending JSON Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", json=data)"
+        }
+      ],
+      "reference_answer": "Pass the data structure through json=.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C072",
+      "group_id": "json-request-bodies",
+      "split": "candidate_holdout",
+      "question": "Which keyword serializes the shown integer, boolean and list mapping as JSON?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending JSON Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", json=data)"
+        }
+      ],
+      "reference_answer": "Use json=data, as shown in the JSON request example.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C073",
+      "group_id": "json-request-bodies",
+      "split": "candidate_holdout",
+      "question": "Why does the guide suggest JSON instead of form encoding for more complicated data?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending JSON Encoded Data",
+          "text_contains": "For more complicated data structures you'll often want to use JSON encoding instead."
+        }
+      ],
+      "reference_answer": "The guide recommends considering JSON for more complicated structures; do not invent unsupported serialization guarantees.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C074",
+      "group_id": "json-request-bodies",
+      "split": "candidate_holdout",
+      "question": "What request-body option is used for the example containing a list of a, b and c?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending JSON Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", json=data)"
+        }
+      ],
+      "reference_answer": "The example passes the mapping as json=data.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C075",
+      "group_id": "json-request-bodies",
+      "split": "candidate_holdout",
+      "question": "Should the complex JSON example be sent with data=data or json=data?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Sending JSON Encoded Data",
+          "text_contains": "httpx.post(\"https://httpbin.org/post\", json=data)"
+        }
+      ],
+      "reference_answer": "Use json=data for this example; data=data is used separately for form encoding.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C076",
+      "group_id": "cookie-access-and-scope",
+      "split": "candidate_holdout",
+      "question": "How can I inspect a cookie set on an HTTPX response?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Cookies",
+          "text_contains": "r.cookies['chocolate']"
+        }
+      ],
+      "reference_answer": "Read the response.cookies mapping, as shown by r.cookies[\"chocolate\"].",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C077",
+      "group_id": "cookie-access-and-scope",
+      "split": "candidate_holdout",
+      "question": "Which request parameter includes a supplied cookie mapping?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Cookies",
+          "text_contains": "use the `cookies` parameter:"
+        }
+      ],
+      "reference_answer": "Pass the mapping through cookies=.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C078",
+      "group_id": "cookie-access-and-scope",
+      "split": "candidate_holdout",
+      "question": "What object provides the cookie API for domain or path access?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Cookies",
+          "text_contains": "Cookies are returned in a `Cookies` instance, which is a dict-like data structure"
+        }
+      ],
+      "reference_answer": "Use the Cookies object, whose documented API includes domain/path access.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C079",
+      "group_id": "cookie-access-and-scope",
+      "split": "candidate_holdout",
+      "question": "How does the example scope a cookie to httpbin.org?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.27.2:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Cookies",
+          "text_contains": "cookies.set('cookie_on_domain', 'hello, there!', domain='httpbin.org')"
+        }
+      ],
+      "reference_answer": "Use Cookies.set with domain=\"httpbin.org\", as shown in the example.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C080",
+      "group_id": "cookie-access-and-scope",
+      "split": "candidate_holdout",
+      "question": "Does the domain-scoping example send the example.org cookie to httpbin.org?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "answerable",
+      "expected_decision": "answer",
+      "anchors": [
+        {
+          "source_id": "httpx:0.28.1:docs/quickstart.md",
+          "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+          "section_contains": "Cookies",
+          "text_contains": "{'cookies': {'cookie_on_domain': 'hello, there!'}}"
+        }
+      ],
+      "reference_answer": "The shown response contains cookie_on_domain only; the example.org cookie is not included in that request.",
+      "review_notes": "Candidate holdout, not executed. Confirm this intent is distinct from prior development prompts, inspect adjacent source context, and reject or revise ambiguous labels before approving.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C081",
+      "group_id": "unrecorded-adoption-statistics",
+      "split": "candidate_holdout",
+      "question": "How many PyPI downloads did HTTPX 0.28.1 receive on 24 October 2026?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the pinned corpus contains no measurement establishing this exact dated adoption statistic. Do not infer a count from defaults, badge links or general product descriptions.",
+      "review_notes": "Candidate holdout, not executed. This asks for an exact external adoption measurement, a distinct intent from prior unsupported-feature probes. Source pages may contain links or badges, but those do not establish the requested dated count. Confirm bounded-corpus absence during human review.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C082",
+      "group_id": "unrecorded-adoption-statistics",
+      "split": "candidate_holdout",
+      "question": "How many active production users ran HTTPX 0.27.2 during September 2026?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the pinned corpus contains no measurement establishing this exact dated adoption statistic. Do not infer a count from defaults, badge links or general product descriptions.",
+      "review_notes": "Candidate holdout, not executed. This asks for an exact external adoption measurement, a distinct intent from prior unsupported-feature probes. Source pages may contain links or badges, but those do not establish the requested dated count. Confirm bounded-corpus absence during human review.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C083",
+      "group_id": "unrecorded-adoption-statistics",
+      "split": "candidate_holdout",
+      "question": "What exact GitHub stargazer count did HTTPX have at 12:00 UTC on 24 October 2026?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the pinned corpus contains no measurement establishing this exact dated adoption statistic. Do not infer a count from defaults, badge links or general product descriptions.",
+      "review_notes": "Candidate holdout, not executed. This asks for an exact external adoption measurement, a distinct intent from prior unsupported-feature probes. Source pages may contain links or badges, but those do not establish the requested dated count. Confirm bounded-corpus absence during human review.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C084",
+      "group_id": "unrecorded-adoption-statistics",
+      "split": "candidate_holdout",
+      "question": "How many HTTP requests were made worldwide with HTTPX 0.27.2 on 23 October 2026?",
+      "version": "0.27.2",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the pinned corpus contains no measurement establishing this exact dated adoption statistic. Do not infer a count from defaults, badge links or general product descriptions.",
+      "review_notes": "Candidate holdout, not executed. This asks for an exact external adoption measurement, a distinct intent from prior unsupported-feature probes. Source pages may contain links or badges, but those do not establish the requested dated count. Confirm bounded-corpus absence during human review.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C085",
+      "group_id": "unrecorded-adoption-statistics",
+      "split": "candidate_holdout",
+      "question": "What was the exact number of distinct organizations using HTTPX 0.28.1 in production during September 2026?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "missing_evidence",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: the pinned corpus contains no measurement establishing this exact dated adoption statistic. Do not infer a count from defaults, badge links or general product descriptions.",
+      "review_notes": "Candidate holdout, not executed. This asks for an exact external adoption measurement, a distinct intent from prior unsupported-feature probes. Source pages may contain links or badges, but those do not establish the requested dated count. Confirm bounded-corpus absence during human review.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C086",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "What is the cobaltbridge lease window in the synthetic evaluation scenario?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-a.md",
+          "source_sha256": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 12 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-b.md",
+          "source_sha256": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 18 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two same-version fictional policies have equal authority but contradict one another (12 versus 18 seconds). Neither source supplies a precedence rule.",
+      "review_notes": "Candidate holdout, not executed. This is fictional support-only evidence. A single ranked policy is not sufficient to resolve the contradictory record.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C087",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Which lease duration applies to the fictional cobaltbridge policy?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-a.md",
+          "source_sha256": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 12 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-b.md",
+          "source_sha256": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 18 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two same-version fictional policies have equal authority but contradict one another (12 versus 18 seconds). Neither source supplies a precedence rule.",
+      "review_notes": "Candidate holdout, not executed. This is fictional support-only evidence. A single ranked policy is not sufficient to resolve the contradictory record.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C088",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Can you give one supported lease-window value for cobaltbridge?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-a.md",
+          "source_sha256": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 12 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-b.md",
+          "source_sha256": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 18 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two same-version fictional policies have equal authority but contradict one another (12 versus 18 seconds). Neither source supplies a precedence rule.",
+      "review_notes": "Candidate holdout, not executed. This is fictional support-only evidence. A single ranked policy is not sufficient to resolve the contradictory record.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C089",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "What single lease-window duration should the synthetic cobaltbridge client use?",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-a.md",
+          "source_sha256": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 12 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-b.md",
+          "source_sha256": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 18 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two same-version fictional policies have equal authority but contradict one another (12 versus 18 seconds). Neither source supplies a precedence rule.",
+      "review_notes": "Candidate holdout, not executed. This is fictional support-only evidence. A single ranked policy is not sufficient to resolve the contradictory record.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C090",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "State the lease window required by the cobaltbridge evaluation policy.",
+      "version": "0.28.1",
+      "access_profile": "support",
+      "category": "conflicting_evidence",
+      "expected_decision": "abstain",
+      "anchors": [
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-a.md",
+          "source_sha256": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 12 seconds."
+        },
+        {
+          "source_id": "synthetic:httpx:0.28.1:cobaltbridge-b.md",
+          "source_sha256": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+          "section_contains": "Cobaltbridge",
+          "text_contains": "The cobaltbridge lease window is 18 seconds."
+        }
+      ],
+      "reference_answer": "Abstain: the two same-version fictional policies have equal authority but contradict one another (12 versus 18 seconds). Neither source supplies a precedence rule.",
+      "review_notes": "Candidate holdout, not executed. This is fictional support-only evidence. A single ranked policy is not sufficient to resolve the contradictory record.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C091",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Using only snapshot 0.27.2, give the cobaltbridge lease window from its later 0.28.1 policy.",
+      "version": "0.27.2",
+      "access_profile": "support",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: cobaltbridge fixtures exist only for 0.28.1; no selected 0.27.2 evidence can supply their later facts.",
+      "review_notes": "Candidate holdout, not executed. The future document is synthetic rather than a claim about actual HTTPX release capabilities. Keep its version variants and permission variants in this same group.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C092",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "From the older 0.27.2 evidence, quote the synthetic cobaltbridge policy introduced only in the 0.28.1 fixtures.",
+      "version": "0.27.2",
+      "access_profile": "support",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: cobaltbridge fixtures exist only for 0.28.1; no selected 0.27.2 evidence can supply their later facts.",
+      "review_notes": "Candidate holdout, not executed. The future document is synthetic rather than a claim about actual HTTPX release capabilities. Keep its version variants and permission variants in this same group.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C093",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "What cobaltbridge lease window does the future 0.28.1 fixture prescribe, using only selected snapshot 0.27.2?",
+      "version": "0.27.2",
+      "access_profile": "support",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: cobaltbridge fixtures exist only for 0.28.1; no selected 0.27.2 evidence can supply their later facts.",
+      "review_notes": "Candidate holdout, not executed. The future document is synthetic rather than a claim about actual HTTPX release capabilities. Keep its version variants and permission variants in this same group.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C094",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Can the selected 0.27.2 documents establish a lease duration for the later synthetic cobaltbridge scenario?",
+      "version": "0.27.2",
+      "access_profile": "support",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: cobaltbridge fixtures exist only for 0.28.1; no selected 0.27.2 evidence can supply their later facts.",
+      "review_notes": "Candidate holdout, not executed. The future document is synthetic rather than a claim about actual HTTPX release capabilities. Keep its version variants and permission variants in this same group.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C095",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Verify the newer 0.28.1 cobaltbridge lease policy from the currently selected older snapshot.",
+      "version": "0.27.2",
+      "access_profile": "support",
+      "category": "wrong_version_trap",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: cobaltbridge fixtures exist only for 0.28.1; no selected 0.27.2 evidence can supply their later facts.",
+      "review_notes": "Candidate holdout, not executed. The future document is synthetic rather than a claim about actual HTTPX release capabilities. Keep its version variants and permission variants in this same group.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C096",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "What is the cobaltbridge lease window in the synthetic evaluation scenario?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot access either support-only cobaltbridge fixture. Do not expose their facts, text or known source IDs.",
+      "review_notes": "Candidate holdout, not executed. Matching support-profile questions intentionally repeat across profiles to test access; both belong to the same holdout group. Protected fixtures: synthetic:httpx:0.28.1:cobaltbridge-a.md and cobaltbridge-b.md.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C097",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Which lease duration applies to the fictional cobaltbridge policy?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot access either support-only cobaltbridge fixture. Do not expose their facts, text or known source IDs.",
+      "review_notes": "Candidate holdout, not executed. Matching support-profile questions intentionally repeat across profiles to test access; both belong to the same holdout group. Protected fixtures: synthetic:httpx:0.28.1:cobaltbridge-a.md and cobaltbridge-b.md.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C098",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "Can you give one supported lease-window value for cobaltbridge?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot access either support-only cobaltbridge fixture. Do not expose their facts, text or known source IDs.",
+      "review_notes": "Candidate holdout, not executed. Matching support-profile questions intentionally repeat across profiles to test access; both belong to the same holdout group. Protected fixtures: synthetic:httpx:0.28.1:cobaltbridge-a.md and cobaltbridge-b.md.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C099",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "What single lease-window duration should the synthetic cobaltbridge client use?",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot access either support-only cobaltbridge fixture. Do not expose their facts, text or known source IDs.",
+      "review_notes": "Candidate holdout, not executed. Matching support-profile questions intentionally repeat across profiles to test access; both belong to the same holdout group. Protected fixtures: synthetic:httpx:0.28.1:cobaltbridge-a.md and cobaltbridge-b.md.",
+      "prior_development_overlap": []
+    },
+    {
+      "case_id": "C100",
+      "group_id": "candidate-cobaltbridge-policy",
+      "split": "candidate_holdout",
+      "question": "State the lease window required by the cobaltbridge evaluation policy.",
+      "version": "0.28.1",
+      "access_profile": "public",
+      "category": "permission_denied",
+      "expected_decision": "abstain",
+      "anchors": [],
+      "reference_answer": "Abstain: this public profile cannot access either support-only cobaltbridge fixture. Do not expose their facts, text or known source IDs.",
+      "review_notes": "Candidate holdout, not executed. Matching support-profile questions intentionally repeat across profiles to test access; both belong to the same holdout group. Protected fixtures: synthetic:httpx:0.28.1:cobaltbridge-a.md and cobaltbridge-b.md.",
+      "prior_development_overlap": []
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "source_id": "synthetic:httpx:0.28.1:quartzbridge-a.md",
+      "product": "httpx",
+      "version": "0.28.1",
+      "path": "data/synthetic/httpx/0.28.1/quartzbridge-a.md",
+      "upstream_path": "quartzbridge-a.md",
+      "commit": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+      "sha256": "c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+      "url": "versionlens://synthetic/httpx/0.28.1/quartzbridge-a.md?sha256=c745ff7a92f7d9873f71634ff32a61bd75a1338678157dca74a3643fc6447b68",
+      "title": "SYNTHETIC DEMO: Quartzbridge policy A",
+      "source_kind": "synthetic",
+      "access": "support"
+    },
+    {
+      "source_id": "synthetic:httpx:0.28.1:quartzbridge-b.md",
+      "product": "httpx",
+      "version": "0.28.1",
+      "path": "data/synthetic/httpx/0.28.1/quartzbridge-b.md",
+      "upstream_path": "quartzbridge-b.md",
+      "commit": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+      "sha256": "5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+      "url": "versionlens://synthetic/httpx/0.28.1/quartzbridge-b.md?sha256=5e4193bfeb4f373dafddc464d912c04f26e95f0be94e76a6537638eb23c8ba71",
+      "title": "SYNTHETIC DEMO: Quartzbridge policy B",
+      "source_kind": "synthetic",
+      "access": "support"
+    },
+    {
+      "source_id": "synthetic:httpx:0.28.1:cobaltbridge-a.md",
+      "product": "httpx",
+      "version": "0.28.1",
+      "path": "data/synthetic/httpx/0.28.1/cobaltbridge-a.md",
+      "upstream_path": "cobaltbridge-a.md",
+      "commit": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+      "sha256": "d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+      "url": "versionlens://synthetic/httpx/0.28.1/cobaltbridge-a.md?sha256=d28eba885d0b46f6c972783fbcb0e8cb87572bd7c7d86157142b780e15f76d3f",
+      "title": "SYNTHETIC DEMO: Cobaltbridge policy A",
+      "source_kind": "synthetic",
+      "access": "support"
+    },
+    {
+      "source_id": "synthetic:httpx:0.28.1:cobaltbridge-b.md",
+      "product": "httpx",
+      "version": "0.28.1",
+      "path": "data/synthetic/httpx/0.28.1/cobaltbridge-b.md",
+      "upstream_path": "cobaltbridge-b.md",
+      "commit": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+      "sha256": "fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+      "url": "versionlens://synthetic/httpx/0.28.1/cobaltbridge-b.md?sha256=fecae22a61800939804c86a76719a02eb969f63ac52c6e8cd8f926dce3729945",
+      "title": "SYNTHETIC DEMO: Cobaltbridge policy B",
+      "source_kind": "synthetic",
+      "access": "support"
+    }
+  ]
+}
