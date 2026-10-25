@@ -1,6 +1,6 @@
 # Architecture and boundaries
 
-## Implemented through day 5
+## Implemented through day 6 engineering
 
 ```mermaid
 flowchart LR
@@ -104,3 +104,18 @@ Retrieval relevance is separate from answer faithfulness and citation support.
 A valid source ID or quoted span alone does not establish that every generated
 claim is supported. Do not label automatic checks as human review. Holdout
 questions must not be used to tune chunk size, thresholds, or prompts.
+
+
+## Evaluation release boundary
+
+A separate ignored evaluation index combines the normal corpus with labelled
+conflict fixtures. Draft question anchors bind exact source identity/checksum
+and topic groups separate development from candidate holdout. A real release
+lock must match complete human question-review attestations and exact dataset,
+corpus and case digests before holdout execution; pending reviews are rejected.
+
+Development observations keep retrieval errors, answer decisions, literal
+citation checks, latency and local usage separate. Mechanical checks do not
+establish semantic correctness. Human claim review is a later digest-bound
+step with separate support/correctness judgments. All genuine reviews and
+held-out results currently remain pending; see [the evaluation observations](EVALUATION_RESULTS.md).

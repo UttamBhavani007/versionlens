@@ -4,12 +4,14 @@ A local, version-aware technical support service for **HTTPX**. The goal is to
 answer upgrade and troubleshooting questions from the documentation that matches
 the requested version, with inspectable evidence and explicit abstention.
 
-**Status: day 5 complete, snapshot updates and synthetic access demonstration.** Pinned ingestion,
+**Status: day 6 evaluation tooling and development observations published.** Pinned ingestion,
 version-filtered keyword/vector/hybrid retrieval, cloud-disabled local models,
 cited drafts, abstention and version-scoped source inspection are implemented.
 Keyword remains the default. Transactional snapshot updates and deletion,
 labelled synthetic documents and server-selected demo access profiles are
-implemented. Human-reviewed held-out evaluation remains a future milestone.
+implemented. A 100-question draft review pack, review-gated evaluation runner
+and citation/claim-review tools are available. Human-reviewed held-out results
+remain pending; agreeing to review has not approved any labels.
 See [the delivery plan](docs/DELIVERY_PLAN.md).
 
 ![VersionLens running locally with actual HTTPX evidence](docs/screenshots/day5-core-desktop-evidence.png)
@@ -29,12 +31,14 @@ for draft answers; build the vector cache for experimental vector/hybrid search.
 The interface provides exact snapshot selection, immutable source links,
 original excerpts, provenance and explicit draft/abstention states.
 
-**Verified on 24 October:** [227 software tests](reports/day5-software-checks.json),
-[8 live permission browser checks](reports/day5-access-browser.json),
-[23 labelled browser-fixture checks](reports/day5-permission-fixtures.json),
-[13 browser regression checks](reports/day5-browser-regression.json) and
-[13 public API probes](reports/day5-http-smoke.json). The timeout probe produced
-a cited draft; the upgrade probe still abstained with `invalid_generation`.
+**Verified on 25 October:** [282 software tests](reports/day6-software-checks.json)
+passed. The [evaluation run](reports/day6-development-evaluation.json) recorded
+40 development questions × three methods, with **zero holdout questions run**.
+Known-anchor hits at five were 17/19 keyword, 17/19 vector and 18/19 hybrid.
+All 55 returned citations passed source/quote checks; semantic correctness and
+unsupported-answer rates remain unavailable pending human judgments. All three
+methods answered four of five synthetic-conflict probes despite draft abstention
+labels. See [results and limitations](docs/EVALUATION_RESULTS.md).
 These development checks do not establish answer accuracy or citation entailment.
 See [API and browser setup](docs/API.md), [actual screenshots](docs/SCREENSHOTS.md)
 and [architecture](docs/ARCHITECTURE.md). This is a local workstation demo;
@@ -213,13 +217,18 @@ upgrade-generation failure. All answers remain unverified drafts.
 **Verified on 22 October:** 132 automated checks pass. Model/API fees were zero;
 local memory, disk, electricity and elapsed time are still resources consumed.
 
-## Evaluation commitments
+## Evaluation and human review
 
-The planned 80–120-question dataset needs human review. Development questions
-and a frozen holdout must be separate. We will report retrieval, citation
-correctness, unsupported answers, abstention, latency, and usage independently.
-No scores, human-review claims, screenshots, or deployment claims will be
-published before they are supported by an actual run or review.
+The [100 draft questions and source context](docs/evaluation/review-pack/QUESTIONS.md)
+cover answerable, missing-evidence, wrong-version, permission and conflict cases.
+Topic groups keep 40 development questions separate from 60 candidate holdout
+questions. All question reviews remain pending. A digest-bound lock is required
+before holdout execution; no real lock or held-out results are currently present.
+
+Mechanical citation checks, draft-label diagnostics, human claim judgments,
+latency and cost remain separate. The [pending answer-review pack](docs/evaluation/answer-review-pack/ANSWERS.md)
+and [review protocol](docs/QUESTION_REVIEW_PROTOCOL.md) support later judgments.
+Unit tests use clearly fictional review fixtures, never actual approvals.
 
 ## License and attribution
 

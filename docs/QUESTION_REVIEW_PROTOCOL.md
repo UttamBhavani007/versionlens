@@ -57,3 +57,29 @@ Generated claims require a separate human answer review. Mechanical citation
 identity/quotation validity is not semantic entailment, release applicability
 or answer correctness. Unsupported-answer and semantic correctness rates stay
 unavailable until the corresponding judgments are completed.
+
+
+## Separate human judgments of generated claims
+
+The [actual development answer pack](evaluation/answer-review-pack/ANSWERS.md)
+contains 51 answered case/method trials and 55 claims. All judgments are pending.
+To export another report or score completed judgments:
+
+```sh
+python3 scripts/review_answers.py --report reports/day6-development-evaluation.json export --output-dir reports/local/my-answer-review
+python3 scripts/review_answers.py --report reports/day6-development-evaluation.json score --reviews path/to/completed-answer-review.json --output reports/local/human-answer-scores.json
+```
+
+Each answered trial and claim binds the exact evaluation report and content
+digests. Completed trial records need human identity/time attestations; every
+claim needs explicit completed `supported` and `correct` booleans. Do not infer
+one from the other. A claim can be factually correct yet unsupported by its
+supplied context, or supported by an inapplicable document. Pending, stale,
+partial, duplicate or extra judgments cannot produce scores.
+
+An unsupported answer is an answered case/method trial with at least one claim
+judged unsupported. Report unsupported claims and unsupported answered trials
+with their separate denominators. Abstentions and operational errors are not
+counted as correct answers or included in that rate. With zero answered trials,
+rates are unavailable. These judgments do not establish per-citation entailment
+or inter-reviewer agreement, and cannot turn a development run into a holdout.
