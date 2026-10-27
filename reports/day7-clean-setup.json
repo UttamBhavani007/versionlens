@@ -1,0 +1,634 @@
+{
+  "schema_version": 1,
+  "kind": "fresh_source_deployment",
+  "status": "passed",
+  "recorded_at_utc": "2026-10-27T13:52:57.615606+00:00",
+  "requested_ref": "94b796b",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "python_version": "3.13.7"
+  },
+  "isolated_source_checkout": true,
+  "python_package_installation_tested": false,
+  "pip_used": false,
+  "local_model_calls": false,
+  "external_network_downloads": false,
+  "candidate_holdout_executed": false,
+  "human_review_completed": false,
+  "check_script_sha256": "53094e55ec57be9f43fe7cd5766cf7e59e49ee13243fd647b9c42ae7c530d2df",
+  "checks": [
+    {
+      "name": "source_archive_excludes_local_state",
+      "status": "passed"
+    },
+    {
+      "name": "pip_free_virtual_environment",
+      "status": "passed",
+      "exit_code": 0,
+      "latency_ms": 40.32,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_bytes": 0
+    },
+    {
+      "name": "offline_source_checksums",
+      "status": "passed",
+      "exit_code": 0,
+      "latency_ms": 77.567,
+      "output_sha256": "dd5d9762a621fdb0b3def98e6fc07e4259d97593d73d7623aff5508b8330c892",
+      "output_bytes": 52
+    },
+    {
+      "name": "missing_readiness_is_read_only",
+      "status": "passed",
+      "exit_code": 2,
+      "latency_ms": 77.572,
+      "output_sha256": "597eddd466931a8c2b5445d96a106cd870f17e6cfb21e498c2228a3e06fe45ff",
+      "output_bytes": 392
+    },
+    {
+      "name": "fresh_offline_preparation",
+      "status": "passed",
+      "result": {
+        "corpus": "upstream",
+        "corpus_fingerprint": "cd52424e35d5d632639fd3696a313507a5e6f968f43af4ca24eef33e13da8db0",
+        "model_server_checked": false,
+        "local_only": true,
+        "status": "ready",
+        "operation": "created",
+        "index": {
+          "schema_version": "2",
+          "sources": 32,
+          "chunks": 644,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        },
+        "prerequisites": {
+          "python": "3.13.7",
+          "sqlite": "3.50.4",
+          "fts5": true
+        },
+        "access_profile": "public"
+      },
+      "exit_code": 0,
+      "latency_ms": 129.378,
+      "output_sha256": "e77e8d1a51b80cdce2fcb4faf3bffa9ecb75cdbae629d6b7e22ed9e63d962540",
+      "output_bytes": 480
+    },
+    {
+      "name": "prepared_readiness_is_read_only",
+      "status": "passed",
+      "exit_code": 0,
+      "latency_ms": 77.835,
+      "output_sha256": "4fc97072a798474b14db90b0fc35a7376070b3929497bae1f89e607b827fd59d",
+      "output_bytes": 480
+    },
+    {
+      "name": "no_external_or_model_socket_attempts",
+      "status": "passed"
+    }
+  ],
+  "http_checks": [
+    {
+      "name": "public_catalog",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 2.633,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "56b67f4985b75aa6f8ebd5bb336a9077940a7ab9242dd2c0e8b593d463048954",
+      "body_bytes": 284,
+      "result": {
+        "product": "httpx",
+        "versions": [
+          "0.27.2",
+          "0.28.1"
+        ],
+        "retrievers": [
+          "keyword",
+          "vector",
+          "hybrid"
+        ],
+        "default_retriever": "keyword",
+        "access_profile": "public",
+        "permission_demo": true,
+        "index": {
+          "schema_version": "2",
+          "sources": 32,
+          "chunks": 644,
+          "versions": [
+            "0.27.2",
+            "0.28.1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "bundled_index.html",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.463,
+      "headers": {
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "69465bcf08a899ab87685ca0beba5b9ea3f61f79e0fa4a729c7b3131bfa8b357",
+      "body_bytes": 7307
+    },
+    {
+      "name": "bundled_style.css",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.374,
+      "headers": {
+        "Content-Type": "text/css; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "f89c41e8f9507e6ce64ddc3ac2e07351a0380cb338d1d866799af4543444f859",
+      "body_bytes": 16745
+    },
+    {
+      "name": "bundled_app.js",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.422,
+      "headers": {
+        "Content-Type": "text/javascript; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "efe920f95c0ee4aab14cf01c258e154de6f73cd17c3cb3e87b324dae50494efb",
+      "body_bytes": 25706
+    },
+    {
+      "name": "keyword_0.27.2",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.942,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "4afc68ec7d8636b7ed29d4e58f9ec91ebc24a3fe4589fccfd0c27d1788f66dac",
+      "body_bytes": 6532,
+      "result": {
+        "access_profile": "public",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.27.2",
+        "question": "default timeout",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "f759c74ff342074e00b214d2",
+            "version": "0.27.2",
+            "section": "Setting a default timeout on a client",
+            "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+            "source_id": "httpx:0.27.2:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 30,
+            "end_line": 40,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/advanced/timeouts.md?plain=1#L30-L40",
+            "score": 9.5095968184306
+          },
+          {
+            "chunk_id": "81ce8f11dbefc6b077a42e75",
+            "version": "0.27.2",
+            "section": "QuickStart > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+            "source_id": "httpx:0.27.2:docs/quickstart.md",
+            "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 448,
+            "end_line": 468,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/quickstart.md?plain=1#L448-L468",
+            "score": 6.9134266982636525
+          },
+          {
+            "chunk_id": "155dc8b2b6f4d486465bb4d8",
+            "version": "0.27.2",
+            "section": "Requests Compatibility Guide > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable [timeouts](quickstart.md#timeouts) for all network operations, while Requests has no timeouts by default.\n\nTo get the same behavior as Requests, set the `timeout` parameter to `None`:\n\n```python\nhttpx.get('https://www.example.com', timeout=None)\n```\n",
+            "source_id": "httpx:0.27.2:docs/compatibility.md",
+            "source_sha256": "27757d0b50b32469b109f263b75df939782175981ca67020a66d5900deb41b5f",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 148,
+            "end_line": 157,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/compatibility.md?plain=1#L148-L157",
+            "score": 6.757256741996812
+          },
+          {
+            "chunk_id": "8cfe3d22a040eb07f202f9d8",
+            "version": "0.27.2",
+            "section": "Changelog > 0.18.2 (17th June, 2021) > Added",
+            "text": "### Added\n\n* Support for Python 3.10. (Pull #1687)\n* Expose `httpx.USE_CLIENT_DEFAULT`, used as the default to `auth` and `timeout` parameters in request methods. (Pull #1634)\n* Support [HTTP/2 \"prior knowledge\"](https://python-hyper.org/projects/hyper-h2/en/v2.3.1/negotiating-http2.html#prior-knowledge), using `httpx.Client(http1=False, http2=True)`. (Pull #1624)\n",
+            "source_id": "httpx:0.27.2:CHANGELOG.md",
+            "source_sha256": "f0fddf6cb8e545c6f4864d16c9f2575d8a347d9803c5b870260edc4ce019b545",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 312,
+            "end_line": 317,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/CHANGELOG.md?plain=1#L312-L317",
+            "score": 5.833307363375023
+          },
+          {
+            "chunk_id": "65fcc04bcd814886f925fb43",
+            "version": "0.27.2",
+            "section": "Fine tuning the configuration",
+            "text": "## Fine tuning the configuration\n\nHTTPX also allows you to specify the timeout behavior in more fine grained detail.\n\nThere are four different types of timeouts that may occur. These are **connect**,\n**read**, **write**, and **pool** timeouts.\n\n* The **connect** timeout specifies the maximum amount of time to wait until\na socket connection to the requested host is established. If HTTPX is unable to connect\nwithin this time frame, a `ConnectTimeout` exception is raised.\n* The **read** timeout specifies the maximum duration to wait for a chunk of\ndata to be received (for example, a chunk of the response body). If HTTPX is\nunable to receive data within this time frame, a `ReadTimeout` exception is raised.\n* The **write** timeout specifies the maximum duration to wait for a chunk of\ndata to be sent (for example, a chunk of the request body). If HTTPX is unable\nto send data within this time frame, a `WriteTimeout` exception is raised.\n* The **pool** timeout specifies the maximum duration to wait for acquiring\na connection from the connection pool. If HTTPX is unable to acquire a connection\nwithin this time frame, a `PoolTimeout` exception is raised. A related\nconfiguration here is the maximum number of allowable connections in the\nconnection pool, which is configured by the `limits` argument.\n\nYou can configure the timeout behavior for any of these values...\n\n```python\n# A client with a 60s timeout for connecting, and a 10s timeout elsewhere.\ntimeout = httpx.Timeout(10.0, connect=60.0)\nclient = httpx.Client(timeout=timeout)\n\nresponse = client.get('http://example.com/')\n```",
+            "source_id": "httpx:0.27.2:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "609df7ecc0f7cb10a1c998aa9c269bba77337c5f",
+            "start_line": 41,
+            "end_line": 71,
+            "citation_url": "https://github.com/encode/httpx/blob/609df7ecc0f7cb10a1c998aa9c269bba77337c5f/docs/advanced/timeouts.md?plain=1#L41-L71",
+            "score": 4.914360657074394
+          }
+        ]
+      }
+    },
+    {
+      "name": "keyword_0.28.1",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.836,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "c9feabbe9c1f6465665d59153847ca0cfb55967f47b5b11ce7da8251d61fef63",
+      "body_bytes": 6532,
+      "result": {
+        "access_profile": "public",
+        "status": "evidence_found",
+        "mode": "keyword_retrieval_only",
+        "retrieval_method": "keyword",
+        "version": "0.28.1",
+        "question": "default timeout",
+        "answer": null,
+        "notice": "Ranked source excerpts, not a generated or verified answer. Scores are not confidence.",
+        "hits": [
+          {
+            "chunk_id": "267f3cdadbaa1e27ca2038ad",
+            "version": "0.28.1",
+            "section": "Setting a default timeout on a client",
+            "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 30,
+            "end_line": 40,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L30-L40",
+            "score": 9.5095968184306
+          },
+          {
+            "chunk_id": "84c4aad941b6d1e060fb0ab5",
+            "version": "0.28.1",
+            "section": "QuickStart > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable timeouts for all network operations,\nmeaning that if a connection is not properly established then it should always\nraise an error rather than hanging indefinitely.\n\nThe default timeout for network inactivity is five seconds. You can modify the\nvalue to be more or less strict:\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=0.001)\n```\n\nYou can also disable the timeout behavior completely...\n\n```pycon\n>>> httpx.get('https://github.com/', timeout=None)\n```\n\nFor advanced timeout management, see [Timeout fine-tuning](advanced/timeouts.md#fine-tuning-the-configuration).\n",
+            "source_id": "httpx:0.28.1:docs/quickstart.md",
+            "source_sha256": "9f8351551dd18be0ed7e40dea2f1c231523a2e8833a0bb5c471630178ec2aea8",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 448,
+            "end_line": 468,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/quickstart.md?plain=1#L448-L468",
+            "score": 6.9134266982636525
+          },
+          {
+            "chunk_id": "295814f78dc346460858f9a1",
+            "version": "0.28.1",
+            "section": "Requests Compatibility Guide > Timeouts",
+            "text": "## Timeouts\n\nHTTPX defaults to including reasonable [timeouts](quickstart.md#timeouts) for all network operations, while Requests has no timeouts by default.\n\nTo get the same behavior as Requests, set the `timeout` parameter to `None`:\n\n```python\nhttpx.get('https://www.example.com', timeout=None)\n```\n",
+            "source_id": "httpx:0.28.1:docs/compatibility.md",
+            "source_sha256": "e30d0a254fc89e5a891739607e289432b48930ac68be285810dd4e540f304776",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 148,
+            "end_line": 157,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/compatibility.md?plain=1#L148-L157",
+            "score": 6.757256741996812
+          },
+          {
+            "chunk_id": "f61ed6566cf4e9266f8a3a69",
+            "version": "0.28.1",
+            "section": "Changelog > 0.18.2 (17th June, 2021) > Added",
+            "text": "### Added\n\n* Support for Python 3.10. (Pull #1687)\n* Expose `httpx.USE_CLIENT_DEFAULT`, used as the default to `auth` and `timeout` parameters in request methods. (Pull #1634)\n* Support [HTTP/2 \"prior knowledge\"](https://python-hyper.org/projects/hyper-h2/en/v2.3.1/negotiating-http2.html#prior-knowledge), using `httpx.Client(http1=False, http2=True)`. (Pull #1624)\n",
+            "source_id": "httpx:0.28.1:CHANGELOG.md",
+            "source_sha256": "2cd04b965b20eff7a4d3b30cc020c63b125da9f731874513bad2e59ca9743258",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 342,
+            "end_line": 347,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/CHANGELOG.md?plain=1#L342-L347",
+            "score": 5.833307363375023
+          },
+          {
+            "chunk_id": "3e5f47bcefed24dde7a7652b",
+            "version": "0.28.1",
+            "section": "Fine tuning the configuration",
+            "text": "## Fine tuning the configuration\n\nHTTPX also allows you to specify the timeout behavior in more fine grained detail.\n\nThere are four different types of timeouts that may occur. These are **connect**,\n**read**, **write**, and **pool** timeouts.\n\n* The **connect** timeout specifies the maximum amount of time to wait until\na socket connection to the requested host is established. If HTTPX is unable to connect\nwithin this time frame, a `ConnectTimeout` exception is raised.\n* The **read** timeout specifies the maximum duration to wait for a chunk of\ndata to be received (for example, a chunk of the response body). If HTTPX is\nunable to receive data within this time frame, a `ReadTimeout` exception is raised.\n* The **write** timeout specifies the maximum duration to wait for a chunk of\ndata to be sent (for example, a chunk of the request body). If HTTPX is unable\nto send data within this time frame, a `WriteTimeout` exception is raised.\n* The **pool** timeout specifies the maximum duration to wait for acquiring\na connection from the connection pool. If HTTPX is unable to acquire a connection\nwithin this time frame, a `PoolTimeout` exception is raised. A related\nconfiguration here is the maximum number of allowable connections in the\nconnection pool, which is configured by the `limits` argument.\n\nYou can configure the timeout behavior for any of these values...\n\n```python\n# A client with a 60s timeout for connecting, and a 10s timeout elsewhere.\ntimeout = httpx.Timeout(10.0, connect=60.0)\nclient = httpx.Client(timeout=timeout)\n\nresponse = client.get('http://example.com/')\n```",
+            "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+            "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "source_kind": "upstream",
+            "access": "public",
+            "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+            "start_line": 41,
+            "end_line": 71,
+            "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L41-L71",
+            "score": 4.914360657074394
+          }
+        ]
+      }
+    },
+    {
+      "name": "source_inspection",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 5.985,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "493a471c300aff6bb8f18b61dce02b4386e2938cf3c6e83b821a38c703cc3f33",
+      "body_bytes": 1070,
+      "result": {
+        "chunk_id": "267f3cdadbaa1e27ca2038ad",
+        "version": "0.28.1",
+        "section": "Setting a default timeout on a client",
+        "text": "## Setting a default timeout on a client\n\nYou can set a timeout on a client instance, which results in the given\n`timeout` being used as the default for requests made with this client:\n\n```python\nclient = httpx.Client()              # Use a default 5s timeout everywhere.\nclient = httpx.Client(timeout=10.0)  # Use a default 10s timeout everywhere.\nclient = httpx.Client(timeout=None)  # Disable all timeouts by default.\n```\n",
+        "source_id": "httpx:0.28.1:docs/advanced/timeouts.md",
+        "source_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+        "source_kind": "upstream",
+        "access": "public",
+        "upstream_commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+        "start_line": 30,
+        "end_line": 40,
+        "citation_url": "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/timeouts.md?plain=1#L30-L40",
+        "product": "httpx",
+        "title": "Timeouts",
+        "upstream_path": "docs/advanced/timeouts.md"
+      }
+    },
+    {
+      "name": "wrong_version_source",
+      "status": "passed",
+      "http_status": 404,
+      "latency_ms": 5.963,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "588f041ddd9eaa8d455ef837abbe177b66f1e7e2a659013aaa19772487b373f4",
+      "body_bytes": 106,
+      "result": {
+        "error": {
+          "code": "not_found",
+          "message": "The requested source excerpt was not found in this version."
+        }
+      }
+    },
+    {
+      "name": "unsupported_version",
+      "status": "passed",
+      "http_status": 400,
+      "latency_ms": 0.33,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "633f57e978812a941120221da9bc3b6cb413fe2c5b96ca44bad258698a71ae1c",
+      "body_bytes": 103,
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "Select an exact supported version: 0.27.2, 0.28.1."
+        }
+      }
+    },
+    {
+      "name": "browser_self_promotion",
+      "status": "passed",
+      "http_status": 400,
+      "latency_ms": 0.32,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "e2faa379143facc7636085637c95f25376db02edb118f55c4d5254b4640bd7fa",
+      "body_bytes": 129,
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "Provide question and version, with only optional retriever and limit fields."
+        }
+      }
+    },
+    {
+      "name": "cross_origin",
+      "status": "passed",
+      "http_status": 403,
+      "latency_ms": 0.371,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "aff2ddf357ce31a57b0cef3d4c5a8a55182e186eeaeb70b4e7bf0234bdcdaaf3",
+      "body_bytes": 98,
+      "result": {
+        "error": {
+          "code": "origin_rejected",
+          "message": "Requests from another origin are not allowed."
+        }
+      }
+    },
+    {
+      "name": "missing_keyword",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.559,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "cf931f5648258e9b9f7718f2bb945bce47ed9c489501a9b2f080e4dfedcbfb0a",
+      "body_bytes": 664,
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "keyword",
+        "retrieval_executed": true,
+        "lexical_support_gate_applied": false,
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "access_profile": "public",
+        "claims": [],
+        "answer": null,
+        "reason": "no_matching_evidence",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.245
+      }
+    },
+    {
+      "name": "missing_vector",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.525,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "93c1badeab244c5c12285a28ba1b8aee95d31fda9057209a8add788b452feef6",
+      "body_bytes": 687,
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "vector",
+        "retrieval_executed": false,
+        "lexical_support_gate_applied": true,
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "access_profile": "public",
+        "claims": [],
+        "answer": null,
+        "reason": "no_lexical_support_for_experimental_retrieval",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.21
+      }
+    },
+    {
+      "name": "missing_hybrid",
+      "status": "passed",
+      "http_status": 200,
+      "latency_ms": 0.492,
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "body_sha256": "45ce98517766fdf3591046971fe58a60eabecc6ac604be21ce33209cb8dfe007",
+      "body_bytes": 688,
+      "result": {
+        "status": "abstained",
+        "mode": "local_cited_draft",
+        "pipeline_version": "quote_menu_v3_access",
+        "retrieval_method": "hybrid",
+        "retrieval_executed": false,
+        "lexical_support_gate_applied": true,
+        "question": "quantumgiraffeunsupported",
+        "version": "0.28.1",
+        "access_profile": "public",
+        "claims": [],
+        "answer": null,
+        "reason": "no_lexical_support_for_experimental_retrieval",
+        "evidence_ids": [],
+        "model_called": false,
+        "model": null,
+        "usage": null,
+        "citation_identity_and_quotes_checked": false,
+        "semantic_support_verified": false,
+        "notice": "Draft answer. Source IDs and literal quotes are checked; semantic support and release applicability still require evaluation.",
+        "latency_ms": 0.206
+      }
+    }
+  ],
+  "limitations": [
+    "Fresh tracked source and pip-free interpreter, not a wheel/install test.",
+    "Model downloads, real generation, dense positive retrieval and browser rendering are separate prior checks.",
+    "No external service, public hosting, human review or answer-quality result is established.",
+    "Python socket guards are additional controls, not an operating-system sandbox."
+  ],
+  "source_commit": "94b796b1af9ecdcdfd7020118540fda050569ae4",
+  "archive_sha256": "dca37a2182eb9261c67b9ddb96e083952c5787f110c8475f21317e55ecd991bf",
+  "archive_members": 197,
+  "project_version": "0.1.0",
+  "third_party_runtime_dependencies": [],
+  "python_environment": {
+    "python_version": "3.13.7",
+    "isolated_venv": true,
+    "user_site_enabled": false,
+    "sqlite_version": "3.50.4",
+    "fts5": true,
+    "python_socket_guard": true,
+    "pip_installed": false
+  },
+  "software_tests": {
+    "status": "passed",
+    "tests_run": 299,
+    "reported_elapsed_seconds": 7.564,
+    "exit_code": 0,
+    "latency_ms": 7726.38,
+    "output_sha256": "23f58f45a6a98549b1bb9071ac5411dd8587877a3356ddabe114e0b637b0ea5a",
+    "output_bytes": 99
+  },
+  "owned_server_shutdown": {
+    "stopped": true,
+    "exit_code": -15,
+    "forced_kill": false,
+    "log_sha256": "062223cb4db2cab53669fdb0357f352d655c68948c7f8c1fe34431c7b74b1edb"
+  },
+  "rejected_socket_attempts": [],
+  "elapsed_seconds": 8.439,
+  "completed_at_utc": "2026-10-27T13:53:06.054464+00:00"
+}

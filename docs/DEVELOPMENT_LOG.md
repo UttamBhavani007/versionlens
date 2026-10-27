@@ -395,3 +395,70 @@ Day 7 on 26 October may proceed with independent reproducible local deployment,
 clean setup checks and final release documentation while clearly preserving
 this open evaluation requirement. The approved schedule still ends on
 26 October; no extension or work beyond that cutoff is assumed.
+
+
+## 2026-10-27 — final source deployment and prototype release
+
+### Schedule and scope
+
+The original local schedule ended on 26 October before final verification was
+finished. No day-7 commit was backdated. The owner explicitly replied “Allow
+completion past midnight” and later requested continuation. This final work
+uses its actual 27 October date. The expired recurring automation was removed
+and not recreated; the extension authorizes completion rather than a new schedule.
+
+### Implemented and verified
+
+- Added `scripts/run_local.py`: Python/FTS5 prerequisites, checksum-verified
+  default preparation, explicit synthetic selection/rebuild, foreground
+  loopback serving and JSON readiness. Matching indexes remain byte-identical;
+  differing/unknown/corrupt indexes are preserved unless a supported explicit
+  rebuild is requested. Fixed-path symlinks are rejected. Readiness disables
+  bytecode writes and rejects WAL-mode indexes before SQLite opens them.
+- Added 17 meaningful launcher checks, bringing the full suite to **299 passing
+  tests** with ResourceWarning treated as an error. Tests include fresh copied
+  source execution from another working directory and no-write/WAL preservation.
+- Added a safe temporary Git-archive verifier, a pip-free virtual environment,
+  offline source verification and actual HTTP deployment probes. It excludes
+  ignored runtime state, credentials, weights and databases. Allowlisted
+  environments and Python socket guards are additional controls, not an
+  operating-system sandbox.
+- The [fresh-source report](../reports/day7-clean-setup.json) records archived
+  commit `94b796b1af9ecdcdfd7020118540fda050569ae4`, Python 3.13.7, SQLite
+  3.50.4/FTS5, pip absent, **299 passing tests and 14 passing real HTTP probes**.
+  A missing-index check changed no files; preparation produced 32 sources/644
+  chunks; ready-state checking changed no files. Both versions, source identity,
+  invalid requests, browser-origin/role rejection and three model-free
+  missing-evidence paths were exercised. No prohibited socket attempts were
+  observed, no downloads/model calls occurred, and the owned server was stopped.
+- The [release browser check](../reports/day7-browser-check.json) passed **12
+  checks**, with no external application requests or script errors. Four
+  negative/race cases use labelled fixtures. Three [real screenshots](SCREENSHOTS.md)
+  show desktop evidence, source inspection and a 360-pixel mobile view. Generation
+  was not repeated; earlier cited-draft screenshots retain their actual dates.
+  The release-capture interface was also stopped after verification.
+- Added source-checkout deployment instructions, a reproducible interview
+  walkthrough, final README, license clarification and prototype release notes.
+  Source deployment includes `data/corpus/` and manifests; a self-contained
+  wheel/pip installation is not claimed. Runtime/model downloads remain explicit
+  optional steps and the pinned native installer supports Apple Silicon macOS.
+
+### Release boundary and remaining human work
+
+Commits 23–25 complete independent packaging and verification. The final commit
+adds documentation and reports without changing the application/test source
+verified at commit 24. Publication is a **0.1.0 local prototype prerelease**.
+There is no public hosted endpoint, production authentication or paid service.
+All model weights and SQLite builds remain ignored local artifacts; the
+untracked pre-existing `error.log` is preserved and excluded from publication.
+
+All 100 question-label records and all 51 generated-answer trial reviews remain
+pending. The 60 candidate holdout questions remain unexecuted, and no real
+holdout lock or semantic score exists. The 12/15 synthetic-conflict drafts and
+prior `invalid_generation` upgrade failures are retained limitations. Mechanical
+quote validity is not semantic correctness. No evaluation tuning, reranker or
+new generation run was added during packaging. Human review and the reviewed
+holdout remain unfinished external requirements, not completed release criteria.
+
+Development used AI coding assistance with automated verification and retained
+raw observations. AI-authored evaluation labels remain explicitly marked drafts.

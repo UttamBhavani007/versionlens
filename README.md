@@ -1,237 +1,151 @@
 # VersionLens
 
-A local, version-aware technical support service for **HTTPX**. The goal is to
-answer upgrade and troubleshooting questions from the documentation that matches
-the requested version, with inspectable evidence and explicit abstention.
+**Version-aware technical support for HTTPX, running entirely on your computer.**
+Search pinned documentation, inspect original evidence and ask a local model for
+cited drafts. Switch the product version or a simulated permission profile to
+see how accessible evidence changes.
 
-**Status: day 6 evaluation tooling and development observations published.** Pinned ingestion,
-version-filtered keyword/vector/hybrid retrieval, cloud-disabled local models,
-cited drafts, abstention and version-scoped source inspection are implemented.
-Keyword remains the default. Transactional snapshot updates and deletion,
-labelled synthetic documents and server-selected demo access profiles are
-implemented. A 100-question draft review pack, review-gated evaluation runner
-and citation/claim-review tools are available. Human-reviewed held-out results
-remain pending; agreeing to review has not approved any labels.
-See [the delivery plan](docs/DELIVERY_PLAN.md).
+**Release status: local prototype.** The API, browser interface, incremental
+updates and evaluation tools are implemented. Answer quality is not yet
+human-validated. The small local model has known conflict-handling and upgrade
+reasoning failures; drafts must be checked against their sources.
 
-![VersionLens running locally with actual HTTPX evidence](docs/screenshots/day5-core-desktop-evidence.png)
+![Actual local HTTPX evidence workspace](docs/screenshots/release-desktop-evidence.png)
 
-## Run the local interface
+## Run it
 
-Requires Python 3.11 or newer with SQLite FTS5. From this repository:
+Requires **Python 3.11+ with SQLite FTS5**. Clone or download this repository,
+then run from its root:
 
 ```sh
-PYTHONPATH=src python3 -m versionlens ingest
-PYTHONPATH=src python3 -m versionlens serve
+git clone https://github.com/UttamBhavani007/versionlens.git
+cd versionlens
+python3 scripts/run_local.py
 ```
 
-Open **http://127.0.0.1:8765**. Keyword evidence search and source inspection
-work without a model. Start the separate local model server described below
-for draft answers; build the vector cache for experimental vector/hybrid search.
-The interface provides exact snapshot selection, immutable source links,
-original excerpts, provenance and explicit draft/abstention states.
-
-**Verified on 25 October:** [282 software tests](reports/day6-software-checks.json)
-passed. The [evaluation run](reports/day6-development-evaluation.json) recorded
-40 development questions × three methods, with **zero holdout questions run**.
-Known-anchor hits at five were 17/19 keyword, 17/19 vector and 18/19 hybrid.
-All 55 returned citations passed source/quote checks; semantic correctness and
-unsupported-answer rates remain unavailable pending human judgments. All three
-methods answered four of five synthetic-conflict probes despite draft abstention
-labels. See [results and limitations](docs/EVALUATION_RESULTS.md).
-These development checks do not establish answer accuracy or citation entailment.
-See [API and browser setup](docs/API.md), [actual screenshots](docs/SCREENSHOTS.md)
-and [architecture](docs/ARCHITECTURE.md). This is a local workstation demo;
-public hosting and production authentication are not provided.
-
-## Updates and permission demonstration
-
-Opt in to two clearly labelled fictional runbooks with `ingest --include-synthetic`.
-The trusted local operator selects `serve --demo-profile public` or `support`;
-requests cannot grant themselves access. Filtering applies to all retrievers,
-source inspection and model context. These profiles simulate permissions and
-are not production authentication.
-
-The [29-step local change demo](reports/day5-change-demo.json) showed version-specific
-fictional budgets of 2 and 3 attempts, then 4 after a source update. Granting and
-revoking public access changed evidence and draft availability. The run retained
-four actual cited drafts and rejected obsolete source IDs and stale vector data.
-See [commands, boundaries and reproduction](docs/PERMISSIONS_AND_UPDATES.md).
-
-## Zero paid services
-
-- No OpenAI API, paid inference, hosted vector database, cloud account, or trial.
-- Python and SQLite run on your existing computer.
-- Inference uses a downloaded open model through local Ollama with cloud
-  features disabled. No account or API key is required for local inference.
-- Source code and documentation are intended for a public GitHub Free repository.
-  Local checks remain the default. Any optional CI must refuse private repositories
-  and use only standard free public runners, with no artifact or cache storage.
-- No remote inference fallback, automatic billing, or paid deployment is allowed.
-
-See [the cost policy](docs/COST_POLICY.md). Internet is needed to download public
-documentation and, later, model weights. After setup, retrieval works offline.
-
-## Why HTTPX?
-
-The initial corpus contains the historical **0.27.2** and **0.28.1** snapshots;
-these are demonstration versions, not a claim about the latest release. HTTPX
-0.28.0 removed deprecated `proxies` and `app` arguments, giving the project real
-version-specific support cases. Each source will carry an immutable upstream
-commit, checksum, and line reference. See [source provenance](docs/SOURCES.md).
-
-## Development
-
-Requires Python 3.11 or newer with SQLite FTS5. The day-1 runtime and tests have
-no third-party dependencies. From this repository:
+Open **http://127.0.0.1:8765**. The launcher verifies the bundled source files,
+creates a missing index and starts the foreground API/UI. Stop with Ctrl-C.
+No Python packages, model, account or API key are needed for keyword search,
+source inspection or missing-evidence abstention.
 
 ```sh
-python3 scripts/fetch_sources.py --check
-PYTHONPATH=src python3 -m versionlens ingest
-PYTHONPATH=src python3 -m versionlens search 'proxies argument removed' --version 0.27.2 --limit 3
-PYTHONPATH=src python3 -m versionlens search 'proxies argument removed' --version 0.28.1 --limit 3
-PYTHONPATH=src python3 -m unittest discover -s tests -v
+python3 scripts/run_local.py --prepare  # prepare without serving
+python3 scripts/run_local.py --check    # inspect readiness without changing files
 ```
 
-The checked-in corpus works offline: 32 source files, 16 per snapshot, indexed
-into 644 line-preserving chunks with the default settings. The index is a local,
-ignored build artifact; rebuild it from the manifest after cloning. An editable
-installation is optional; running with `PYTHONPATH=src` avoids installing build
-tools. No service account is required.
+A different existing index is preserved; choose the corpus explicitly before
+using `--rebuild`. See [local deployment](docs/LOCAL_DEPLOYMENT.md) for readiness,
+synthetic documents, platform limits and clean-setup verification. This release
+is deployed from its source checkout, including its corpus and manifests.
 
-`search` returns JSON with ranked excerpts, exact version, immutable source
-links, line ranges, and SHA-256 provenance. It sets `answer` to `null` because
-`search` is retrieval-only. Missing keyword matches return `no_matching_evidence`.
-Unsupported versions and malformed requests fail explicitly.
+## What it demonstrates
 
-**Known baseline limitation:** BM25 can rank an old release-history entry above
-a more recent applicable change, even within the correct snapshot. Selecting
-the correct snapshot is necessary but does not prove the retrieved passage
-answers the question. Release headings are preserved for the later answering
-and evaluation layers. Ranking scores are not confidence probabilities.
+- **Exact versions:** HTTPX 0.27.2 and 0.28.1, with 32 pinned source files and
+  644 line-preserving chunks. Immutable commits, SHA-256 hashes and original
+  line ranges accompany evidence. These are historical demonstration versions.
+- **Retrieval:** SQLite FTS5 keyword search, local Nomic cosine search and fixed
+  reciprocal-rank fusion. Keyword remains the default; no reranker was added.
+- **Local cited drafts:** source/quote identity validation, explicit abstention,
+  bounded requests and no remote inference fallback. Literal quotes do not
+  establish semantic support; answers expose `semantic_support_verified: false`.
+- **Updates and simulated permissions:** transactional snapshot changes,
+  deletion, stale-vector rejection, access filtering before retrieval and
+  context assembly, and evidence rechecks around generation.
+- **Inspectable interface:** responsive browser workspace, version selection,
+  source inspection and separate evidence, draft and error states.
+- **Evaluation engineering:** grouped development/holdout candidates,
+  digest-bound human review gates, citation audits and separate claim reviews.
 
-Automated checks cover source integrity and line references, transactional
-ingestion, wrong-version isolation, local endpoint/model restrictions, proxy
-and redirect rejection, malformed or truncated model responses, citation
-validation, conservative abstention and CLI behavior. These are software
-checks, not a held-out answer-quality benchmark.
+Two opt-in MIT-licensed fictional runbooks demonstrate permission and version
+changes. Profiles are selected at server startup; they simulate permissions and
+provide no production sign-in or protection for real confidential documents.
+The [interview walkthrough](docs/INTERVIEW_DEMO.md) reproduces the demonstration.
 
-## Free local draft answers
+## Optional free local models
 
-The native runtime installer currently supports **Apple Silicon macOS**.
-Generation uses `qwen3:1.7b` locally on a separate loopback port, with cloud
-features disabled. See [runtime/model provenance and setup](docs/LOCAL_MODELS.md).
-The application and tests still use Python's standard library only.
-
-In one terminal, install the pinned runtime and start its foreground server:
+The pinned runtime installer supports **Apple Silicon macOS**. In one terminal:
 
 ```sh
 python3 scripts/local_runtime.py install
 python3 scripts/local_runtime.py serve
 ```
 
-Leave that terminal running. In a second terminal:
+In another terminal:
 
 ```sh
 python3 scripts/local_runtime.py pull
-PYTHONPATH=src python3 -m versionlens doctor
-PYTHONPATH=src python3 -m versionlens ask 'What is the default timeout in HTTPX?' --version 0.28.1
-PYTHONPATH=src python3 -m versionlens ask 'Why did the proxies argument stop working after upgrading?' --version 0.28.1
-PYTHONPATH=src python3 -m versionlens ask 'quantumgiraffeunsupported' --version 0.28.1
-python3 scripts/smoke_local.py
-```
-
-The first model pull downloads approximately 1.4 GB of free model weights;
-weights and runtime artifacts are ignored by Git. Stop the server with Ctrl-C.
-No desktop app, sign-in, key, system background service or paid API is required.
-
-`ask` emits structured JSON and a cited draft. The model selects source and
-quotation IDs; the server resolves the exact original text and constructs
-source links from trusted metadata.
-Empty retrieval does not call the model. Invalid drafts are suppressed; runtime
-failure is an operational error, separately from evidence abstention.
-
-**A real quote does not prove that a paraphrase is correct.** Answers expose
-`semantic_support_verified: false`; citation relevance, entailment and release
-applicability still need evaluation. See [the answer policy](docs/ANSWER_POLICY.md).
-
-**Verified on 21 October:** 74 automated checks pass. The actual four-case
-[local development run](reports/day2-local-smoke.json) produced two cited drafts,
-suppressed one invalid generation on the upgrade question, and skipped the model
-for one missing-evidence query. The
-[initial failed run](reports/day2-initial-smoke.json) is retained. These prompts
-were used during development and are not held-out evaluation questions; the
-recorded roughly 1.1–1.8 second end-to-end latencies for model-calling probes are warmed, small-sample
-observations, not a deployment speed guarantee or controlled comparison.
-
-## Local vector and hybrid retrieval
-
-With the same foreground server running, pull the free Apache-2.0 embedding
-model and build its separate SQLite vector index:
-
-```sh
 python3 scripts/local_runtime.py pull --embedding
 PYTHONPATH=src python3 -m versionlens embed
-PYTHONPATH=src python3 -m versionlens search 'Why did the proxies argument stop working after upgrading HTTPX?' --version 0.28.1 --retriever vector
-PYTHONPATH=src python3 -m versionlens search 'Why did the proxies argument stop working after upgrading HTTPX?' --version 0.28.1 --retriever hybrid
-python3 scripts/compare_retrieval.py
-python3 scripts/smoke_retrievers.py
+python3 scripts/run_local.py
 ```
 
-Nomic `nomic-embed-text:v1.5` downloads approximately 274 MB and produces
-768-dimensional embeddings locally. Full inputs are retained, with document/query
-prefixes and no silent truncation. Exact cosine search filters the requested
-version before scoring; hybrid uses fixed reciprocal-rank fusion over twenty
-candidates per engine. There is no reranker or similarity confidence threshold.
+Generation uses Apache-2.0 `qwen3:1.7b` (about 1.4 GB); embeddings use Apache-2.0
+`nomic-embed-text:v1.5` (about 274 MB). Downloads are explicit, weights stay local,
+Ollama cloud features are disabled and the adapter accepts only loopback model
+endpoints without redirects or inherited proxies. Stop the foreground model
+server with Ctrl-C. [Setup and model provenance](docs/LOCAL_MODELS.md).
 
-The vector cache binds every chunk and its provenance to the model digest,
-dimensions and preprocessing revision. Missing, changed or incomplete caches
-fail explicitly; rerun `embed` when those inputs change. Failed builds preserve
-the previous index. Both SQLite indexes and all model weights remain ignored.
+**No paid services are used:** no OpenAI API, hosted database, cloud inference,
+card-backed trial or automatic billing. Deployment is local; there is no public
+hosted endpoint. Existing hardware, disk, electricity and download bandwidth
+remain resources you supply. [Cost policy](docs/COST_POLICY.md).
 
-The [development comparison](reports/day3-retrieval-comparison.json) uses sixteen
-answerable questions and four separate qualitative probes. Labels are
-AI-authored, source-checked and **not human-reviewed or held out**.
+## Measured behavior and limits
 
-| Retrieval | Known-evidence hit at 5 | Known-evidence MRR at 5 |
+The [25 October development run](reports/day6-development-evaluation.json)
+executed **40 AI-authored development questions × three retrievers**. The
+positive-anchor denominator was 19 per method; labels are provisional and
+nonexhaustive, and the questions were not held out.
+
+| Retrieval | Known-anchor hit at 5 | Known-anchor MRR at 5 |
 | --- | --- | --- |
-| Keyword | 13/16 | 0.65625 |
-| Vector | 12/16 | 0.71875 |
-| Hybrid | 13/16 | 0.653125 |
+| Keyword | 17/19 | 0.7228 |
+| Vector | 17/19 | 0.7895 |
+| Hybrid | 18/19 | 0.7675 |
 
-These scores describe nonexhaustive source anchors, not answer accuracy or
-complete relevance judgments. Hybrid did not improve coverage over the simpler
-keyword baseline, so keyword stays the default. No reranker was added.
-See [methodology, latency and limitations](docs/RETRIEVAL_EVALUATION.md).
+These are retrieval observations, **not answer accuracy**. All 55 returned
+citations passed mechanical source/quote checks, yet **12/15 synthetic-conflict
+trials returned drafts despite provisional abstention labels**, even when both
+sources were found. Real upgrade probes have also been withheld as
+`invalid_generation`. Experimental vector/hybrid generation requires a keyword
+match first; this conservative gate does not establish semantic support.
 
-`ask --retriever vector` and `ask --retriever hybrid` are explicit experimental
-options. Dense search returns neighbors even for unsupported questions. An
-[initial smoke run](reports/day3-initial-answer-smoke.json) showed unrelated
-answers for the missing-token probe. Generation now requires at least one
-keyword match before using either experimental mode; otherwise it abstains
-without embedding or generation. This conservative check can reject useful
-paraphrases and does **not** prove semantic support when a term matches.
-The [final smoke run](reports/day3-answer-smoke.json) retains the remaining
-upgrade-generation failure. All answers remain unverified drafts.
+The 100-question draft pack contains 40 development and **60 unexecuted candidate
+holdout questions**. All question reviews and 51 generated-answer trial reviews
+remain pending. No reviewed holdout results, semantic citation-correctness score
+or unsupported-answer rate are claimed. Human question-label review and human
+claim review are separate requirements.
 
-**Verified on 22 October:** 132 automated checks pass. Model/API fees were zero;
-local memory, disk, electricity and elapsed time are still resources consumed.
+[Results, timing, cost and limitations](docs/EVALUATION_RESULTS.md) ·
+[Question review pack](docs/evaluation/review-pack/QUESTIONS.md) ·
+[Answer review pack](docs/evaluation/answer-review-pack/ANSWERS.md)
 
-## Evaluation and human review
+## Verify and explore
 
-The [100 draft questions and source context](docs/evaluation/review-pack/QUESTIONS.md)
-cover answerable, missing-evidence, wrong-version, permission and conflict cases.
-Topic groups keep 40 development questions separate from 60 candidate holdout
-questions. All question reviews remain pending. A digest-bound lock is required
-before holdout execution; no real lock or held-out results are currently present.
+```sh
+python3 scripts/fetch_sources.py --check
+PYTHONPATH=src python3 -W error::ResourceWarning -m unittest discover -s tests -v
+python3 scripts/check_clean_setup.py --output reports/local/my-clean-setup.json
+```
 
-Mechanical citation checks, draft-label diagnostics, human claim judgments,
-latency and cost remain separate. The [pending answer-review pack](docs/evaluation/answer-review-pack/ANSWERS.md)
-and [review protocol](docs/QUESTION_REVIEW_PROTOCOL.md) support later judgments.
-Unit tests use clearly fictional review fixtures, never actual approvals.
+The clean-setup verifier requires Git and local repository history. It uses a
+temporary source archive and a pip-free virtual environment. It checks ingestion, the API/UI assets, both versions, source
+inspection and model-free abstention. It downloads no models and runs no holdout.
+**Verified on 27 October:** [299 software tests and 14 API checks](reports/day7-clean-setup.json)
+passed from a fresh archive of commit `94b796b` in a pip-free Python 3.13.7
+virtual environment. [12 browser checks](reports/day7-browser-check.json) passed
+against the real running interface, with actual desktop/mobile/source captures.
+No models or holdout questions were run again in these release checks.
+The final documentation commit adds these reports without changing application
+code. Software checks do not measure answer correctness.
 
-## License and attribution
+[Architecture](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
+[Updates and access simulation](docs/PERMISSIONS_AND_UPDATES.md) ·
+[Actual screenshots](docs/SCREENSHOTS.md) · [Release notes](docs/RELEASE_NOTES.md) ·
+[Development log](docs/DEVELOPMENT_LOG.md) · [Delivery plan](docs/DELIVERY_PLAN.md)
 
-Project code: [MIT](LICENSE). Vendored HTTPX documentation remains under its
-upstream license and attribution, documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-AI assistance and limitations will be recorded in [the development log](docs/DEVELOPMENT_LOG.md).
+## License
+
+Project code and synthetic fixtures: [MIT](LICENSE). Bundled HTTPX sources retain
+their upstream BSD license and attribution. Model weights are not distributed
+with the repository. [Third-party notices](THIRD_PARTY_NOTICES.md).

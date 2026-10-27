@@ -22,12 +22,20 @@ The remaining commits use their actual 24 October dates. The owner later
 explicitly requested the originally planned day-5 task on 24 October. It was completed on that date, with three additional meaningful
 commits; the instruction to defer day 5 was superseded by that direct request.
 The table above retains the original targets. The authorized
-schedule still ends on 26 October, with no unapproved deadline extension.
+schedule originally ended on 26 October. The owner subsequently explicitly
+approved completion past midnight for final verification and publication.
 
 On 25 October, day-6 engineering delivered the draft set, review gates,
 evaluation/audit tools and actual development observations. Human review and
 the reviewed holdout freeze/run remain pending. Day-7 packaging can proceed
 independently while documenting that limitation.
+
+Final packaging was completed on **27 October**, under that explicit extension,
+with actual-date commits 23–25. The fresh-source check passed 299 software tests
+and 14 API probes; the browser check passed 12 checks and captured three real
+screenshots. The release is a local prototype prerelease, with day-6 human
+question/claim review and reviewed holdout results still pending. The expired
+recurring automation was removed and was not recreated.
 
 ## Human input and external requirements
 
