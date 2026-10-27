@@ -46,3 +46,20 @@ checks and the actual draft observation. Synthetic facts remain fictional.
 
 The separate [browser regression report](../reports/day5-browser-regression.json)
 records four additional `day5-core-*` captures. Original day-4 images are retained.
+
+
+## Release captures: 27 October 2026
+
+These screenshots were captured from the running local application during final
+packaging, using the new source launcher and real public-profile API responses.
+The [release browser report](../reports/day7-browser-check.json) records
+**12 passing checks**, no external application requests and no browser script
+errors. Four negative/race checks use explicitly labelled browser fixtures;
+the screenshots themselves use real responses. Generation was not run again
+for these captures; earlier cited-draft observations above retain their dates.
+
+![Release desktop evidence](screenshots/release-desktop-evidence.png)
+
+![Release source inspection](screenshots/release-source-inspector.png)
+
+![Release mobile evidence](screenshots/release-mobile-evidence.png)

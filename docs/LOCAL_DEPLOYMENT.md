@@ -96,6 +96,19 @@ counts, read-only checks, idempotence, explicit replacement, symlink/schema
 preservation and absence of model construction. Clean-checkout verification is
 recorded separately from existing model/download/browser observations.
 
+From a Git checkout with local history, verify an archived commit in a temporary,
+pip-free virtual environment:
+
+```sh
+python3 scripts/check_clean_setup.py --output reports/local/my-clean-setup.json
+```
+
+The verifier does not fetch sources, install packages, download models, execute
+candidate holdout questions or run generation. It starts and stops its own
+loopback API, checks both versions and inspects real evidence. Python socket
+guards add controls but are not an operating-system sandbox. Source ZIP users
+can run the application and software tests; this archive verifier requires Git.
+
 Software setup checks and literal citations do not establish answer correctness.
 The [evaluation results](EVALUATION_RESULTS.md) retain conflict-handling and
 release-reasoning limitations. Human question/claim reviews and held-out results
