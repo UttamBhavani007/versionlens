@@ -38,6 +38,23 @@ A label, question, split, policy or corpus change invalidates earlier approvals
 and requires review of the new exact version. Never fill human approvals through
 an automated label generator. Unit-test approvals are fictional temporary data.
 
+## Terminal review helper
+
+```sh
+python3 scripts/review_session.py            # review the 60 candidate-holdout questions
+python3 scripts/review_session.py --status   # progress only
+```
+
+The helper shows each pending question with its draft labels and source text,
+then records only what you type: the full word `approve` or `reject` plus a
+required note of what you checked. It stores your name, `reviewer_type: human` and a
+timezone-aware timestamp in `reports/local/question-review/review.json`, saving
+after every decision so you can stop and resume. It suggests nothing, has no bulk
+or flag-based approval, and refuses piped or scripted input. It does not freeze
+or run anything; when `--status` reports `holdout_ready_to_freeze`, use the
+freeze command below. Like hand-edited records, this attests judgment and cannot
+verify identity.
+
 ## Export, freeze and run
 
 ```sh
