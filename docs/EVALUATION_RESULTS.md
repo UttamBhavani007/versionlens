@@ -77,6 +77,41 @@ Thus semantic citation correctness and unsupported-answer rate are currently
 `null`, not zero or perfect. Development outputs remain development after
 review. See [the review protocol](QUESTION_REVIEW_PROTOCOL.md).
 
+## Uncertainty on the same development run — 5 November 2026
+
+[`reports/day8-development-uncertainty.json`](../reports/day8-development-uncertainty.json)
+is computed only from the recorded 25 October run; no retrieval or model was
+executed again. It remains development data: AI-authored, not human-reviewed,
+not a holdout. Hit intervals are Wilson 95%; MRR and MRR-difference intervals are
+percentile bootstrap (10,000 resamples, fixed seed); paired hit differences use
+an exact sign test. Nothing is corrected for multiple comparisons.
+
+| Method | Hit at 5 (19 anchors) | Wilson 95% | MRR at 5 | Bootstrap 95% | Missed cases |
+| --- | --- | --- | --- | --- | --- |
+| keyword | 17/19 | 68.6–97.1% | 0.723 | 0.544–0.889 | C010, C034 |
+| vector | 17/19 | 68.6–97.1% | 0.789 | 0.632–0.921 | C010, C034 |
+| hybrid | 18/19 | 75.4–99.1% | 0.768 | 0.614–0.908 | C010 |
+
+All paired comparisons are inconclusive. Hybrid versus keyword differs by one
+case (sign-test p = 1.0; MRR difference +0.045, bootstrap 95% −0.039 to +0.126).
+Vector versus keyword has no hit difference (MRR +0.067, −0.037 to +0.186).
+With 19 anchors the interval around any hit rate spans roughly 30 percentage
+points, so the ordering of the three retrievers is not established.
+
+The two shared misses are C010 ("Why does an old proxies keyword no longer match
+the newer HTTPX API?", an upgrade question) and C034 ("Which HTTP protocol
+versions does the overview say HTTPX supports?"). Keyword and vector place the
+anchor at rank 1 in 12 and 13 of 19 cases.
+
+Answer coverage is a separate and weaker signal: the pipeline answered rather
+than abstained on 8/19 (keyword; Wilson 23.1–63.7%), 10/19 (vector) and 11/19
+(hybrid) answerable questions. This counts answers produced, not correct answers;
+claim support and correctness still await human review.
+
+```sh
+python3 scripts/summarize_uncertainty.py --output reports/local/my-uncertainty.json
+```
+
 ## Reproduce locally
 
 Start the existing cloud-disabled local model server, then:

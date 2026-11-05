@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "kind": "development_uncertainty_summary",
+  "source_report_dataset_sha256": "09a64d3923d7817228fbf99b568caf944dfcf1ddcfa8991582efc8ee0640fbde",
+  "source_report_corpus_fingerprint": "62d9c3a98fe05e3f805bbd6e286f5358d3305a7977aa6f5563c73cfd4817aac2",
+  "source_report_recorded_at_utc": "2026-10-25T20:06:46.907309+00:00",
+  "development_only": true,
+  "human_reviewed": false,
+  "held_out_benchmark": false,
+  "method": {
+    "hit_interval": "Wilson score, 95%",
+    "mrr_interval": "percentile bootstrap, 10000 resamples, seed 20261025",
+    "paired_hit_test": "exact two-sided sign test on discordant cases",
+    "errors": "retrieval errors count as misses, as in the source report"
+  },
+  "methods": {
+    "keyword": {
+      "answerable_cases": 19,
+      "known_anchor_hits_at_5": 17,
+      "known_anchor_hit_at_5": 0.8947368421052632,
+      "hit_at_5_wilson_95": [
+        0.686054495051583,
+        0.9706420586049034
+      ],
+      "known_anchor_mrr_at_5": 0.7228070175438596,
+      "mrr_at_5_bootstrap_95": [
+        0.543859649122807,
+        0.8894736842105262
+      ],
+      "missed_case_ids": [
+        "C010",
+        "C034"
+      ],
+      "rank_distribution": {
+        "1": 12,
+        "2": 2,
+        "3": 1,
+        "4": 0,
+        "5": 2,
+        "miss": 2
+      },
+      "retrieval_latency_ms": {
+        "count": 40,
+        "median": 0.8634999999999999,
+        "p95_nearest_rank": 1.542
+      },
+      "answer_status_by_category": {
+        "answerable": {
+          "answered": 8,
+          "abstained": 11
+        },
+        "wrong_version_trap": {
+          "abstained": 6,
+          "answered": 2
+        },
+        "permission_denied": {
+          "abstained": 3
+        },
+        "missing_evidence": {
+          "abstained": 3,
+          "answered": 2
+        },
+        "conflicting_evidence": {
+          "answered": 4,
+          "abstained": 1
+        }
+      },
+      "answered_on_answerable": {
+        "answered": 8,
+        "of": 19,
+        "wilson_95": [
+          0.2314162039203038,
+          0.6372444853483988
+        ]
+      }
+    },
+    "vector": {
+      "answerable_cases": 19,
+      "known_anchor_hits_at_5": 17,
+      "known_anchor_hit_at_5": 0.8947368421052632,
+      "hit_at_5_wilson_95": [
+        0.686054495051583,
+        0.9706420586049034
+      ],
+      "known_anchor_mrr_at_5": 0.7894736842105263,
+      "mrr_at_5_bootstrap_95": [
+        0.631578947368421,
+        0.9210526315789473
+      ],
+      "missed_case_ids": [
+        "C010",
+        "C034"
+      ],
+      "rank_distribution": {
+        "1": 13,
+        "2": 4,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "miss": 2
+      },
+      "retrieval_latency_ms": {
+        "count": 40,
+        "median": 489.227,
+        "p95_nearest_rank": 703.241
+      },
+      "answer_status_by_category": {
+        "answerable": {
+          "answered": 10,
+          "abstained": 9
+        },
+        "wrong_version_trap": {
+          "abstained": 5,
+          "answered": 3
+        },
+        "permission_denied": {
+          "abstained": 3
+        },
+        "missing_evidence": {
+          "abstained": 5
+        },
+        "conflicting_evidence": {
+          "answered": 4,
+          "abstained": 1
+        }
+      },
+      "answered_on_answerable": {
+        "answered": 10,
+        "of": 19,
+        "wilson_95": [
+          0.31707482511825114,
+          0.7267049451255145
+        ]
+      }
+    },
+    "hybrid": {
+      "answerable_cases": 19,
+      "known_anchor_hits_at_5": 18,
+      "known_anchor_hit_at_5": 0.9473684210526315,
+      "hit_at_5_wilson_95": [
+        0.7536078466345479,
+        0.99064824750947
+      ],
+      "known_anchor_mrr_at_5": 0.7675438596491229,
+      "mrr_at_5_bootstrap_95": [
+        0.6140350877192983,
+        0.9078947368421053
+      ],
+      "missed_case_ids": [
+        "C010"
+      ],
+      "rank_distribution": {
+        "1": 12,
+        "2": 4,
+        "3": 1,
+        "4": 1,
+        "5": 0,
+        "miss": 1
+      },
+      "retrieval_latency_ms": {
+        "count": 40,
+        "median": 512.8635,
+        "p95_nearest_rank": 744.939
+      },
+      "answer_status_by_category": {
+        "answerable": {
+          "answered": 11,
+          "abstained": 8
+        },
+        "wrong_version_trap": {
+          "abstained": 5,
+          "answered": 3
+        },
+        "permission_denied": {
+          "abstained": 3
+        },
+        "missing_evidence": {
+          "abstained": 5
+        },
+        "conflicting_evidence": {
+          "answered": 4,
+          "abstained": 1
+        }
+      },
+      "answered_on_answerable": {
+        "answered": 11,
+        "of": 19,
+        "wilson_95": [
+          0.36275551465160105,
+          0.7685837960796962
+        ]
+      }
+    }
+  },
+  "comparisons": {
+    "vector_minus_keyword": {
+      "hit_only_in_first": 0,
+      "hit_only_in_second": 0,
+      "exact_sign_test_p": 1.0,
+      "mrr_difference": 0.06666666666666667,
+      "mrr_difference_bootstrap_95": [
+        -0.03684210526315789,
+        0.18596491228070175
+      ]
+    },
+    "hybrid_minus_keyword": {
+      "hit_only_in_first": 0,
+      "hit_only_in_second": 1,
+      "exact_sign_test_p": 1.0,
+      "mrr_difference": 0.04473684210526316,
+      "mrr_difference_bootstrap_95": [
+        -0.039473684210526314,
+        0.12631578947368421
+      ]
+    },
+    "hybrid_minus_vector": {
+      "hit_only_in_first": 0,
+      "hit_only_in_second": 1,
+      "exact_sign_test_p": 1.0,
+      "mrr_difference": -0.02192982456140351,
+      "mrr_difference_bootstrap_95": [
+        -0.08771929824561404,
+        0.030701754385964907
+      ]
+    }
+  },
+  "limitations": [
+    "Computed only from a recorded run; no retrieval or model was executed.",
+    "Questions and anchors are AI-authored, source-checked and not human-reviewed.",
+    "Small samples give wide intervals; paired p-values are not corrected for multiple comparisons.",
+    "Hit and MRR refer to known nonexhaustive anchors, not answer accuracy or semantic citation correctness."
+  ]
+}
