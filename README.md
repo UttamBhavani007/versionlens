@@ -103,6 +103,10 @@ nonexhaustive, and the questions were not held out.
 | Vector | 17/19 | 0.7895 |
 | Hybrid | 18/19 | 0.7675 |
 
+With 19 anchors the 95% intervals are wide (hit at 5: 68.6–97.1% for keyword and
+vector, 75.4–99.1% for hybrid) and no paired difference is conclusive; see the
+[uncertainty analysis](docs/EVALUATION_RESULTS.md#uncertainty-on-the-same-development-run--5-november-2026).
+
 These are retrieval observations, **not answer accuracy**. All 55 returned
 citations passed mechanical source/quote checks, yet **12/15 synthetic-conflict
 trials returned drafts despite provisional abstention labels**, even when both
@@ -138,6 +142,11 @@ against the real running interface, with actual desktop/mobile/source captures.
 No models or holdout questions were run again in these release checks.
 The final documentation commit adds these reports without changing application
 code. Software checks do not measure answer correctness.
+
+Later work added the uncertainty summary and a terminal helper for recording
+[human question reviews](docs/QUESTION_REVIEW_PROTOCOL.md#terminal-review-helper).
+The suite now has 317 tests; these additions were not part of the 27 October
+fresh-archive verification above.
 
 [Architecture](docs/ARCHITECTURE.md) · [API](docs/API.md) ·
 [Updates and access simulation](docs/PERMISSIONS_AND_UPDATES.md) ·
